@@ -1,8 +1,7 @@
-REPO=nicholasjackson/workshop-better-together
+REPO=ghcr.io/nicholasjackson/workshop-better-together
 VERSION=v0.0.1
 
 build_codeserver:
-	docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 	docker buildx create --name vscode || true
 	docker buildx use vscode
 	docker buildx inspect --bootstrap

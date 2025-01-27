@@ -1,6 +1,6 @@
 jumppad_images = [
   "ghcr.io/jumppad-labs/docker-registry-proxy:v1.0.0",
-  "ghcr.io/jumppad-labs/terraform-workshop:v0.4.0",
+  "ghcr.io/jumppad-labs/nicholasjackson/workshop-better-together:v0.0.1",
   "ghcr.io/jumppad-labs/docs:v0.5.1",
 ]
 

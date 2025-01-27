@@ -75,7 +75,7 @@ resource "container" "vscode" {
   }
 
   image {
-    name = "nicholasjackson/terraform-provider-workshop:v0.3.1"
+    name = "ghcr.io/nicholasjackson/workshop-better-together:v0.0.1"
   }
 
   volume {

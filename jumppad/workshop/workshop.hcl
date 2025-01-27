@@ -30,3 +30,16 @@ resource "chapter" "introduction" {
     })
   }
 }
+
+resource "book" "better_together" {
+  title = "Building a Terraform Provider"
+
+  chapters = [
+    resource.chapter.introduction,
+  ]
+}
+
+
+output "book" {
+  value = resource.book.better_together
+}
