@@ -2,5 +2,39 @@
 
 * Part 1: Create a new Packer configuration that builds a new Minecraft server image.
 * Part 2: Build the image with Packer
+Can these be moved to task 4?
 * Part 3: Update your Terraform configuration to use the new image.
 * Part 4: Complete the task in Minecraft ...
+
+Does this need to be a mindcraft server? its not clear what the purpose is here
+other simple options that could would be quick to implement and allow tie in to final 
+- depoy docker to packer image using ansible provisioner, just install docker using ansible thats it.
+
+## We can provide playbook for provisioner
+---
+- name: "Install Docker packages"
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
+    update_cache: yes 
+
+- name: "Docker Service"
+  systemd:
+    name: docker.service
+    enabled: yes
+    state: started
+
+- name: Add user 'ubuntu' to the 'docker' group
+  ansible.builtin.user:
+    name: ubuntu
+    groups: docker
+    append: yes
+  become: true
+
+ ## And provider provisioner block to populate the pkr file
+
+- In task 4 we then deploy and run a startup a basic API server docker image that returns a simple message to unlock the final task in game.
+If we are using this deployment for task 4 and executing an ansible job on the server we need to be able to return a public IP addresss from the terraform as a resource attribute.
