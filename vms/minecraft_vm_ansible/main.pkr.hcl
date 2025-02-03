@@ -1,6 +1,6 @@
 packer {
   required_plugins {
-    googlecompute = {
+    qemu = {
       source  = "github.com/hashicorp/qemu"
       version = "~> 1"
     }
