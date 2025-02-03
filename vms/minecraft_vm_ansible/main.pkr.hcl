@@ -4,6 +4,10 @@ packer {
       source  = "github.com/hashicorp/qemu"
       version = "~> 1"
     }
+    ansible = {
+      version = "~> 1"
+      source  = "github.com/hashicorp/ansible"
+    }
   }
 }
 
