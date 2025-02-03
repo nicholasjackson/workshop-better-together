@@ -17,6 +17,21 @@ RUN apt-get update && \
     build-essential \
     gnupg
 
+# allow ansible local rsa ssh connection  - Note: not sure if this is needed and user would need to change
+# RUN sudo mkdir /home/runner/.ssh/
+# RUN sudo tee /home/runner/.ssh/config <<EOF
+# Host *
+#    StrictHostKeyChecking no
+#    UserKnownHostsFile=/dev/null
+#    HostKeyAlgorithms ssh-rsa,ssh-ed25519,ecdsa-sha2-nistp384
+#    PubkeyAcceptedKeyTypes +ssh-rsa,ecdsa-sha2-nistp256,ssh-ed25519,ecdsa-sha2-nistp384
+# EOF
+
+# Ansible
+RUN sudo apt-add-repository ppa:ansible/ansible -y \
+    && sudo apt-get update \
+    && sudo apt-get install ansible -y
+
 # Install Vault
 RUN wget -O vault.zip https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_${TARGETARCH}.zip && \
   unzip -o vault.zip && \
