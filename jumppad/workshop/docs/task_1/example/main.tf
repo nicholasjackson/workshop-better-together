@@ -21,14 +21,14 @@ resource "libvirt_pool" "ubuntu" {
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = "ubuntu-qcow2"
   pool   = libvirt_pool.ubuntu.name
-  source = "../../../../../vms/ubuntu_base/build/os-base/ubuntu-2404-amd64.qcow2"
+  source = "../../../../../vms/build/minecraft_vm/minecraft-vm.qcow2"
   format = "qcow2"
 }
 
 resource "libvirt_domain" "domain-ubuntu" {
   name   = "ubuntu-terraform"
-  memory = "512"
-  vcpu   = 1
+  memory = "3096"
+  vcpu   = 4
 
   network_interface {
     network_name = "default"

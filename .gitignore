@@ -3,5 +3,5 @@
 .terraform.tfstate.lock.info
 terraform.tfstate
 terraform.tfstate.backup
-os-base
-buccaneers_bay
+build
+worlds

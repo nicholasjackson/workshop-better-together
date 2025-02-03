@@ -15,5 +15,5 @@ build_codeserver:
 functional_test:
 	dagger -m ./dagger call functional-test --src . --working-directory jumppad --runtime docker
 
-build_packer:
-	cd ./instruqt_vm && packer build -var-file=./main.pkrvars.hcl ./main.pkr.hcl
+build_packer_base:
+	cd ./vms/ubuntu_base && packer build ./main.pkr.hcl
