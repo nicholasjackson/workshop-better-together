@@ -16,7 +16,7 @@ resource "libvirt_pool" "ubuntu" {
   name = "ubuntu"
   type = "dir"
   target {
-    path = "/tmp/terraform-provider-libvirt-pool-ubuntu"
+    path = "/var/libvirt/pools/ubuntu"
   }
 }
 

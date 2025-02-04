@@ -99,12 +99,20 @@ resource "container" "vscode" {
   }
 
   # libvirt
+
+  ## socket
   volume {
     source      = "/var/run/libvirt/libvirt-sock"
     destination = "/var/run/libvirt/libvirt-sock"
   }
 
-  # images
+  ## pools 
+  volume {
+    source      = "/var/libvirt/pools"
+    destination = "/var/libvirt/pools"
+  }
+
+  ## images
   volume {
     source      = variable.image_location
     destination = "/images"

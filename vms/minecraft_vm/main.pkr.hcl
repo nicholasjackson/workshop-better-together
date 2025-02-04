@@ -9,11 +9,11 @@ packer {
 
 source "qemu" "minecraft" {
   vm_name          = "minecraft-vm.qcow2"
-  iso_url          = "../build/os-base/ubuntu-2404-amd64.qcow2"
+  iso_url          = "../build/ubuntu-2404-amd64.qcow2"
   iso_checksum     = "none"
   disk_image       = true
   memory           = 1500
-  output_directory = "../build/minecraft_vm"
+  output_directory = "../build"
   accelerator      = "kvm"
   disk_size        = "12000M"
   disk_interface   = "virtio"
