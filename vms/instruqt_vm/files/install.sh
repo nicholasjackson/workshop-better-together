@@ -50,3 +50,5 @@ mkdir /var/images
 # Add the base qemu images
 curl -L -o minecraft_base.tar https://storage.googleapis.com/jumppad_sko/minecraft_base.tar
 tar -xzf minecraft_base.tar -C /var/images
+
+# Add the minecraft worlds

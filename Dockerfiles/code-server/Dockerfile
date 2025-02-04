@@ -1,5 +1,8 @@
 FROM ghcr.io/jumppad-labs/vscode:vscode-v0.5.2
 
+LABEL org.opencontainers.image.source=https://github.com/nicholasjackson/workshop-better-together
+
+
 ARG TARGETARCH
 ARG VAULT_VERSION=1.18.3
 ARG PACKER_VERSION=1.12.0
@@ -15,12 +18,12 @@ RUN apt-get update && \
     git \
     jq \
     build-essential \
-    gnupg
+    gnupg \
+    python3-launchpadlib
 
 # Ansible
-RUN sudo apt-add-repository ppa:ansible/ansible -y \
-    && sudo apt-get update \
-    && sudo apt-get install ansible -y
+RUN apt-add-repository --yes --update ppa:ansible/ansible \
+    && apt-get install -y ansible
 
 # Install Vault
 RUN wget -O vault.zip https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_${TARGETARCH}.zip && \

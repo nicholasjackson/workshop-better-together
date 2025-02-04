@@ -9,7 +9,7 @@ terraform {
 }
 
 provider "libvirt" {
-  uri = "qemu:///system"
+  uri = "qemu:///system?socket=/var/run/libvirt/libvirt-sock"
 }
 
 resource "libvirt_pool" "ubuntu" {
@@ -23,8 +23,7 @@ resource "libvirt_pool" "ubuntu" {
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = "ubuntu-qcow2"
   pool   = libvirt_pool.ubuntu.name
-  source = "../../../../../vms/build/minecraft_vm/minecraft-vm.qcow2"
-  format = "qcow2"
+  source = "/images/minecraft_vm/minecraft-vm.qcow2"
 }
 
 resource "libvirt_domain" "domain-ubuntu" {
