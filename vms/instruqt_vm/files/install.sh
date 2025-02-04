@@ -17,7 +17,9 @@ apt-get -y install \
     git \
     curl \
     jq \
-    vim
+    vim \
+    qemu-kvm \
+    libvirt-daemon-system
 
 # Install Docker
 curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | sudo apt-key add -
@@ -42,3 +44,9 @@ systemctl enable jumppad-connector.service
 for IMAGE in $JUMPPAD_IMAGES; do
   docker pull $IMAGE
 done  
+
+mkdir /var/images
+
+# Add the base qemu images
+curl -L -o minecraft_base.tar https://storage.googleapis.com/jumppad_sko/minecraft_base.tar
+tar -xzf minecraft_base.tar -C /var/images

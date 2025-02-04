@@ -15,7 +15,9 @@ provider "libvirt" {
 resource "libvirt_pool" "ubuntu" {
   name = "ubuntu"
   type = "dir"
-  path = "/tmp/terraform-provider-libvirt-pool-ubuntu"
+  target {
+    path = "/tmp/terraform-provider-libvirt-pool-ubuntu"
+  }
 }
 
 resource "libvirt_volume" "ubuntu-qcow2" {
@@ -58,4 +60,12 @@ resource "libvirt_domain" "domain-ubuntu" {
     listen_type = "address"
     autoport    = true
   }
+}
+
+output "ip_address" {
+  value = libvirt_domain.domain-ubuntu.network_interface.0.addresses.0
+}
+
+output "socat_command" {
+  value = "socat TCP-LISTEN:25565,fork,reuseaddr TCP:${libvirt_domain.domain-ubuntu.network_interface.0.addresses.0}:25565"
 }

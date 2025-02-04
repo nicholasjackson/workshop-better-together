@@ -2,6 +2,11 @@ variable "jumppad_version" {
   type = string
 }
 
+variable "image_version" {
+  type    = string
+  default = "1"
+}
+
 variable "jumppad_images" {
   type    = list(string)
   default = []
@@ -36,11 +41,11 @@ source "googlecompute" "jumppad" {
   zone       = var.zone
 
   image_family = "jumppad"
-  image_name   = regex_replace("better-workshop-${var.jumppad_version}", "[^a-zA-Z0-9_-]", "-")
+  image_name   = regex_replace("better-workshop-${var.jumppad_version}-${var.image_version}", "[^a-zA-Z0-9_-]", "-")
 
   source_image_family = "ubuntu-2204-lts"
   machine_type        = "n1-standard-2"
-  disk_size           = 20
+  disk_size           = 60
 
   ssh_username = "root"
 }
