@@ -45,10 +45,39 @@ for IMAGE in $JUMPPAD_IMAGES; do
   docker pull $IMAGE
 done  
 
-mkdir /var/images
+# Create the workshop directories
+mkdir -p /var/workshop/images
+mkdir -p /var/workshop/pools
 
 # Add the base qemu images
 curl -L -o minecraft_base.tar https://storage.googleapis.com/jumppad_sko/minecraft_base.tar
-tar -xzf minecraft_base.tar -C /var/images
+tar -xzf minecraft_base.tar -C /var/workshop/images
 
-# Add the minecraft worlds
+# Configure apparmor
+echo "/var/workshop/images/ rwk," >> /etc/apparmor.d/abstractions/libvirt-qemu
+echo "/var/workshop/images/* rwk," >> /etc/apparmor.d/abstractions/libvirt-qemu
+
+# Add HashiCorp tools
+TARGETARCH=amd64
+VAULT_VERSION=1.18.3
+PACKER_VERSION=1.12.0
+TERRAFORM_VERSION=1.10.5
+
+# Ansible
+apt-add-repository --yes --update ppa:ansible/ansible \
+    && apt-get install -y ansible
+
+# Install Vault
+wget -O vault.zip https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_${TARGETARCH}.zip && \
+  unzip -o vault.zip && \
+  mv vault /usr/local/bin
+
+# Install Packer
+wget -O packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_${TARGETARCH}.zip && \
+  unzip -o packer.zip && \
+  mv packer /usr/local/bin
+  
+# Install Terraform
+wget -O terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_${TARGETARCH}.zip && \
+  unzip -o terraform.zip && \
+  mv terraform /usr/local/bin

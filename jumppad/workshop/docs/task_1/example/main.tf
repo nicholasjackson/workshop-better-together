@@ -16,14 +16,14 @@ resource "libvirt_pool" "ubuntu" {
   name = "ubuntu"
   type = "dir"
   target {
-    path = "/pools/ubuntu"
+    path = "/var/workshop/ubuntu"
   }
 }
 
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = "ubuntu-qcow2"
   pool   = libvirt_pool.ubuntu.name
-  source = "/images/minecraft-vm.qcow2"
+  source = "/var/workshop/images/minecraft-vm.qcow2"
 }
 
 resource "libvirt_domain" "domain-ubuntu" {
@@ -61,10 +61,10 @@ resource "libvirt_domain" "domain-ubuntu" {
   }
 }
 
-output "ip_address" {
-  value = libvirt_domain.domain-ubuntu.network_interface.0.addresses.0
-}
+//output "ip_address" {
+//  value = libvirt_domain.domain-ubuntu.network_interface.0.addresses.0
+//}
 
-output "socat_command" {
-  value = "socat TCP-LISTEN:25565,fork,reuseaddr TCP:${libvirt_domain.domain-ubuntu.network_interface.0.addresses.0}:25565"
-}
+//output "socat_command" {
+//  value = "socat TCP-LISTEN:25565,fork,reuseaddr TCP:${libvirt_domain.domain-ubuntu.network_interface.0.addresses.0}:25565"
+//}

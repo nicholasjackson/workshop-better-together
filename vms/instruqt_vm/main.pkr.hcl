@@ -4,7 +4,7 @@ variable "jumppad_version" {
 
 variable "image_version" {
   type    = string
-  default = "1"
+  default = "4"
 }
 
 variable "jumppad_images" {
@@ -45,7 +45,7 @@ source "googlecompute" "jumppad" {
 
   source_image_family = "ubuntu-2204-lts"
   machine_type        = "n1-standard-2"
-  disk_size           = 60
+  disk_size           = 80
 
   ssh_username = "root"
 }
