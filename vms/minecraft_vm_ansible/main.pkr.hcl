@@ -33,27 +33,30 @@ source "qemu" "minecraft" {
 }
 
 build {
+
   name    = "iso"
   sources = ["source.qemu.minecraft"]
+
+  provisioner "ansible" {
+    playbook_file = "${path.cwd}/ansible/playbook.yml"
+
+    ansible_env_vars = [
+      "ANSIBLE_DEPRECATION_WARNINGS=False",
+      "ANSIBLE_HOST_KEY_CHECKING=False",
+      "ANSIBLE_NOCOLOR=True",
+      "ANSIBLE_NOCOWS=1",
+      "VAULT_NAMESPACE=${var.vault_namespace}",
+      "VAULT_URL=${var.vault_url}",
+      "ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3"
+    ]
+
+    extra_arguments = [
+      "--ssh-extra-args",
+      "-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa -o IdentitiesOnly=yes",
+      "--scp-extra-args",
+      "'-O'"
+    ]
+  }
+
 }
 
-provisioner "ansible" {
-  playbook_file = "${path.cwd}/ansible/playbook.yml"
-
-  ansible_env_vars = [
-    "ANSIBLE_DEPRECATION_WARNINGS=False",
-    "ANSIBLE_HOST_KEY_CHECKING=False",
-    "ANSIBLE_NOCOLOR=True",
-    "ANSIBLE_NOCOWS=1",
-    "VAULT_NAMESPACE=${var.vault_namespace}",
-    "VAULT_URL=${var.vault_url}",
-    "ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3"
-  ]
-
-  extra_arguments = [
-    "--ssh-extra-args",
-    "-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa -o IdentitiesOnly=yes",
-    "--scp-extra-args",
-    "'-O'"
-  ]
-}
