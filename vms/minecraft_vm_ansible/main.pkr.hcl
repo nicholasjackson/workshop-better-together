@@ -13,7 +13,7 @@ packer {
 
 source "qemu" "minecraft" {
   vm_name          = "minecraft-vm-ansible.qcow2"
-  iso_url          = "../build/os-base/ubuntu-2404-amd64.qcow2"
+  iso_url          = "../build/ubuntu-2404-amd64.qcow2"
   iso_checksum     = "none"
   disk_image       = true
   memory           = 1500
