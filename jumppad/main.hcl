@@ -7,6 +7,16 @@ variable "docs_url" {
   default     = "http://localhost"
 }
 
+variable "image_location" {
+  description = "The URL for the documentation site"
+  default     = "../vms/build"
+}
+
+variable "libvirt_pools" {
+  description = "The URL for the documentation site"
+  default     = "/tmp"
+}
+
 variable "prismarine_url" {
   description = "The URL for prismarine"
   default     = "http://minecraft-web.container.local.jmpd.in:8080"
@@ -99,6 +109,18 @@ resource "container" "vscode" {
   volume {
     source      = "/var/run/libvirt/libvirt-sock"
     destination = "/var/run/libvirt/libvirt-sock"
+  }
+
+  ## pools 
+  volume {
+    source      = "/var/workshop/pools"
+    destination = "/var/workshop/pools"
+  }
+
+  ## images
+  volume {
+    source      = "/var/workshop/images"
+    destination = "/var/workshop/images"
   }
 
   # examples

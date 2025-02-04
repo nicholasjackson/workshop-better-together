@@ -16,7 +16,7 @@ resource "libvirt_pool" "ubuntu" {
   name = "ubuntu"
   type = "dir"
   target {
-    path = "/var/workshop/ubuntu"
+    path = "/var/workshop/pools/ubuntu"
   }
 }
 
