@@ -16,14 +16,14 @@ resource "libvirt_pool" "ubuntu" {
   name = "ubuntu"
   type = "dir"
   target {
-    path = "/var/libvirt/pools/ubuntu"
+    path = "/pools/ubuntu"
   }
 }
 
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = "ubuntu-qcow2"
   pool   = libvirt_pool.ubuntu.name
-  source = "/images/minecraft_vm/minecraft-vm.qcow2"
+  source = "/images/minecraft-vm.qcow2"
 }
 
 resource "libvirt_domain" "domain-ubuntu" {

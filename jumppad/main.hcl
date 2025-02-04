@@ -12,6 +12,11 @@ variable "image_location" {
   default     = "../vms/build"
 }
 
+variable "libvirt_pools" {
+  description = "The URL for the documentation site"
+  default     = "/tmp"
+}
+
 variable "prismarine_url" {
   description = "The URL for prismarine"
   default     = "http://minecraft-web.container.local.jmpd.in:8080"
@@ -108,8 +113,8 @@ resource "container" "vscode" {
 
   ## pools 
   volume {
-    source      = "/var/libvirt/pools"
-    destination = "/var/libvirt/pools"
+    source      = variable.libvirt_pools
+    destination = "/pools"
   }
 
   ## images
