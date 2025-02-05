@@ -4,18 +4,29 @@ terraform {
       source = "ansible/aap"
       version = "1.1.2"
     }
+
+    http = {
+      source = "hashicorp/http"
+      version = "3.4.5"
+    }
   }
 }
 
 # https://registry.terraform.io/providers/ansible/aap/latest
 
 provider "aap" {
-  host                 = "https://44.210.128.100"
+  host                 = var.aap_url
   username             = var.aap_username
   password             = var.aap_password
   insecure_skip_verify = true
 }
 
+# aap url
+variable "aap_url" {
+  type = string
+  description = "Ansible Automation Platform URL"
+  default = "https://44.210.128.10"
+}
 
 variable "aap_username" {
   type = string
@@ -47,6 +58,13 @@ variable "minecraft_usernames" {
 variable "job_template_id" {
   type = string
   description = "Job template id"
+  default = null
+}
+
+variable "job_template_name" {
+  type = string
+  description = "Job template name"
+  default = "minecraft_whitelist"
 }
 
 # Create a new AAP inventory for the shared minecraft server
@@ -63,11 +81,25 @@ resource "aap_host" "vm_hosts" {
     "ansible_host"     : "${var.minecraft_hostname}",
     "ansible_port"     : var.ansible_port
 })
+}
 
-# we can probably use a http datasource for lookup here.
+# Get the job template id by name from the AAP
+data "http" "minecraft_accesslist" {
+  url = "${var.aap_url}/api/controller/v2/job_templates/?name=${var.job_template_name}"
+
+  request_headers = {
+    Accept        = "application/json"
+    Authorization = "Basic ${base64encode("${var.aap_username}:${var.aap_password}")}"
+  }
+}
+
+locals {
+  response_body = jsondecode(data.http.minecraft_accesslist.response_body)
+  template_id            = local.response_body.results[0].id
+}
 
 resource "aap_job" "minecraft_whitelist" {
-  job_template_id = var.job_template_id
+  job_template_id = local.template_id
   inventory_id    = aap_inventory.dedicated_minecraft.id
   extra_vars      = jsonencode({
     "minecraft_usernames" : var.minecraft_usernames

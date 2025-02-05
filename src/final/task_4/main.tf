@@ -10,10 +10,16 @@ terraform {
 # https://registry.terraform.io/providers/ansible/aap/latest
 
 provider "aap" {
-  host                 = "https://44.210.128.100"
+  host                 = var.aap_url
   username             = var.aap_username
   password             = var.aap_password
   insecure_skip_verify = true
+}
+
+variable "aap_url" {
+  type = string
+  description = "Ansible Automation Platform URL"
+  default = "https://44.210.128.10"
 }
 
 variable "aap_username" {
