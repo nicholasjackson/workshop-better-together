@@ -20,7 +20,7 @@ resource "chapter" "introduction" {
 }
 
 resource "chapter" "task_1" {
-  title = "1.Deploy a Minecraft server with Terraform"
+  title = "1.Deploy a Minecraft server"
 
   page "intro" {
     content = template_file("docs/task_1/intro.mdx", {
