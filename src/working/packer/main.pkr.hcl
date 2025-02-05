@@ -16,7 +16,7 @@ packer {
 
 source "qemu" "minecraft" {
   vm_name          = "minecraft-vm-ansible.qcow2"
-  iso_url          = "var/workshop/images/base/ubuntu-2404-amd64.qcow2"
+  iso_url          = "/var/workshop/images/base/ubuntu-2404-amd64.qcow2"
   output_directory = "/var/workshop/images/minecraft_vm_ansible"
   iso_checksum     = "none"
   disk_image       = true
