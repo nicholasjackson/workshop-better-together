@@ -21,7 +21,6 @@ provider "aap" {
   insecure_skip_verify = true
 }
 
-# aap url
 variable "aap_url" {
   type = string
   description = "Ansible Automation Platform URL"
