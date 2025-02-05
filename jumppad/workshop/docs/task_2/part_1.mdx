@@ -1,4 +1,6 @@
-# Part 1: Validate login to HCP Vault and retrieve secrets and AAP credentials
+# Part 1: Login to HCP Vault and test retrieving secrets
+
+Each
 
 ## HCP Vault Address
 
@@ -10,8 +12,9 @@ https://skoaap-public-vault-7a278d60.8c03478c.z1.hashicorp.cloud:8200/
 
 ## Login to HCP Vault
 
-1. Set environment variable `export VAULT_ADDDR=https://skoaap-public-vault-7a278d60.8c03478c.z1.hashicorp.cloud:8200/`
-2. Using the Vault CLI, login using `vault login -namespace=admin -method=userpass username=<team_name> password='<password>'`
+1. Navigate to the Instrqut terminal tab. 
+2. Set environment variable `export VAULT_ADDDR=https://skoaap-public-vault-7a278d60.8c03478c.z1.hashicorp.cloud:8200/`
+3. Using the Vault CLI, login using `vault login -namespace=admin -method=userpass username=<team_name> password='<password>'`
 
-## Test retrieving secrets
+### Test retrieving secrets
 1. Test retrieving a secret from Vault's Key-Value Secrets engine `vault kv get -namespace=admin/<team_name> secrets/skofy26`
