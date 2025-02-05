@@ -25,7 +25,7 @@ resource "template" "vscode_jumppad" {
       "uri": "${variable.docs_url}",
       "type": "browser",
       "active": true
-    },
+    }
   ]
   }
   EOF
