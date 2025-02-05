@@ -19,9 +19,20 @@ resource "chapter" "introduction" {
   }
 }
 
+resource "chapter" "task_1" {
+  title = "1.Deploy a Minecraft server with Terraform"
+
+  page "intro" {
+    content = template_file("docs/task_1/intro.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+    })
+  }
+}
+
 
 resource "chapter" "task_2" {
-  title = "Vault with AAP"
+  title = "2.Vault with AAP"
 
   page "intro" {
     content = template_file("docs/task_2/intro.mdx", {
@@ -32,7 +43,7 @@ resource "chapter" "task_2" {
 }
 
 resource "chapter" "task_3" {
-  title = "Packer and Terraform with AAP"
+  title = "3.Packer and Terraform with AAP"
 
   page "intro" {
     content = template_file("docs/task_3/intro.mdx", {
@@ -43,7 +54,7 @@ resource "chapter" "task_3" {
 }
 
 resource "chapter" "task_4" {
-  title = "Use AAP to update the shared Minecraft server access list"
+  title = "4.Use AAP to update the shared Minecraft server access list"
 
   page "intro" {
     content = template_file("docs/task_4/intro.mdx", {
@@ -58,6 +69,7 @@ resource "book" "better_together" {
 
   chapters = [
     resource.chapter.introduction,
+    resource.chapter.task_1,
     resource.chapter.task_2,
     resource.chapter.task_3,
     resource.chapter.task_4
