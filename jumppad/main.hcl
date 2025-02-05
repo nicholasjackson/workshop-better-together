@@ -84,6 +84,7 @@ resource "container" "vscode" {
     destination = "/workshop/examples/task_1"
   }
 
+
   # task 3
   volume {
     source      = "../vms/minecraft_vm_ansible"

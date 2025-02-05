@@ -20,7 +20,7 @@ resource "chapter" "introduction" {
 }
 
 resource "chapter" "task_3" {
-  title = "Introduction"
+  title = "Packer with Ansible provisioner"
 
   page "intro" {
     content = template_file("docs/task_3/intro.mdx", {
@@ -31,7 +31,7 @@ resource "chapter" "task_3" {
 }
 
 resource "book" "better_together" {
-  title = "Building a Terraform Provider"
+  title = "Use Packer with Ansible provisioner to build a secure Minecraft server image"
 
   chapters = [
     resource.chapter.introduction,
