@@ -27,4 +27,5 @@ AAP natively uses Vault's AppRole Authenication method. The first step would be 
 
 ### Retrieve AAP AppRole Credentials
 
-1. 
+vault read -namespace=admin/testorgc auth/approle/role/aap/role-id
+vault write -namespace=admin/testorgc -force auth/approle/role/aap/secret-id
