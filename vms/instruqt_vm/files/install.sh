@@ -46,16 +46,20 @@ for IMAGE in $JUMPPAD_IMAGES; do
 done  
 
 # Create the workshop directories
-mkdir -p /var/workshop/images
+mkdir -p /var/workshop/images/base
+mkdir -p /var/workshop/images/minecraft_1
 mkdir -p /var/workshop/pools
 
 # Add the base qemu images
 curl -L -o minecraft_base.tar https://storage.googleapis.com/jumppad_sko/minecraft_base.tar
-tar -xzf minecraft_base.tar -C /var/workshop/images
+tar -xzf minecraft_base.tar -C /var/workshop/images/minecraft_1
+
+curl -L -o ubuntu_base.tar https://storage.googleapis.com/jumppad_sko/ubuntu-2404-amd64.tar.gz
+tar -xzf ubuntu_base.tar -C /var/workshop/images/base
 
 # Configure apparmor
-echo "/var/workshop/images/ rwk," >> /etc/apparmor.d/abstractions/libvirt-qemu
-echo "/var/workshop/images/* rwk," >> /etc/apparmor.d/abstractions/libvirt-qemu
+systemctl stop apparmor
+systemctl disable apparmor
 
 # Add HashiCorp tools
 TARGETARCH=amd64
@@ -64,8 +68,8 @@ PACKER_VERSION=1.12.0
 TERRAFORM_VERSION=1.10.5
 
 # Ansible
-apt-add-repository --yes --update ppa:ansible/ansible \
-    && apt-get install -y ansible
+apt-add-repository --yes --update ppa:ansible/ansible
+apt-get install -y ansible
 
 # Install Vault
 wget -O vault.zip https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_${TARGETARCH}.zip && \

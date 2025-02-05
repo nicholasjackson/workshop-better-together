@@ -1,4 +1,3 @@
-# vault namespace
 variable "vault_namespace" {
   description = "The namespace to use for the vault"
   type        = string

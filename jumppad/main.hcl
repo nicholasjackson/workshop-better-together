@@ -7,29 +7,9 @@ variable "docs_url" {
   default     = "http://localhost"
 }
 
-variable "image_location" {
-  description = "The URL for the documentation site"
-  default     = "../vms/build"
-}
-
-variable "libvirt_pools" {
-  description = "The URL for the documentation site"
-  default     = "/tmp"
-}
-
-variable "prismarine_url" {
-  description = "The URL for prismarine"
-  default     = "http://minecraft-web.container.local.jmpd.in:8080"
-}
-
-variable "minecraft_url" {
+variable "machine_url" {
   description = "The URL for the Minecraft server"
   default     = "minecraft.container.local.jmpd.in"
-}
-
-variable "api_url" {
-  description = "The URL for the Minecraft API"
-  default     = "http://minecraft.container.local.jmpd.in:9090"
 }
 
 variable "vscode_token" {
@@ -46,11 +26,6 @@ resource "template" "vscode_jumppad" {
       "type": "browser",
       "active": true
     },
-    {
-      "name": "Terminal",
-      "location": "editor",
-      "type": "terminal"
-    }
   ]
   }
   EOF
@@ -103,30 +78,16 @@ resource "container" "vscode" {
     destination = "/root/.bashrc"
   }
 
-  # libvirt
-
-  ## socket
-  volume {
-    source      = "/var/run/libvirt/libvirt-sock"
-    destination = "/var/run/libvirt/libvirt-sock"
-  }
-
-  ## pools 
-  volume {
-    source      = "/var/workshop/pools"
-    destination = "/var/workshop/pools"
-  }
-
-  ## images
-  volume {
-    source      = "/var/workshop/images"
-    destination = "/var/workshop/images"
-  }
-
   # examples
   volume {
     source      = "./workshop/docs/task_1/example"
     destination = "/workshop/examples/task_1"
+  }
+
+  # task 3
+  volume {
+    source      = "../vms/minecraft_vm_ansible"
+    destination = "/workshop/examples/task_3"
   }
 
   environment = {
@@ -160,11 +121,9 @@ module "workshop" {
   source = "./workshop"
 
   variables = {
-    working_directory = "/provider"
+    working_directory = "/workshop"
     docs_url          = variable.docs_url
-    minecraft_url     = variable.minecraft_url
-    prismarine_url    = variable.prismarine_url
-    api_url           = variable.api_url
+    machine_url       = variable.machine_url
   }
 }
 

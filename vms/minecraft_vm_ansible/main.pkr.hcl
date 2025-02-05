@@ -13,18 +13,17 @@ packer {
 
 source "qemu" "minecraft" {
   vm_name          = "minecraft-vm-ansible.qcow2"
-  iso_url          = "../build/ubuntu-2404-amd64.qcow2"
+  iso_url          = "../build/base/ubuntu-2404-amd64.qcow2"
   iso_checksum     = "none"
   disk_image       = true
   memory           = 1500
-  output_directory = "../build/minecraft_vm"
+  output_directory = "../build/minecraft_vm_ansible"
   accelerator      = "kvm"
   disk_size        = "12000M"
   disk_interface   = "virtio"
   format           = "raw"
   net_device       = "virtio-net"
   boot_wait        = "3s"
-  http_directory   = "./files"
   shutdown_command = "echo 'packer' | sudo -S shutdown -P now"
   ssh_username     = "packer"
   ssh_password     = "packer"
@@ -47,7 +46,8 @@ build {
       "ANSIBLE_NOCOWS=1",
       "VAULT_NAMESPACE=${var.vault_namespace}",
       "VAULT_URL=${var.vault_url}",
-      "ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3"
+      "ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3",
+      "ANSIBLE_REMOTE_TEMP=/tmp/ansible"
     ]
 
     extra_arguments = [
