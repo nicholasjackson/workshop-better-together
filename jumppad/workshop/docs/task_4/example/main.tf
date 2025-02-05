@@ -7,6 +7,8 @@ terraform {
   }
 }
 
+# https://registry.terraform.io/providers/ansible/aap/latest
+
 provider "aap" {
   host                 = "https://44.210.128.100"
   username             = var.aap_username
@@ -28,18 +30,18 @@ variable "minecraft_hostname" {
 }
 
 
+# Create a new AAP inventory for the shared minecraft server
 resource "aap_inventory" "shared_minecraft" {
   name = "minecraft"
   description = "Shared Minecraft Server"
 }
-
 
 # Create a new AAP host for the miecraft server
 resource "aap_host" "vm_hosts" {
   inventory_id = aap_inventory.shared_minecraft.id
   name         = each.value.hostname  # Use the hostname for each VM
   variables    = jsonencode({
-    "ansible_host"     : "${var.minecraft_hostname}" #ip address of the VM
+    "ansible_host"     : "${var.minecraft_hostname}" #ip address or dns name of the shared GCP Minecraft VM
 })
 
 
