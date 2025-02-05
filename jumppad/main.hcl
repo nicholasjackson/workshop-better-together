@@ -84,6 +84,12 @@ resource "container" "vscode" {
     destination = "/workshop/examples/task_1"
   }
 
+ # task 2
+  volume {
+    source      = "./workshop/docs/task_2/example"
+    destination = "/workshop/examples/task_2"
+  }
+
 
   # task 3a - packer
   volume {
