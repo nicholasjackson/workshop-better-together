@@ -78,35 +78,10 @@ resource "container" "vscode" {
     destination = "/root/.bashrc"
   }
 
-  # task 1
+  # Workshop source
   volume {
-    source      = "./workshop/docs/task_1/example"
-    destination = "/workshop/examples/task_1"
-  }
-
- # task 2
-  volume {
-    source      = "./workshop/docs/task_2/example"
-    destination = "/workshop/examples/task_2"
-  }
-
-
-  # task 3a - packer
-  volume {
-    source      = "../vms/minecraft_vm_ansible"
-    destination = "/workshop/examples/task_3/3a-packer"
-  }
-
-    # task 3b - terraform with Ansible Automation Platform
-  volume {
-    source      = "./workshop/docs/task_3/example"
-    destination = "/workshop/examples/task_3/3b-terraform"
-  }
-
-    # task 4
-  volume {
-    source      = "./workshop/docs/task_4/example"
-    destination = "/workshop/examples/task_4"
+    source      = "../src"
+    destination = "/workshop/src"
   }
 
   environment = {

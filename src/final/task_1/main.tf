@@ -1,5 +1,5 @@
 terraform {
- required_version = ">= 0.13"
+  required_version = ">= 0.13"
   required_providers {
     libvirt = {
       source  = "dmacvicar/libvirt"
@@ -10,6 +10,30 @@ terraform {
 
 provider "libvirt" {
   uri = "qemu:///system?socket=/var/run/libvirt/libvirt-sock"
+}
+
+variable "server_mac_addr" {
+  type        = string
+  description = "Fixed MAC address for the server, to enable static ip"
+  default     = "52:54:00:00:00:01"
+}
+
+variable "server_ip_addr" {
+  type        = string
+  description = "Static IP address for the server"
+  default     = "192.168.16.100"
+}
+
+resource "libvirt_network" "minecraft" {
+  # the name used by libvirt
+  name = "minecraft"
+  mode = "nat"
+
+  addresses = ["192.168.16.1/24"]
+
+  dhcp {
+    enabled = true
+  }
 }
 
 resource "libvirt_pool" "ubuntu" {
@@ -23,7 +47,7 @@ resource "libvirt_pool" "ubuntu" {
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = "ubuntu-qcow2"
   pool   = libvirt_pool.ubuntu.name
-  source = "../../../../../vms/build/minecraft_vm/minecraft-vm-ansible.qcow2"
+  source = "/var/workshop/images/minecraft_1/minecraft-vm.qcow2"
 }
 
 resource "libvirt_domain" "domain-ubuntu" {
@@ -32,7 +56,9 @@ resource "libvirt_domain" "domain-ubuntu" {
   vcpu   = 4
 
   network_interface {
-    network_name = "default"
+    network_name   = libvirt_network.minecraft.name
+    addresses      = [var.server_ip_addr]
+    wait_for_lease = false
   }
 
   # IMPORTANT: this is a known bug on cloud images, since they expect a console
@@ -59,4 +85,12 @@ resource "libvirt_domain" "domain-ubuntu" {
     listen_type = "address"
     autoport    = true
   }
+}
+
+output "ip_address" {
+  value = var.server_ip_addr
+}
+
+output "socat_command" {
+  value = "socat TCP-LISTEN:25565,fork,reuseaddr TCP:${var.server_ip_addr}:25565"
 }

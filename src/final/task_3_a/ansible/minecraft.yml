@@ -1,0 +1,83 @@
+---
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install OpenJDK 21 JRE Headless
+      apt:
+        name: openjdk-21-jre-headless
+        state: present
+
+    - name: Download Rcon CLI
+      get_url:
+        url: https://github.com/itzg/rcon-cli/releases/download/1.6.10/rcon-cli_1.6.10_linux_amd64.tar.gz
+        dest: /tmp/rcon-cli.tar.gz
+
+    - name: Extract Rcon CLI
+      unarchive:
+        src: /tmp/rcon-cli.tar.gz
+        dest: /usr/local/bin
+        remote_src: yes
+
+    - name: Remove Rcon CLI archive
+      file:
+        path: /tmp/rcon-cli.tar.gz
+        state: absent
+
+    - name: Create Minecraft directory
+      file:
+        path: /etc/minecraft
+        state: directory
+
+    - name: Create EULA file
+      copy:
+        dest: /etc/minecraft/eula.txt
+        content: |
+          eula=true
+
+    - name: Download Fabric installer
+      get_url:
+        url: https://maven.fabricmc.net/net/fabricmc/fabric-installer/1.0.1/fabric-installer-1.0.1.jar
+        dest: /etc/minecraft/fabric-installer.jar
+
+    - name: Run Fabric installer
+      command: >
+        java -Xmx2G -jar fabric-installer.jar server -mcversion 1.21.4 -downloadMinecraft
+      args:
+        chdir: /etc/minecraft
+
+    - name: Download Minecraft world
+      get_url:
+        url: https://github.com/nicholasjackson/workshop-better-together/releases/download/v0.0.0/buccaneers_bay.tar.gz
+        dest: /etc/minecraft/buccaneers_bay.tar.gz
+
+    - name: Extract Minecraft world
+      unarchive:
+        src: /etc/minecraft/buccaneers_bay.tar.gz
+        dest: /etc/minecraft
+        remote_src: yes
+
+    - name: Move extracted world directory
+      command: >
+        mv /etc/minecraft/buccaneers_bay /etc/minecraft/world
+
+    - name: Create Minecraft systemd service
+      copy:
+        dest: /etc/systemd/system/minecraft.service
+        content: |
+          [Unit]
+          Description=Minecraft Server
+          After=network.target
+
+          [Service]
+          WorkingDirectory=/etc/minecraft
+          ExecStart=/usr/bin/java -Xmx2G -Xms2G -jar fabric-server-launch.jar nogui
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Enable and start Minecraft service
+      systemd:
+        name: minecraft
+        enabled: yes
+        state: started

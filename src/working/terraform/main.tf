@@ -47,7 +47,7 @@ resource "libvirt_pool" "ubuntu" {
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = "ubuntu-qcow2"
   pool   = libvirt_pool.ubuntu.name
-  source = "../../../../../vms/build/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
+  source = "/var/workshop/images/minecraft_1/minecraft-vm.qcow2"
 }
 
 resource "libvirt_domain" "domain-ubuntu" {
