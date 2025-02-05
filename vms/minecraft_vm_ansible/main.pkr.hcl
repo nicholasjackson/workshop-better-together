@@ -17,10 +17,12 @@ packer {
 source "qemu" "minecraft" {
   vm_name          = "minecraft-vm-ansible.qcow2"
   iso_url          = "../build/base/ubuntu-2404-amd64.qcow2"
+  output_directory = "../build/minecraft_vm_ansible"
+  #iso_url          = "/var/workshop/images/base/ubuntu-2404-amd64.qcow2"
+  #output_directory = "/var/workshop/images/minecraft_vm_ansible"
   iso_checksum     = "none"
   disk_image       = true
   memory           = 1500
-  output_directory = "../build/minecraft_vm_ansible"
   accelerator      = "kvm"
   disk_size        = "12000M"
   disk_interface   = "virtio"
@@ -41,6 +43,7 @@ build {
 
   provisioner "ansible" {
     playbook_file = "${path.cwd}/ansible/playbook.yml"
+    user          = "packer"
 
     ansible_env_vars = [
       "ANSIBLE_DEPRECATION_WARNINGS=False",
