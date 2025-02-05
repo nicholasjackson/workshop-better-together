@@ -88,13 +88,13 @@ resource "container" "vscode" {
   # task 3a
   volume {
     source      = "../vms/minecraft_vm_ansible"
-    destination = "/workshop/examples/task_3/packer"
+    destination = "/workshop/examples/task_3/3a-packer"
   }
 
     # task 3b
   volume {
-    source      = "../vms/minecraft_vm_ansible"
-    destination = "/workshop/examples/task_3/terraform"
+    source      = "./workshop/docs/task_3/example"
+    destination = "/workshop/examples/task_3/3b-terraform"
   }
 
   environment = {
