@@ -29,6 +29,11 @@ variable "minecraft_hostname" {
   type = string
 }
 
+variable "minecraft_username" {
+  type = string
+  description = "minecraft username to add whitelist"
+}
+
 
 # Create a new AAP inventory for the shared minecraft server
 resource "aap_inventory" "shared_minecraft" {
@@ -47,4 +52,6 @@ resource "aap_host" "vm_hosts" {
 
 # Execute the Job Template to update the minecraft server for access using existing job template - minecraft_whitelist
 # note: the job template should be created in the AAP server and is already associated with the machine credentials configured in task_2
+# or alternatively, you use the api - example 
+# GET /api/controller/v2/job_templates/?name=minecraft_whitelist
 
