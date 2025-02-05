@@ -19,7 +19,8 @@ apt-get -y install \
     jq \
     vim \
     qemu-kvm \
-    libvirt-daemon-system
+    libvirt-daemon-system \
+    socat
 
 # Install Docker
 curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | sudo apt-key add -
