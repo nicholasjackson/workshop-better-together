@@ -78,17 +78,23 @@ resource "container" "vscode" {
     destination = "/root/.bashrc"
   }
 
-  # examples
+  # task 1
   volume {
     source      = "./workshop/docs/task_1/example"
     destination = "/workshop/examples/task_1"
   }
 
 
-  # task 3
+  # task 3a
   volume {
     source      = "../vms/minecraft_vm_ansible"
-    destination = "/workshop/examples/task_3"
+    destination = "/workshop/examples/task_3/packer"
+  }
+
+    # task 3b
+  volume {
+    source      = "../vms/minecraft_vm_ansible"
+    destination = "/workshop/examples/task_3/terraform"
   }
 
   environment = {
