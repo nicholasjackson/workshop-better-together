@@ -32,7 +32,7 @@ variable "minecraft_hostname" {
 
 # Create a new AAP inventory for the shared minecraft server
 resource "aap_inventory" "shared_minecraft" {
-  name = "minecraft"
+  name = "minecraft_gcp"
   description = "Shared Minecraft Server"
 }
 
