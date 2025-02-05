@@ -103,6 +103,12 @@ resource "container" "vscode" {
     destination = "/workshop/examples/task_3/3b-terraform"
   }
 
+    # task 4
+  volume {
+    source      = "./workshop/docs/task_4/example"
+    destination = "/workshop/examples/task_4"
+  }
+
   environment = {
     CONNECTION_TOKEN = variable.vscode_token
     DEFAULT_FOLDER   = "/workshop"
