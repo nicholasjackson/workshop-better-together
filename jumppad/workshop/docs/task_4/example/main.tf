@@ -24,7 +24,6 @@ variable "aap_password" {
   type = string
 }
 
-
 variable "minecraft_hostname" {
   type = string
 }
@@ -41,7 +40,7 @@ resource "aap_inventory" "shared_minecraft" {
   description = "Shared Minecraft Server"
 }
 
-# Create a new AAP host for the miecraft server
+# Create a new AAP host for the minecraft server
 resource "aap_host" "vm_hosts" {
   inventory_id = aap_inventory.shared_minecraft.id
   name         = each.value.hostname  # Use the hostname for each VM
@@ -54,4 +53,6 @@ resource "aap_host" "vm_hosts" {
 # note: the job template should be created in the AAP server and is already associated with the machine credentials configured in task_2
 # or alternatively, you use the api - example 
 # GET /api/controller/v2/job_templates/?name=minecraft_whitelist
+#
+# Hint: the job template is in the directory you will need to populate the variable using terraform
 
