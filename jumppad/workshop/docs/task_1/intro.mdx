@@ -13,4 +13,21 @@ To access the minecraft server you can use the following DNS name in your minecr
 
 ```
 {{ machine_url }}
-``` 
+```
+
+<Task id="create_terraform_configuration">
+Configure the Kubernetes auth method.
+</Task>
+
+Did you mange that? If not you can find the solution below.
+
+<Solution title="Solution: configure kubernetes auth">
+
+```bash
+vault write auth/kubernetes/config \
+  token_reviewer_jwt=@/usr/src/k8s.token \
+  kubernetes_host="https://kubernetes.default.svc:443" \
+  kubernetes_ca_cert=@/usr/src/k8s.crt
+```
+
+</Solution>

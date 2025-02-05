@@ -100,11 +100,6 @@ resource "container" "vscode" {
     timeout = "100s"
 
     http {
-      address       = "http://${resource.docs.docs.fqdn}"
-      success_codes = [200]
-    }
-
-    http {
       address       = "http://localhost:8000/"
       success_codes = [200, 302, 403]
     }
@@ -118,6 +113,7 @@ module "workshop" {
     working_directory = "/workshop"
     docs_url          = variable.docs_url
     machine_url       = variable.machine_url
+    vscode            = resource.container.vscode.meta.id
   }
 }
 
@@ -129,18 +125,6 @@ resource "docs" "docs" {
   image {
     name = "ghcr.io/jumppad-labs/docs:v0.5.1"
   }
-
-  /* 
-  have docs support multiple paths that get combined into docs?
-  grabs all the books from the library and generates navigation
-  mounts the library to a volume
-  */
-
-  // logo {
-  //   url = "https://companieslogo.com/img/orig/HCP.D-be08ca6f.png"
-  //   width = 32
-  //   height = 32
-  // }
 
   content = [
     module.workshop.output.book
