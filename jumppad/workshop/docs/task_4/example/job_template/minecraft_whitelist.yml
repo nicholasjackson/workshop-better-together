@@ -3,15 +3,15 @@
   vars:
     minecraft_usernames:
       - "SheriffJackson"
-    lock_timeout: 30  # 30 seconds
+    lock_timeout: 60  # 30 seconds
 
   tasks:
     - block:
         - name: Fetch UUIDs from Mojang API (with retries)
-          uri:
+          ansible.builtin.uri:
             url: "https://api.mojang.com/users/profiles/minecraft/{{ item }}"
             method: GET
-            return_content: yes
+            return_content: true
             status_code: [200, 204]
           loop: "{{ minecraft_usernames }}"
           register: mojang_responses
@@ -20,12 +20,12 @@
           delay: 1
 
         - name: Extract UUIDs
-          set_fact:
+          ansible.builtin.set_fact:
             whitelist_entries: "{{ whitelist_entries | default([]) + [{'uuid': item.json.id, 'name': item.json.name}] }}"
           loop: "{{ mojang_responses.results }}"
-          when: 
+          when:
             - item.status == 200
-            - item.json is defined 
+            - item.json is defined
             - item.json.id is defined
 
         - name: Check if lock file exists and is not stale
@@ -37,7 +37,7 @@
           ansible.builtin.file:
             path: /etc/minecraft/whitelist.lock
             state: absent
-          when: 
+          when:
             - lockfile.stat.exists
             - (ansible_date_time.epoch | int) - (lockfile.stat.mtime | int) > lock_timeout
 
@@ -62,21 +62,21 @@
             state: touch
 
         - name: Read existing whitelist.json
-          slurp:
+          ansible.builtin.slurp:
             src: /etc/minecraft/whitelist.json
           register: whitelist_file
-          ignore_errors: yes
+          ignore_errors: true
 
         - name: Parse existing whitelist.json
-          set_fact:
+          ansible.builtin.set_fact:
             existing_whitelist: "{{ (whitelist_file['content'] | b64decode | from_json) if (whitelist_file['content'] is defined and whitelist_file['content'] | length > 0) else [] }}"
 
         - name: Merge whitelist entries
-          set_fact:
+          ansible.builtin.set_fact:
             updated_whitelist: "{{ (existing_whitelist | default([])) + whitelist_entries | unique(attribute='uuid') }}"
 
         - name: Write updated whitelist.json
-          copy:
+          ansible.builtin.copy:
             content: "{{ updated_whitelist | to_nice_json }}"
             dest: /etc/minecraft/whitelist.json
             mode: '0644'
