@@ -1,0 +1,51 @@
+---
+- name: Update whitelist.conf with locking
+  hosts: all
+  vars:
+    minecraft_username:
+      - "SheriffJackson"
+
+  tasks:
+    - name: Fetch UUID from Mojang API
+      uri:
+        url: "https://api.mojang.com/users/profiles/minecraft/{{ minecraft_username }}"
+        method: GET
+        return_content: yes
+      register: mojang_response
+
+    - name: Extract UUID
+      set_fact:
+        mcuuid: "{{ mojang_response.json.id }}"
+
+    - name: Ensure whitelist.conf exists
+      ansible.builtin.file:
+        path: /etc/minecraft/whitelist.conf
+        state: touch
+
+    - name: Check if lock file exists
+      ansible.builtin.stat:
+        path: /etc/minecraft/whitelist.lock
+      register: lockfile
+
+    - name: Fail if lock file exists
+      ansible.builtin.fail:
+        msg: "Another process is updating the file. Please try again later."
+      when: lockfile.stat.exists
+
+    - name: Create lock file
+      ansible.builtin.file:
+        path: /etc/minecraft/whitelist.lock
+        state: touch
+      when: not lockfile.stat.exists
+    
+    - name: Update the target file
+      lineinfile:
+        path: /etc/minecraft/whitelist.conf
+        line: "{{mcuuid}}:{{whitelist_user}}"
+        state: present
+      
+    - name: Remove lock file
+      file:
+        path: /etc/minecraft/whitelist.lock
+        state: absent
+      when: not lockfile.stat.exists
