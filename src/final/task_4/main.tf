@@ -53,6 +53,7 @@ resource "aap_host" "vm_hosts" {
   variables    = jsonencode({
     "ansible_host"     : "${var.minecraft_hostname}" #ip address or dns name of the shared GCP Minecraft VM
 })
+}
 
 
 # Execute the Job Template to update the minecraft server for access using existing job template - minecraft_whitelist
