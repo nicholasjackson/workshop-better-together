@@ -34,8 +34,8 @@ variable "minecraft_hostname" {
   type = string
 }
 
-variable "minecraft_username" {
-  type = string
+variable "minecraft_usernames" {
+  type = list(string)
   description = "minecraft username to add whitelist"
 }
 
