@@ -20,29 +20,3 @@
 * Part 3: Update your Terraform configuration to use the new image and configure ansible access list
 
 * Part 4: deploy and using updated Terraform that executes post install acccess list via AAP
-
-
-## Making VM SSH Public, temporary manual steps
-
-Get the IP address of the VM from libvirt
-
-```
-virsh net-dhcp-leases default
-```
-
-Run socat on instruqt to forward the SSH port to the VM
-
-```
-apt update
-apt install socat
-
-socat TCP-LISTEN:2222,fork TCP:192.168.122.197:22
-```
-
-The SSH server will now be available at
-
-```
-{{ machine_url }}:2222
-
-ssh packer@{{ machine_url }} -p 2222
-```
