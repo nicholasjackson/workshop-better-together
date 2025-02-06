@@ -1,33 +1,8 @@
-# Task1 - Use Terraform to deploy your Minecraft Server
+# Introduction
 
-## In this task you are going to start a new Virtual machine in your environment using Terraform.
+## In this task you are going to deploy and new Minecraft server in your environment using Terraform.
 
 * Part 1: Create a new Terraform configuration that configures the Libvirt provider.
 * Part 2: Create a new Virtual machine using the `libvirt_domain` resource for the provider.
 * Part 3: Connect to the minecraft server and verify that it is running.
 * Part 4: Complete the task in Minecraft to find Blackbeards treasure.
-
-## Machine Name
-
-To access the minecraft server you can use the following DNS name in your minecraft client.
-
-```
-{{ machine_url }}
-```
-
-<Task id="create_terraform_configuration">
-Configure the Kubernetes auth method.
-</Task>
-
-Did you mange that? If not you can find the solution below.
-
-<Solution title="Solution: configure kubernetes auth">
-
-```bash
-vault write auth/kubernetes/config \
-  token_reviewer_jwt=@/usr/src/k8s.token \
-  kubernetes_host="https://kubernetes.default.svc:443" \
-  kubernetes_ca_cert=@/usr/src/k8s.crt
-```
-
-</Solution>
