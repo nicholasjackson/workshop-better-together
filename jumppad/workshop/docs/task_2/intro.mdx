@@ -1,4 +1,6 @@
-# Task 2 Configure Ansible Automation Platform for SSH key signing - Gain Access to Blackbeards Treasure
+# Intro.
+
+Task 2 Configure Ansible Automation Platform for SSH key signing - Gain Access to Blackbeards Treasure
 
 * Part 1: Vault is preconfigured for userpass login with your namespace credentials - Tony (done)
 * Part 2: Retrieve approle secret and configure Ansible AAP Vault SSH credentials plugin, test connectivity - Simon (done)
@@ -11,16 +13,8 @@
 ## HashiCorp Cloud Platform (HCP) Vault Dedicated
 For this lab, we are leveraging a single shared HCP Vault Dedicated with child namespaces precreated and configured for each team.
 
-**Vault Address:** https://skoaap-public-vault-7a278d60.8c03478c.z1.hashicorp.cloud:8200/
-
 ## Get AppRole credentials for Ansible Automation Platform (AAP)
 AAP natively uses Vault's AppRole Authenication method. The first step would be to receive these credentials so you can configure AAP to interact with Vault.
-
-### Login to HCP Vault using `userpass` authenication method
-
-1. Set environment variable `export VAULT_ADDDR=https://skoaap-public-vault-7a278d60.8c03478c.z1.hashicorp.cloud:8200/`
-2. Login to Vault `vault login -namespace=admin -method=userpass username=<team_name> password='<password>'`
-3. Test retrieving a secret from Vault's Key-Value Secrets engine `vault kv get -namespace=admin/<team_name> secrets/skofy26`
 
 ### Retrieve AAP AppRole Credentials
 
