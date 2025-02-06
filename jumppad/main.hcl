@@ -84,6 +84,13 @@ resource "container" "vscode" {
     destination = "/workshop/src"
   }
 
+  volume {
+    source      = "/var/workshop/images/"
+    destination = "/workshop/images"
+  }
+
+  
+
   environment = {
     CONNECTION_TOKEN = variable.vscode_token
     DEFAULT_FOLDER   = "/workshop"

@@ -38,7 +38,7 @@ resource "task" "packer_build" {
 
     check {
       script = <<-EOF
-        validate file exists "/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
+        validate file exists "/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
       EOF
 
       failure_message = "Packer image build failed"
