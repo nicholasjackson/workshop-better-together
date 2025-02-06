@@ -12,6 +12,12 @@ provider "libvirt" {
   uri = "qemu:///system?socket=/var/run/libvirt/libvirt-sock"
 }
 
+variable "image_source" {
+  type        = string
+  description = "Name of the image to use"
+  default     = "/var/workshop/images/minecraft_1/minecraft-vm.qcow2"
+}
+
 variable "server_mac_addr" {
   type        = string
   description = "Fixed MAC address for the server, to enable static ip"
@@ -47,7 +53,7 @@ resource "libvirt_pool" "ubuntu" {
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = "ubuntu-qcow2"
   pool   = libvirt_pool.ubuntu.name
-  source = "/var/workshop/images/minecraft_1/minecraft-vm.qcow2"
+  source = var.image_source
 }
 
 resource "libvirt_domain" "domain-ubuntu" {
