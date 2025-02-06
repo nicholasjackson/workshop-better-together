@@ -1,1 +1,13 @@
-# Step 2: Initialize the Environment 
+# Step 2: Deploy Your Minecraft Server
+* Use SSH to connect to your Minecraft server and verify it is running:
+
+```
+ssh packer@localhost -p2222 
+``` 
+* Select Yes for knoown host then input `packer` as password when prompted
+
+* To access the minecraft server you can use the following DNS name in your minecraft client.
+
+```
+{{ machine_url }}
+```

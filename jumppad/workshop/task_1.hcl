@@ -5,7 +5,7 @@ resource "chapter" "task_1" {
     apply_terraform_configuration = resource.task.apply_terraform_configuration
   }
 
-  page "intro" {
+  page "Introduction" {
     content = template_file("docs/task_1/intro.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
@@ -30,8 +30,14 @@ resource "chapter" "task_1" {
       machine_url = variable.machine_url
     })
   }
-   page "step_4" {
+  page "step_4" {
     content = template_file("docs/task_1/step_4.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+    })
+  }
+    page "outtro" {
+    content = template_file("docs/task_1/outro.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
     })
