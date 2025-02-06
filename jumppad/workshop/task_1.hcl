@@ -12,7 +12,7 @@ resource "chapter" "task_1" {
     })
   }
 
-   page "intro" {
+   page "part_1" {
     content = template_file("docs/task_1/part_1.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
