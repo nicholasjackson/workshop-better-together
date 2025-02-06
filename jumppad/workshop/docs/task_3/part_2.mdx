@@ -1,10 +1,51 @@
-# Part 2: Using Terraform deploy new secure packer image and apply user access using Ansible
+# Part 2: Update existing Terraform to deploy new secure packer image and apply user access using AAP provider
 
 ## Machine Name
 ```
 {{ machine_url }}
 ```
 ## Ansible automation Platform
+
 ```
+aap_url="https://44.210.128.10"
+```
+
+## Update your existing terraform configuration to use the new packer image
+
+### copy files from aap directory to the terraform directory
+
+```
+# ensure your in the terraform directory
+cp ../aap/* .
+ls
+```
+
+## output
+```
+root@debian:/workshop/src/working/terraform# ls
+aap.tf  main.tf  terraform.auto.tfvars
+root@debian:/workshop/src/working/terraform# 
+```
+
+```
+vi terraform.auto.tfvars
+
+```
+
+
+```hcl
+# terraform.auto.tfvars
+
+aap_username="" #your <teamname_admin>
+aap_password="" #default credentials
+minecraft_hostname=""
+minecraft_usernames=[]
+image_source="/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
+```
+
+
+### save the updates
+```
+esc :wq
 
 ```

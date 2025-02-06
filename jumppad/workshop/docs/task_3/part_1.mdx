@@ -19,7 +19,6 @@ cd packer
 ```
 packer init .
 packer validate .
-
 ```
 
 You should see the following output:
@@ -38,7 +37,7 @@ https://packer.io/docs/templates/hcl_templates/syntax for details.
 
 <Task id="packer_build">
 ```
-packer build -var vault_namespace=<your_team_name> .
+packer build -var vault_namespace=\<your_team_name\> .
 ```
 </Task>
 
