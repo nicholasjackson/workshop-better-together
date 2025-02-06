@@ -1,5 +1,5 @@
 resource "chapter" "task_1" {
-  title = "1.Deploy a Minecraft server"
+  title = "1.Set Sail – Deploying the Pirate World with Terraform"
 
   tasks = {
     apply_terraform_configuration = resource.task.apply_terraform_configuration
@@ -12,8 +12,26 @@ resource "chapter" "task_1" {
     })
   }
 
-   page "part_1" {
-    content = template_file("docs/task_1/part_1.mdx", {
+   page "step_1" {
+    content = template_file("docs/task_1/step_1.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+    })
+  }
+   page "step_2" {
+    content = template_file("docs/task_1/step_2.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+    })
+  }
+   page "step_3" {
+    content = template_file("docs/task_1/step_3.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+    })
+  }
+   page "step_4" {
+    content = template_file("docs/task_1/step_4.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
     })
