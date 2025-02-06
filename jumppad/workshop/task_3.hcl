@@ -1,6 +1,10 @@
 resource "chapter" "task_3" {
   title = "3.Packer and Terraform with AAP"
 
+  tasks = {
+    packer_build = resource.task.packer_build
+  }
+
    page "intro" {
     content = template_file("docs/task_3/intro.mdx", {
       docs_url    = variable.docs_url
@@ -30,7 +34,7 @@ resource "task" "packer_build" {
   }
 
   condition "vault login" {
-    description = "Pacjer image build successful"
+    description = "Packer image build successful"
 
     check {
       script = <<-EOF

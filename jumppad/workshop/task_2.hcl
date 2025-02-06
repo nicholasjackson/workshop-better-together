@@ -1,6 +1,10 @@
 resource "chapter" "task_2" {
   title = "2.Vault with AAP"
 
+  tasks = {
+    vault_login = resource.task.vault_login
+  }
+
   page "intro" {
     content = template_file("docs/task_2/intro.mdx", {
       docs_url    = variable.docs_url
