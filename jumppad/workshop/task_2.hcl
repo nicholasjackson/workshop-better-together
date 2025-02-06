@@ -20,3 +20,30 @@ resource "chapter" "task_2" {
     })
   }
 }
+
+resource "task" "vault_login" {
+  prerequisites = []
+
+  config {
+    user   = "root"
+    target = variable.vscode
+  }
+
+  condition "vault login" {
+    description = "retrieved the vault secrets"
+
+    check {
+      script = <<-EOF
+      EOF
+
+      failure_message = "Please try again"
+    }
+
+    solve {
+      script = <<-EOF
+      EOF
+
+      timeout = 60
+    }
+  }
+}

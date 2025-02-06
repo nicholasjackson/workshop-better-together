@@ -12,7 +12,8 @@ https://skoaap-public-vault-7a278d60.8c03478c.z1.hashicorp.cloud:8200/
 For this lab,  the HCP Vault Dedicated cluster is accessible over the public internet. Generally, this is not recommended and should be disabled. If there is a requirement to allow public access, we recommend customers to use the IP allow list as measure to limit access and security exposure. More information can be found in the [Manage public network access
 ](https://developer.hashicorp.com/hcp/docs/vault/get-started/manage-public-access).
 
-## Login to HCP Vault
+<Task id="vault_login">
+Login to HCP Vault
 
 1. Click on Instrqut terminal tab to begin.
 2. The [Vault CLI](https://developer.hashicorp.com/vault/docs/commands) is pre-installed in the terminal. However, you'll need to set the environment variable `VAULT_ADDR` to the HCP Vault address as by default its `https://127.0.0.1:8200`.
@@ -52,6 +53,7 @@ Last WAL                 800808
 ```
 vault login -namespace=admin -method=userpass username=<team_name> password='<password>'
 ```
+</Task>
 
 ### Test retrieving secrets
 1. Test retrieving a secret from Vault's Key-Value Secrets engine using
