@@ -36,7 +36,7 @@ resource "template" "vscode_jumppad" {
 resource "template" "vscode_settings" {
   source = <<-EOF
   {
-      "workbench.colorTheme": "Palenight Theme",
+      "workbench.colorTheme": "Default Dark Modern",
       "editor.fontSize": 16,
       "workbench.iconTheme": "material-icon-theme",
       "terminal.integrated.fontSize": 16
