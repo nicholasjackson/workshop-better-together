@@ -1,0 +1,47 @@
+# Part 1: Retreive AppRole credentials and configure AAP
+
+Vault's [AppRole](https://www.vaultproject.io/docs/auth/approle) authentication (auth) method is used to enable AAP to authenticate with Vault using a Role ID and Secret ID.
+
+The AppRole auth method has been preconfigured for each team in their respective namespaces, as such the Role ID and Secret ID are unique to each team and are stored in Vault. This task will guide you through retrieving the Role ID and Secret ID for use with AAP. 
+
+## Retreive AppRole credentials
+
+<Task id="read_aap_creds">
+1. Using the same terminal that you logged into Vault with in the prior tasks, retreive the Role ID using the command. 
+```
+vault read -namespace=admin/<team_name> auth/approle/role/aap/role-id
+```
+Replace `<team_name>` with your team's name.
+
+You should see the following output
+```
+root@debian:/workshop/src/working# vault read -namespace=admin/testorga auth/approle/role/aap/role-id
+Key        Value
+---        -----
+role_id    3d05b15f-4262-419a-c609-b3a2633877b4
+```
+2. Retreive the Secret ID using the command. 
+```
+vault write -namespace=admin/<team_name> -force auth/approle/role/aap/secret-id
+```
+Replace `<team_name>` with your team's name.
+
+You should see the following output
+```
+root@debian:/workshop/src/working# vault write -namespace=admin/testorga -force auth/approle/role/aap/secret-id
+Key                   Value
+---                   -----
+secret_id             950d8a35-5b34-228f-5475-030c6ecbf970
+secret_id_accessor    7978c558-2d0c-5ab9-c178-89ee68bab69c
+secret_id_num_uses    0
+secret_id_ttl         0s
+```
+3. Make a note of the Role ID and Secret ID as you will need them in the next task.
+</Task>
+
+## Configure AAP Vault SSH credentials
+
+<Task id="configure_aap_vault_creds">
+1. From the Instruqt lab, click on the **Ansible Automation Platform** tab to open the Ansible Automation Platform web interface. (ignore any certificate warnings, this is lab environment)
+2. Enter the username allocated to your team and the password provided. **Hint:** the details can be retrieved from Vault. The Vault path is `secrets/app`
+</Task>

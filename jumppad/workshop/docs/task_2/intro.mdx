@@ -10,13 +10,11 @@ Task 2 Configure Ansible Automation Platform for SSH key signing - Gain Access t
 
 --
 
-## HashiCorp Cloud Platform (HCP) Vault Dedicated
-For this lab, we are leveraging a single shared HCP Vault Dedicated with child namespaces precreated and configured for each team.
+## Environment
 
-## Get AppRole credentials for Ansible Automation Platform (AAP)
-AAP natively uses Vault's AppRole Authenication method. The first step would be to receive these credentials so you can configure AAP to interact with Vault.
+Each team will be allocated a team name that will present as a child namespace in Vault and organization in Ansible Automation Platform (AAP).
 
-### Retrieve AAP AppRole Credentials
+### HashiCorp Cloud Platform (HCP) Vault Dedicated
+For this lab, we are leveraging a single shared HCP Vault Dedicated. The parent namespace `admin` is configured with `userpass` authentication method for each team to authenticate with their respective child namespaces to read KV secrets and retreive AppRole credentials.
 
-vault read -namespace=admin/testorgc auth/approle/role/aap/role-id
-vault write -namespace=admin/testorgc -force auth/approle/role/aap/secret-id
+AAP itself will be configured to authenticate with Vault using the AppRole method directly to the child namespaces.

@@ -1,8 +1,7 @@
 # Part 1: Login to HCP Vault and retrieve secrets
 
-Each
-
 ## HCP Vault Address
+
 To access the HCP Vault Dedicated cluster you can use the following FQDN.
 
 ```
@@ -13,6 +12,7 @@ For this lab,  the HCP Vault Dedicated cluster is accessible over the public int
 ](https://developer.hashicorp.com/hcp/docs/vault/get-started/manage-public-access).
 
 ## Login to HCP Vault
+
 <Task id="vault_login">
 1. Click on Instrqut terminal tab to begin.
 2. The [Vault CLI](https://developer.hashicorp.com/vault/docs/commands) is pre-installed in the terminal. However, you'll need to set the environment variable `VAULT_ADDR` to the HCP Vault address as by default its `https://127.0.0.1:8200`.
@@ -48,10 +48,12 @@ Raft Committed Index     1945872
 Raft Applied Index       1945872
 Last WAL                 800808
 ```
-5. Login using the `userpass` method with the team's credentials. Replace `<team_name>` and `<password>` with your team's credentials.
+5. Login using the `userpass` method with the team's credentials by using the command. 
 ```
 vault login -namespace=admin -method=userpass username=<team_name> password='<password>'
 ```
+Replace `<team_name>` and `<password>` with your team's credentials.
+
 You should see the following output
 ```
 root@debian:/workshop/src/working# vault login -namespace=admin -method=userpass username=testorga
@@ -76,10 +78,12 @@ token_meta_username    testorga
 ## Retrieve KV secrets
 
 <Task id="read_kv_secrets">
-1. In the same terminal that you logged into Vault with, retrieving a secret from Vault's Key-Value Secrets engine using. Replace `<team_name>` with your team's name.
+1. Using the same terminal that you logged into Vault with, Retreive a secret from Vault's Key-Value Secrets engine by using the command. 
 ```
 vault kv get -namespace=admin/<team_name> secrets/skofy26
 ```
+Replace `<team_name>` with your team's name.
+
 You should see the following output
 ```
 root@debian:/workshop/src/working# vault kv get -namespace=admin/testorga secrets/skofy26
