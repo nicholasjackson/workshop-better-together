@@ -7,7 +7,7 @@
 ## Ansible automation Platform
 
 ```
-aap_url="https://44.210.128.10"
+https://44.210.128.10
 ```
 
 ## Update your existing terraform configuration to use the new packer image
@@ -19,21 +19,17 @@ ensure your in the terraform directory
 cp ../aap/* .
 ls
 ```
-
 confirm the files are copied
-
 ```
 root@debian:/workshop/src/working/terraform# ls
 aap.tf  main.tf  terraform.auto.tfvars
 root@debian:/workshop/src/working/terraform# 
 ```
-
 update the terraform.auto.tfvars 
 
 ```
 vi terraform.auto.tfvars
 ```
-
 ```hcl
 # terraform.auto.tfvars
 
