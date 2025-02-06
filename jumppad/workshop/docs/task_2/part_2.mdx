@@ -1,4 +1,4 @@
-# Part 1: Retreive AppRole credentials and configure AAP
+# Part 2: Retreive AppRole credentials and configure AAP
 
 Vault's [AppRole](https://www.vaultproject.io/docs/auth/approle) authentication (auth) method is used to enable AAP to authenticate with Vault using a Role ID and Secret ID.
 
@@ -44,4 +44,15 @@ secret_id_ttl         0s
 <Task id="configure_aap_vault_creds">
 1. From the Instruqt lab, click on the **Ansible Automation Platform** tab to open the Ansible Automation Platform web interface. (ignore any certificate warnings, this is lab environment)
 2. Enter the username allocated to your team and the password provided. **Hint:** the details can be retrieved from Vault. The Vault path is `secrets/app`
+3. From the left menu, click on **Automation Execution** and then **Credentials**.
+**`hashicorp_vault_ssh_approle` has been preconfigured but you'll need to input the AppRole Role ID and Secret ID to complete the configuration**
+4. Click on the edit credential icon for the **hashicorp_vault_ssh_approle** credential.
+5. Enter the Role ID and Secret ID you retrieved in the previous task into the respective fields.
+6. Click **Test** (Opens a new window with additional fields).
+    a. For `Unsigned Public Key`, insert a unsigned public key. You can use the key provided in the `secrets/app` path in Vault or use your own if you are feeling adventurous.
+    b. For `Path to Secret`, insert `ssh`.
+    c. For `Path to Auth`, insert `approle`.
+    d. For `Role Name`, insert `aap`.
+7. Click *Run* to test the connection.
+8. If the test is successful, click **Save credential** to save the configuration.
 </Task>
