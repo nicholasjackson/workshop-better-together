@@ -11,6 +11,13 @@ resource "chapter" "task_1" {
       machine_url = variable.machine_url
     })
   }
+
+   page "intro" {
+    content = template_file("docs/task_1/part_1.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+    })
+  }
 }
 
 resource "task" "create_terraform_configuration" {
@@ -26,7 +33,7 @@ resource "task" "create_terraform_configuration" {
 
     check {
       script = <<-EOF
-        validate file exists "/workshop/src/working/terraform/main.tf"
+       # validate file exists "/workshop/src/working/task1_terraform/main.tf"
       EOF
 
       failure_message = "Please create and run the Terraform configuration"
