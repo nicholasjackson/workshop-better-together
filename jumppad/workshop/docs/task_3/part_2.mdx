@@ -15,23 +15,24 @@ aap_url="https://44.210.128.10"
 ### copy files from aap directory to the terraform directory
 
 ```
-# ensure your in the terraform directory
+ensure your in the terraform directory
 cp ../aap/* .
 ls
 ```
 
-## output
+confirm the files are copied
+
 ```
 root@debian:/workshop/src/working/terraform# ls
 aap.tf  main.tf  terraform.auto.tfvars
 root@debian:/workshop/src/working/terraform# 
 ```
 
+update the terraform.auto.tfvars 
+
 ```
 vi terraform.auto.tfvars
-
 ```
-
 
 ```hcl
 # terraform.auto.tfvars
@@ -42,12 +43,9 @@ minecraft_hostname=""
 minecraft_usernames=[]
 image_source="/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
 ```
-
-
-### save the updates
+save the updates
 ```
 esc :wq
-
 ```
 
 <Task id="update_terraform">
