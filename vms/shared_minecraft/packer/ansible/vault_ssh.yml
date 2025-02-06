@@ -1,0 +1,27 @@
+    ## Vault SSH signing CA
+    - name: Create temporary directory for SSH CA storage
+      file:
+        path: /tmp/ssh_ca.d/
+        state: directory
+
+    - name: Add HCP Vault SSH signing public certificate
+      get_url:
+        url: "{{ lookup('env', 'VAULT_URL') }}/v1/ssh/public_key"
+        headers: 
+          X-Vault-Namespace: "admin/{{ lookup('env', 'VAULT_NAMESPACE') }}"
+        dest: /tmp/ssh_ca.d/hcp-vault-ca-keys.pem
+        mode: 0644
+        
+    - name: Add CA public certificates
+      assemble:
+        src: /tmp/ssh_ca.d/
+        dest: /etc/ssh/trusted-user-ca-keys.pem
+
+    - name: Update ssh config
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        state: present
+        line: TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem
+
+    - name: Register HCP Vault CA
+      command: update-ca-certificates

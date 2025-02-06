@@ -1,0 +1,16 @@
+- name: Minecraft Install with Vault SSH prereqs
+  hosts: all
+  become: true
+  gather_facts: false
+  vars:
+    minecraft_usernames:
+      - "SheriffJackson"
+  tasks:
+    - name: "Include minecraft tasks"
+      include_tasks: minecraft.yml
+    
+    - name: "Include minecraft whitelist tasks"
+      include_tasks: minecraft_whitelist.yml
+
+    - name: "Include vault tasks"
+      include_tasks: vault_ssh.yml

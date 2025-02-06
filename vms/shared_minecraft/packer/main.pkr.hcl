@@ -1,10 +1,11 @@
+
 ####
 #  Important this task needs to be executed from the the terminal tab - you cannot use the vscode integrated terminal
 ####
 packer {
   required_plugins {
-    qemu = {
-      source  = "github.com/hashicorp/qemu"
+    googlecompute = {
+      source  = "github.com/hashicorp/googlecompute"
       version = "~> 1"
     }
     ansible = {
@@ -14,36 +15,47 @@ packer {
   }
 }
 
-source "qemu" "minecraft" {
-  vm_name          = "minecraft-vm-ansible.qcow2"
-  iso_url          = "../build/base/ubuntu-2404-amd64.qcow2"
-  output_directory = "../build/minecraft_vm_ansible"
-  #iso_url          = "/var/workshop/images/base/ubuntu-2404-amd64.qcow2"
-  #output_directory = "/var/workshop/images/minecraft_vm_ansible"
-  iso_checksum     = "none"
-  disk_image       = true
-  memory           = 1500
-  accelerator      = "kvm"
-  disk_size        = "12000M"
-  disk_interface   = "virtio"
-  format           = "raw"
-  net_device       = "virtio-net"
-  boot_wait        = "3s"
-  shutdown_command = "echo 'packer' | sudo -S shutdown -P now"
-  ssh_username     = "packer"
-  ssh_password     = "packer"
-  ssh_timeout      = "60m"
-  headless         = true
+variable "image_version" {
+  type    = string
+  default = "2"
+}
+
+variable "project_id" {
+  type    = string
+  default = "jumppad"
+}
+
+variable "region" {
+  type    = string
+  default = "europe-west1"
+}
+
+variable "zone" {
+  type    = string
+  default = "europe-west4-b"
+}
+
+source "googlecompute" "minecraft" {
+  project_id = var.project_id
+  region     = var.region
+  zone       = var.zone
+
+  image_family = "jumppad"
+  image_name   = regex_replace("better-workshop-sharedmc-${var.image_version}", "[^a-zA-Z0-9_-]", "-")
+
+  source_image_family = "ubuntu-2204-lts"
+  machine_type        = "n1-standard-2"
+  disk_size           = 40
+
+  ssh_username = "root"
 }
 
 build {
-
   name    = "iso"
-  sources = ["source.qemu.minecraft"]
+  sources = ["source.googlecompute.minecraft"]
 
   provisioner "ansible" {
     playbook_file = "${path.cwd}/ansible/playbook.yml"
-    user          = "packer"
 
     ansible_env_vars = [
       "ANSIBLE_DEPRECATION_WARNINGS=False",
@@ -65,3 +77,4 @@ build {
   }
 
 }
+
