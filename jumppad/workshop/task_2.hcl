@@ -19,6 +19,12 @@ resource "chapter" "task_2" {
       machine_url = variable.machine_url
     })
   }
+  page "part_3" {
+    content = template_file("docs/task_2/part_3.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+    })
+  }
 }
 
 resource "task" "vault_login" {
