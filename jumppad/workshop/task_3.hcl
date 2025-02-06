@@ -20,3 +20,30 @@ resource "chapter" "task_3" {
     })
   }
 }
+
+resource "task" "packer_build" {
+  prerequisites = []
+
+  # config {
+  #   user   = "root"
+  # }
+
+  # condition "vault login" {
+  #   description = "vault login successful"
+
+  #   check {
+  #     script = <<-EOF
+  #       vault status
+  #     EOF
+
+  #     failure_message = "check the environment variable and try again"
+  #   }
+
+  #   solve {
+  #     script = <<-EOF
+  #     EOF
+
+  #     timeout = 60
+  #   }
+  # }
+}
