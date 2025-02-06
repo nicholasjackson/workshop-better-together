@@ -50,9 +50,9 @@ Last WAL                 800808
 ```
 5. Login using the `userpass` method with the team's credentials by using the command. 
 ```
-vault login -namespace=admin -method=userpass username=<team_name> password='<password>'
+vault login -namespace=admin -method=userpass username=#your_team_name# password='<password>'
 ```
-Replace `<team_name>` and `<password>` with your team's credentials.
+Replace `#your_team_name#` and `<password>` with your team's credentials.
 
 You should see the following output
 ```
@@ -80,9 +80,9 @@ token_meta_username    testorga
 <Task id="read_kv_secrets">
 1. Using the same terminal that you logged into Vault with, Retreive a secret from Vault's Key-Value Secrets engine by using the command. 
 ```
-vault kv get -namespace=admin/<team_name> secrets/skofy26
+vault kv get -namespace=admin/#your_team_name# secrets/skofy26
 ```
-Replace `<team_name>` with your team's name.
+Replace `#your_team_name#` with your team's name.
 
 You should see the following output
 ```

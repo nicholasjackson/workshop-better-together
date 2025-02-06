@@ -9,9 +9,9 @@ The AppRole auth method has been preconfigured for each team in their respective
 <Task id="read_aap_creds">
 1. Using the same terminal that you logged into Vault with in the prior tasks, retreive the Role ID using the command. 
 ```
-vault read -namespace=admin/<team_name> auth/approle/role/aap/role-id
+vault read -namespace=admin/#your_team_name# auth/approle/role/aap/role-id
 ```
-Replace `<team_name>` with your team's name.
+Replace `#your_team_name#` with your team's name.
 
 You should see the following output
 ```
@@ -22,9 +22,9 @@ role_id    3d05b15f-4262-419a-c609-b3a2633877b4
 ```
 2. Retreive the Secret ID using the command. 
 ```
-vault write -namespace=admin/<team_name> -force auth/approle/role/aap/secret-id
+vault write -namespace=admin/#your_team_name# -force auth/approle/role/aap/secret-id
 ```
-Replace `<team_name>` with your team's name.
+Replace `#your_team_name#` with your team's name.
 
 You should see the following output
 ```
