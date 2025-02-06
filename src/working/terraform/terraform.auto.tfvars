@@ -1,1 +1,0 @@
-image_name="minecraft-vm.qcow2"
