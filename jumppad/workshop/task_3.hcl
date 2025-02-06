@@ -24,28 +24,28 @@ resource "chapter" "task_3" {
 resource "task" "packer_build" {
   prerequisites = []
 
-  # config {
-  #   user   = "root"
-  # }
+  config {
+    user   = "root"
+  }
 
-  # condition "vault login" {
-  #   description = "vault login successful"
+  condition "vault login" {
+    description = "Pacjer image build successful"
 
-  #   check {
-  #     script = <<-EOF
-  #       vault status
-  #     EOF
+    check {
+      script = <<-EOF
+        validate file exists "/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
+      EOF
 
-  #     failure_message = "check the environment variable and try again"
-  #   }
+      failure_message = "Packer image build failed"
+    }
 
-  #   solve {
-  #     script = <<-EOF
-  #     EOF
+    solve {
+      script = <<-EOF
+      EOF
 
-  #     timeout = 60
-  #   }
-  # }
+      timeout = 60
+    }
+  }
 }
 
 
