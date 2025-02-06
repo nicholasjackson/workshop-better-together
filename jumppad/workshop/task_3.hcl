@@ -8,13 +8,13 @@ resource "chapter" "task_3" {
     })
   }
   page "step_1" {
-    content = template_file("docs/task_3/part_1.mdx", {
+    content = template_file("docs/task_3/step_1.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
     })
   }
   page "step_2" {
-    content = template_file("docs/task_3/part_2.mdx", {
+    content = template_file("docs/task_3/step_2.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
     })
