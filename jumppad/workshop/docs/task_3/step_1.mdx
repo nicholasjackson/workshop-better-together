@@ -6,7 +6,6 @@
 ```
 <Task id="packer_build">
 ## 1. switch to the `packer` directory
-
 Open the integrated terminal tab
 ```
 cd packer
@@ -16,9 +15,7 @@ cd packer
 packer init .
 packer validate .
 ```
-
 You should see the following output:
-
 ```
 root@debian:/workshop/src/working/task3_a_packer# packer validate .
 Error: Unset variable "vault_namespace"
@@ -26,10 +23,8 @@ Error: Unset variable "vault_namespace"
 A used variable must be set or have a default value; see
 https://packer.io/docs/templates/hcl_templates/syntax for details.
 ```
-
 ## 3. populate the required variables
 *Hint: **vault_namespace** is your team name*
-
 ```hcl
 packer build -var vault_namespace=#your_team_name# .
 ```
