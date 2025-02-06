@@ -80,3 +80,30 @@ resource "task" "read_kv_secrets" {
   #   }
   # }
 }
+
+resource "task" "configure_aap_vault_creds" {
+  prerequisites = []
+
+  # config {
+  #   user   = "root"
+  # }
+
+  # condition "vault login" {
+  #   description = "vault login successful"
+
+  #   check {
+  #     script = <<-EOF
+  #       vault status
+  #     EOF
+
+  #     failure_message = "check the environment variable and try again"
+  #   }
+
+  #   solve {
+  #     script = <<-EOF
+  #     EOF
+
+  #     timeout = 60
+  #   }
+  # }
+}
