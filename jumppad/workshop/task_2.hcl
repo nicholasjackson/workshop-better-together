@@ -24,26 +24,53 @@ resource "chapter" "task_2" {
 resource "task" "vault_login" {
   prerequisites = []
 
-  config {
-    user   = "root"
-  }
+  # config {
+  #   user   = "root"
+  # }
 
-  condition "vault login" {
-    description = "vault login successful"
+  # condition "vault login" {
+  #   description = "vault login successful"
 
-    check {
-      script = <<-EOF
-        vault status
-      EOF
+  #   check {
+  #     script = <<-EOF
+  #       vault status
+  #     EOF
 
-      failure_message = "check the environment variable and try again"
-    }
+  #     failure_message = "check the environment variable and try again"
+  #   }
 
-    solve {
-      script = <<-EOF
-      EOF
+  #   solve {
+  #     script = <<-EOF
+  #     EOF
 
-      timeout = 60
-    }
-  }
+  #     timeout = 60
+  #   }
+  # }
+}
+
+resource "task" "read_kv_secrets" {
+  prerequisites = []
+
+  # config {
+  #   user   = "root"
+  # }
+
+  # condition "vault login" {
+  #   description = "vault login successful"
+
+  #   check {
+  #     script = <<-EOF
+  #       vault status
+  #     EOF
+
+  #     failure_message = "check the environment variable and try again"
+  #   }
+
+  #   solve {
+  #     script = <<-EOF
+  #     EOF
+
+  #     timeout = 60
+  #   }
+  # }
 }

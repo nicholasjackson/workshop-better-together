@@ -1,4 +1,4 @@
-# Part 1: HCP Vault login and retrieving secrets
+# Part 1: Login to HCP Vault and retrieve secrets
 
 Each
 
@@ -52,10 +52,53 @@ Last WAL                 800808
 ```
 vault login -namespace=admin -method=userpass username=<team_name> password='<password>'
 ```
+You should see the following output
+```
+root@debian:/workshop/src/working# vault login -namespace=admin -method=userpass username=testorga
+Password (will be hidden): 
+Success! You are now authenticated. The token information displayed below
+is already stored in the token helper. You do NOT need to run "vault login"
+again. Future Vault requests will automatically use this token.
+
+Key                    Value
+---                    -----
+token                  REDACTED
+token_accessor         REDACTED
+token_duration         1h
+token_renewable        true
+token_policies         ["default" "testorga"]
+identity_policies      []
+policies               ["default" "testorga"]
+token_meta_username    testorga
+```
 </Task>
 
-### Test retrieving secrets
-1. Test retrieving a secret from Vault's Key-Value Secrets engine using
+## Retrieve KV secrets
+
+<Task id="read_kv_secrets">
+1. In the same terminal that you logged into Vault with, retrieving a secret from Vault's Key-Value Secrets engine using. Replace `<team_name>` with your team's name.
 ```
 vault kv get -namespace=admin/<team_name> secrets/skofy26
 ```
+You should see the following output
+```
+root@debian:/workshop/src/working# vault kv get -namespace=admin/testorga secrets/skofy26
+==== Secret Path ====
+secrets/data/skofy26
+
+======= Metadata =======
+Key                Value
+---                -----
+created_time       2025-02-04T02:43:17.230018382Z
+custom_metadata    <nil>
+deletion_time      n/a
+destroyed          false
+version            2
+
+==== Data ====
+Key      Value
+---      -----
+city     las vegas
+state    nevada
+```
+</Task>
