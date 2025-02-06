@@ -26,6 +26,7 @@ resource "task" "packer_build" {
 
   config {
     user   = "root"
+    target = variable.vscode
   }
 
   condition "vault login" {

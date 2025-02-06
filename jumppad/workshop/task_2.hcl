@@ -59,6 +59,7 @@ resource "task" "read_kv_secrets" {
 
   # config {
   #   user   = "root"
+  #    target = variable.vscode
   # }
 
   # condition "vault login" {
@@ -86,6 +87,7 @@ resource "task" "configure_aap_vault_creds" {
 
   # config {
   #   user   = "root"
+  #   target = variable.vscode
   # }
 
   # condition "vault login" {
