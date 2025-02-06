@@ -26,17 +26,17 @@ resource "task" "vault_login" {
 
   config {
     user   = "root"
-    target = variable.vscode
   }
 
   condition "vault login" {
-    description = "retrieved the vault secrets"
+    description = "vault login successful"
 
     check {
       script = <<-EOF
+        vault status
       EOF
 
-      failure_message = "Please try again"
+      failure_message = "check the environment variable and try again"
     }
 
     solve {
