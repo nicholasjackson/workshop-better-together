@@ -33,7 +33,7 @@ resource "task" "create_terraform_configuration" {
 
     check {
       script = <<-EOF
-      validate file exists "/workshop/src/working/task1_terraform/main.tf"
+      validate file exists "/workshop/src/working/terraform/main.tf"
       EOF
 
       failure_message = "Please create and run the Terraform configuration"
