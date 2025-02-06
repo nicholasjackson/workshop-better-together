@@ -2,7 +2,7 @@ resource "chapter" "task_1" {
   title = "1.Deploy a Minecraft server"
 
   tasks = {
-    create_terraform_configuration = resource.task.create_terraform_configuration
+    apply_terraform_configuration = resource.task.apply_terraform_configuration
   }
 
   page "intro" {
@@ -50,32 +50,32 @@ resource "task" "apply_terraform_configuration" {
 
 
 
-resource "task" "connect_to_minecraft" {
-  prerequisites = []
+# resource "task" "connect_to_minecraft" {
+#   prerequisites = []
 
-  # config {
-  #   user   = "root"
-  #   target = variable.vscode
-  # }
+#   # config {
+#   #   user   = "root"
+#   #   target = variable.vscode
+#   # }
 
-  # condition "terraform created" {
-  #   description = "Terraform configuration has been created"
+#   # condition "terraform created" {
+#   #   description = "Terraform configuration has been created"
 
-  #   check {
-  #     script = <<-EOF
-  #     validate file exists "/workshop/src/working/terraform/main.tf"
-  #     EOF
+#   #   check {
+#   #     script = <<-EOF
+#   #     validate file exists "/workshop/src/working/terraform/main.tf"
+#   #     EOF
 
-  #     failure_message = "Please create and run the Terraform configuration"
-  #   }
+#   #     failure_message = "Please create and run the Terraform configuration"
+#   #   }
 
-  #   solve {
-  #     script = <<-EOF
-  #     EOF
+#   #   solve {
+#   #     script = <<-EOF
+#   #     EOF
 
-  #     timeout = 60
-  #   }
-  # }
-}
+#   #     timeout = 60
+#   #   }
+#   # }
+# }
 
 
