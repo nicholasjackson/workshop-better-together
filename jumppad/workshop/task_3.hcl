@@ -34,14 +34,14 @@ resource "task" "packer_build" {
   }
 
   condition "vault login" {
-    description = "Packer image build successful"
+    description = "Success - Packer image minecraft-vm-ansible.qcow2 exists"
 
     check {
       script = <<-EOF
         validate file exists "/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
       EOF
 
-      failure_message = "Packer image build failed"
+      failure_message = "Validation Failed - Packer image minecraft-vm-ansible.qcow2 not found"
     }
 
     solve {
