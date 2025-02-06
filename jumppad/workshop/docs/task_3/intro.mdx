@@ -1,22 +1,21 @@
-# Task 3a Use Packer to build a custom Minecraft server image
+# 
 
-## Machine Name
+## Learning Objectives
 
-```
-{{ machine_url }}
-```
+* Leveraging Packer with Ansible to build custom images
+* Integrating Terraform with AAP using the AAP provider
 
-![](/assets/fine.gif)
 
-* Part 1: Create a new Packer configuration that builds a new Minecraft server image.
-* Part 2: Build the image with Packer
-    * Packer installs the Minecraft server packages
-        To do - convert the shell script to ansible (simon) - done
-    * Trusts the Vault namespce CA certificate (simon) - done
-    * Test and validate the packer image on qemu (john)
-    * update instruqt track (john)
-    
 
-* Part 3: Update your Terraform configuration to use the new image and configure ansible access list
 
-* Part 4: deploy and using updated Terraform that executes post install acccess list via AAP
+### Part 1 - Create a new Packe a new secure Minecraft server image using Ansible
+
+#### Build the image with Packer
+* Install Minecraft server using Ansible configuration
+* Use Ansible in Packer to trusts the Vault namespace CA certificate
+
+### Part 2 - Deploy the new image with Terraform and allow using access using Ansible
+
+#### Deploy updated terraform 
+* Update your Terraform configuration to use the new image and configure ansible access list
+* deploy and using updated Terraform that executes post install acccess list via Ansible Automaiton Platform
