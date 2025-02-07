@@ -54,6 +54,38 @@ once you have validated the terraform configuration, you can run terraform plan 
 ```
 terraform plan
 ```
+see example output below
+```
+root@debian:/workshop/src/working/terraform# terraform plan
+data.http.minecraft_accesslist: Reading...
+data.http.minecraft_accesslist: Read complete after 1s [id=https://44.210.128.100/api/controller/v2/job_templates/?name=minecraft_whitelist]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aap_host.vm_hosts will be created
+...
+...
+  # libvirt_volume.ubuntu-qcow2 will be created
+  + resource "libvirt_volume" "ubuntu-qcow2" {
+      + format = (known after apply)
+      + id     = (known after apply)
+      + name   = "ubuntu-qcow2"
+      + pool   = "ubuntu"
+      + size   = (known after apply)
+      + source = "/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
+    }
+
+Plan: 7 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + ip_address    = "192.168.16.100"
+  + socat_command = "socat TCP-LISTEN:25565,fork,reuseaddr TCP:192.168.16.100:25565"
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
+```
 apply the changes
 ```
 terraform apply
