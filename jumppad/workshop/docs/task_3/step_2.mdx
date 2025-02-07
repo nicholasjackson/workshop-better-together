@@ -26,28 +26,29 @@ aap.tf  main.tf  terraform.auto.tfvars
 root@debian:/workshop/src/working/terraform# 
 ```
 </Task>
-
-update the terraform.auto.tfvars 
+<Task id="update_tfvars">
+update the terraform.auto.tfvars using cli, or if your more comfortable with vscode you can use that as well from the workshop tab
 
 ```
 vi terraform.auto.tfvars
 ```
 ```hcl
 # terraform.auto.tfvars
-
-aap_username="" #your <teamname_admin>
-aap_password="" #default credentials
-minecraft_hostname=""
-minecraft_usernames=[]
+aap_username="#_your_team_name#_admin" replace #_your_team_name# with your team name
+aap_password="" #AAP password see the docs at the top of the task page
+minecraft_hostname="" #this is available in the docs at the top of the task page
+minecraft_usernames=[] #update with your minecraft usernames in > ["user1","user2"]
 image_source="/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
 ```
 save the updates
 ```
 esc :wq
 ```
-
-
+</Task>
+validate the terraform configuration updates
+<Task id="validte terraform">
 ```
 terraform init
 terraform validate
 ```
+</Task>

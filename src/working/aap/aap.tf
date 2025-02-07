@@ -1,17 +1,3 @@
-terraform {
-  required_providers {
-    aap = {
-      source = "ansible/aap"
-      version = "1.1.2"
-    }
-
-    http = {
-      source = "hashicorp/http"
-      version = "3.4.5"
-    }
-  }
-}
-
 # https://registry.terraform.io/providers/ansible/aap/latest
 
 provider "aap" {
@@ -24,7 +10,7 @@ provider "aap" {
 variable "aap_url" {
   type = string
   description = "Ansible Automation Platform URL"
-  default = "https://44.210.128.10"
+  default = "https://44.210.128.100"
 }
 
 variable "aap_username" {
