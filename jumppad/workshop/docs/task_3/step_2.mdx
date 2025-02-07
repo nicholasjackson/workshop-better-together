@@ -28,7 +28,6 @@ root@debian:/workshop/src/working/terraform#
 </Task>
 <Task id="update_tfvars">
 update the terraform.auto.tfvars using cli, or if your more comfortable with vscode you can use that as well from the workshop tab
-
 ```
 vi terraform.auto.tfvars
 ```
@@ -46,9 +45,17 @@ esc :wq
 ```
 </Task>
 validate the terraform configuration updates
-<Task id="validte terraform">
+<Task id="terraform_apply">
 ```
 terraform init
 terraform validate
+```
+once you have validated the terraform configuration, you can run terraform plan to review the changes.
+```
+terraform plan
+```
+apply the changes
+```
+terraform apply
 ```
 </Task>

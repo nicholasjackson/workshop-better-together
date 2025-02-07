@@ -4,13 +4,14 @@ resource "chapter" "task_3" {
   tasks = {
     packer_build = resource.task.packer_build
     update_terraform = resource.task.update_terraform
+    update_tfvars = resource.task.update_tfvars
+    terraform_apply = resource.task.terraform_apply
   }
 
   page "intro" {
     content = template_file("docs/task_3/intro.mdx", {
       docs_url     = variable.docs_url
       machine_url  = variable.machine_url
-      #ansible_pass = variable.ansible_pass
     })
   }
   page "step_1" {
@@ -23,6 +24,7 @@ resource "chapter" "task_3" {
     content = template_file("docs/task_3/step_2.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
+      ansible_pass = variable.ansible_pass
     })
   }
 }
@@ -55,7 +57,6 @@ resource "task" "packer_build" {
   }
 }
 
-
 resource "task" "update_terraform" {
   prerequisites = []
 
@@ -73,6 +74,60 @@ resource "task" "update_terraform" {
         EOF
 
         failure_message = "Validation Failed - aap.tf not found in your Terraform configuration"
+      }
+
+      solve {
+        script = <<-EOF
+        EOF
+
+        timeout = 60
+      }
+    }
+}
+
+resource "task" "update_tfvars" {
+  prerequisites = []
+
+  config {
+    user   = "root"
+    target = variable.vscode
+  }
+
+  condition "check terraform" {
+      description = "Success - "
+
+      check {
+        script = <<-EOF
+        EOF
+
+        failure_message = "Validation Failed - "
+      }
+
+      solve {
+        script = <<-EOF
+        EOF
+
+        timeout = 60
+      }
+    }
+}
+
+resource "task" "terraform_apply" {
+  prerequisites = []
+
+  config {
+    user   = "root"
+    target = variable.vscode
+  }
+
+  condition "check terraform" {
+      description = "Success - "
+
+      check {
+        script = <<-EOF
+        EOF
+
+        failure_message = "Validation Failed - "
       }
 
       solve {
