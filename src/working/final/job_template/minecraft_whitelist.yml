@@ -22,7 +22,7 @@
 
         - name: Extract UUIDs
           ansible.builtin.set_fact:
-            whitelist_entries: "{{ whitelist_entries | default([]) + [{'uuid': item.json.id, 'name': item.json.name}] }}"
+            whitelist_entries: "{{ whitelist_entries | default([]) + [{'uuid': (item.json.id[:8] + '-' + item.json.id[8:12] + '-' + item.json.id[12:16] + '-' + item.json.id[16:20] + '-' + item.json.id[20:]),'name': item.json.name}] }}"
           loop: "{{ mojang_responses.results }}"
           when:
             - item.status == 200
