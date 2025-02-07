@@ -7,6 +7,11 @@
 
   tasks:
     - block:
+        # Need to update to change the API and whitelist file update to use RCON cli
+        # updating the whitelist file directly does not update permissions until the server is 
+        # restarted. cli updates immedately.
+        #
+        # rcon-cli --password password whitelist add SheriffJackson
         - name: Fetch UUIDs from Mojang API (with retries)
           ansible.builtin.uri:
             url: "https://api.mojang.com/users/profiles/minecraft/{{ item }}"
@@ -21,7 +26,7 @@
 
         - name: Extract UUIDs
           ansible.builtin.set_fact:
-            whitelist_entries: "{{ whitelist_entries | default([]) + [{'uuid': item.json.id, 'name': item.json.name}] }}"
+            whitelist_entries: "{{ whitelist_entries | default([]) + [{'uuid': (item.json.id[:8] + '-' + item.json.id[8:12] + '-' + item.json.id[12:16] + '-' + item.json.id[16:20] + '-' + item.json.id[20:]),'name': item.json.name}] }}"
           loop: "{{ mojang_responses.results }}"
           when:
             - item.status == 200

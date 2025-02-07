@@ -17,7 +17,7 @@ packer {
 
 variable "image_version" {
   type    = string
-  default = "2"
+  default = "1"
 }
 
 variable "project_id" {
@@ -62,7 +62,6 @@ build {
       "ANSIBLE_HOST_KEY_CHECKING=False",
       "ANSIBLE_NOCOLOR=True",
       "ANSIBLE_NOCOWS=1",
-      "VAULT_NAMESPACE=${var.vault_namespace}",
       "VAULT_URL=${var.vault_url}",
       "ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3",
       "ANSIBLE_REMOTE_TEMP=/tmp/ansible"
@@ -77,4 +76,3 @@ build {
   }
 
 }
-

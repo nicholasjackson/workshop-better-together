@@ -10,46 +10,32 @@
       retries: 3
       delay: 1
 
-    - name: Extract UUIDs
+    - name: Extract UUIDs for Whitelist
       ansible.builtin.set_fact:
-        whitelist_entries: "{{ whitelist_entries | default([]) + [{'uuid': item.json.id, 'name': item.json.name}] }}"
+        whitelist_entries: "{{ whitelist_entries | default([]) + [{'uuid': (item.json.id[:8] + '-' + item.json.id[8:12] + '-' + item.json.id[12:16] + '-' + item.json.id[16:20] + '-' + item.json.id[20:]),'name': item.json.name}] }}"
+      loop: "{{ mojang_responses.results }}"
+      when:
+        - item.status == 200
+        - item.json is defined
+        - item.json.id is defined
+    
+    - name: Extract UUIDs for ops
+      ansible.builtin.set_fact:
+        ops_entries: "{{ ops_entries | default([]) + [{'uuid': (item.json.id[:8] + '-' + item.json.id[8:12] + '-' + item.json.id[12:16] + '-' + item.json.id[16:20] + '-' + item.json.id[20:]),'name': item.json.name, 'level': 4, 'bypassesPlayerLimit': false}] }}"
       loop: "{{ mojang_responses.results }}"
       when:
         - item.status == 200
         - item.json is defined
         - item.json.id is defined
 
-    - name: Check if lock file exists and is not stale
-      ansible.builtin.stat:
-        path: /etc/minecraft/whitelist.lock
-      register: lockfile
-
-    - name: Remove stale lock file
-      ansible.builtin.file:
-        path: /etc/minecraft/whitelist.lock
-        state: absent
-      when:
-        - lockfile.stat.exists
-        - (ansible_date_time.epoch | int) - (lockfile.stat.mtime | int) > lock_timeout
-
-    - name: Check lock file again after potential stale removal
-      ansible.builtin.stat:
-        path: /etc/minecraft/whitelist.lock
-      register: lockfile_final
-
-    - name: Fail if lock file still exists
-      ansible.builtin.fail:
-        msg: "Another process is updating the file. Please try again later."
-      when: lockfile_final.stat.exists
-
-    - name: Create lock file
-      ansible.builtin.file:
-        path: /etc/minecraft/whitelist.lock
-        state: touch
-
     - name: Ensure whitelist.json exists
       ansible.builtin.file:
         path: /etc/minecraft/whitelist.json
+        state: touch
+    
+    - name: Ensure ops.json exists
+      ansible.builtin.file:
+        path: /etc/minecraft/ops.json
         state: touch
 
     - name: Read existing whitelist.json
@@ -72,8 +58,24 @@
         dest: /etc/minecraft/whitelist.json
         mode: '0644'
       register: write_result
+    
+    - name: Read existing ops.json
+      ansible.builtin.slurp:
+        src: /etc/minecraft/ops.json
+      register: ops_file
+      ignore_errors: true
 
-    - name: Remove lock file
-      ansible.builtin.file:
-        path: /etc/minecraft/whitelist.lock
-        state: absent
+    - name: Parse existing ops.json
+      ansible.builtin.set_fact:
+        existing_ops: "{{ (ops_file['content'] | b64decode | from_json) if (ops_file['content'] is defined and ops_file['content'] | length > 0) else [] }}"
+    
+    - name: Merge ops entries
+      ansible.builtin.set_fact:
+        updated_ops: "{{ (existing_ops | default([])) + ops_entries | unique(attribute='uuid') }}"
+    
+    - name: Write updated ops.json
+      ansible.builtin.copy:
+        content: "{{ updated_ops | to_nice_json }}"
+        dest: /etc/minecraft/ops.json
+        mode: '0644'
+      register: write_result

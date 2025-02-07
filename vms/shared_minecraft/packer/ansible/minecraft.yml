@@ -1,4 +1,20 @@
 ---
+    - name: Stop apt-daily.service
+      ansible.builtin.command:
+        cmd: systemctl stop apt-daily.service
+
+    - name: Stop apt-daily-upgrade.service
+      ansible.builtin.command:
+        cmd: systemctl stop apt-daily-upgrade.service
+
+    - name: Kill all processes of apt-daily.service
+      ansible.builtin.command:
+        cmd: systemctl kill --kill-who=all apt-daily.service
+
+    - name: Kill all processes of apt-daily-upgrade.service
+      ansible.builtin.command:
+        cmd: systemctl kill --kill-who=all apt-daily-upgrade.service
+
     - name: Update apt cache
       apt:
         update_cache: yes
@@ -99,12 +115,12 @@
           enable-command-block=false
           enable-jmx-monitoring=false
           enable-query=false
-          enable-rcon=false
+          enable-rcon=true
           enable-status=true
           enforce-secure-profile=true
-          enforce-whitelist=false
+          enforce-whitelist=true
           entity-broadcast-range-percentage=100
-          force-gamemode=false
+          force-gamemode=true
           function-permission-level=2
           gamemode=survival
           generate-structures=true
@@ -131,7 +147,7 @@
           pvp=true
           query.port=25565
           rate-limit=0
-          rcon.password=
+          rcon.password=password
           rcon.port=25575
           region-file-compression=deflate
           require-resource-pack=false
