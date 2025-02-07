@@ -52,22 +52,6 @@ variable "job_template_name" {
   default = "minecraft_whitelist"
 }
 
-# Create a new AAP inventory for the shared minecraft server
-resource "aap_inventory" "dedicated_minecraft" {
-  name = "minecraft_dedicated"
-  description = "Dedicated Minecraft Server"
-}
-
-# Create a new AAP host for the minecraft server
-resource "aap_host" "vm_hosts" {
-  inventory_id = aap_inventory.dedicated_minecraft.id
-  name         = var.minecraft_hostname  # Use the hostname for each VM
-  variables    = jsonencode({
-    "ansible_host"     : "${var.minecraft_hostname}",
-    "ansible_port"     : var.ansible_port
-})
-}
-
 # Get the job template id by name from the AAP
 data "http" "minecraft_accesslist" {
   url = "${var.aap_url}/api/controller/v2/job_templates/?name=${var.job_template_name}"
@@ -81,7 +65,25 @@ data "http" "minecraft_accesslist" {
 
 locals {
   response_body = jsondecode(data.http.minecraft_accesslist.response_body)
-  template_id            = local.response_body.results[0].id
+  template_id = local.response_body.results[0].id
+  org_id = local.response_body.results[0].organization
+}
+
+# Create a new AAP inventory for the shared minecraft server
+resource "aap_inventory" "dedicated_minecraft" {
+  name = "minecraft_dedicated"
+  description = "Dedicated Minecraft Server"
+  organization = local.org_id
+}
+
+# Create a new AAP host for the minecraft server
+resource "aap_host" "vm_hosts" {
+  inventory_id = aap_inventory.dedicated_minecraft.id
+  name         = var.minecraft_hostname  # Use the hostname for each VM
+  variables    = jsonencode({
+    "ansible_host"     : "${var.minecraft_hostname}",
+    "ansible_port"     : var.ansible_port
+})
 }
 
 resource "aap_job" "minecraft_whitelist" {
