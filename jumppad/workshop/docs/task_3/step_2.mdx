@@ -13,7 +13,7 @@ https://44.210.128.10
 ## Update your existing terraform configuration to use the new packer image
 
 ### copy files from aap directory to the terraform directory
-
+<Task id="update_terraform">
 ```
 ensure your in the terraform directory
 cp ../aap/* .
@@ -25,6 +25,8 @@ root@debian:/workshop/src/working/terraform# ls
 aap.tf  main.tf  terraform.auto.tfvars
 root@debian:/workshop/src/working/terraform# 
 ```
+</Task>
+
 update the terraform.auto.tfvars 
 
 ```
@@ -44,9 +46,8 @@ save the updates
 esc :wq
 ```
 
-<Task id="update_terraform">
+
 ```
 terraform init
 terraform validate
 ```
-</Task>

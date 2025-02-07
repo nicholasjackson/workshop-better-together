@@ -3,13 +3,14 @@ resource "chapter" "task_3" {
 
   tasks = {
     packer_build = resource.task.packer_build
+    update_terraform = resource.task.update_terraform
   }
 
   page "intro" {
     content = template_file("docs/task_3/intro.mdx", {
       docs_url     = variable.docs_url
       machine_url  = variable.machine_url
-      ansible_pass = variable.ansible_pass
+      #ansible_pass = variable.ansible_pass
     })
   }
   page "step_1" {
@@ -34,7 +35,7 @@ resource "task" "packer_build" {
     target = variable.vscode
   }
 
-  condition "vault login" {
+  condition "check packer image" {
     description = "Success - Packer image minecraft-vm-ansible.qcow2 exists"
 
     check {
@@ -58,26 +59,27 @@ resource "task" "packer_build" {
 resource "task" "update_terraform" {
   prerequisites = []
 
-  # config {
-  #   user   = "root"
-  # }
+  config {
+    user   = "root"
+    target = variable.vscode
+  }
 
-  # condition "vault login" {
-  #   description = "vault login successful"
+  condition "check terraform" {
+      description = "Success - aap.tf exists in your Terraform configuration"
 
-  #   check {
-  #     script = <<-EOF
-  #       vault status
-  #     EOF
+      check {
+        script = <<-EOF
+          validate file exists "/workshop/src/working/terraform/aap.tf"
+        EOF
 
-  #     failure_message = "check the environment variable and try again"
-  #   }
+        failure_message = "Validation Failed - aap.tf not found in your Terraform configuration"
+      }
 
-  #   solve {
-  #     script = <<-EOF
-  #     EOF
+      solve {
+        script = <<-EOF
+        EOF
 
-  #     timeout = 60
-  #   }
-  # }
+        timeout = 60
+      }
+    }
 }

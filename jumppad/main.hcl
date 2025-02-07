@@ -88,10 +88,10 @@ resource "container" "vscode" {
     destination = "/workshop/src"
   }
 
-  # volume {
-  #   source      = "/var/workshop/images/"
-  #   destination = "/workshop/images"
-  # }
+  volume {
+    source      = "/var/workshop/images/"
+    destination = "/workshop/images"
+  }
 
   
 
