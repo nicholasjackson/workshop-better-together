@@ -1,0 +1,81 @@
+    - name: Fetch UUIDs from Mojang API (with retries)
+      ansible.builtin.uri:
+        url: "https://api.mojang.com/users/profiles/minecraft/{{ item }}"
+        method: GET
+        return_content: true
+        status_code: [200, 204]
+      loop: "{{ minecraft_usernames }}"
+      register: mojang_responses
+      until: mojang_responses.status == 200
+      retries: 3
+      delay: 1
+
+    - name: Extract UUIDs for Whitelist
+      ansible.builtin.set_fact:
+        whitelist_entries: "{{ whitelist_entries | default([]) + [{'uuid': (item.json.id[:8] + '-' + item.json.id[8:12] + '-' + item.json.id[12:16] + '-' + item.json.id[16:20] + '-' + item.json.id[20:]),'name': item.json.name}] }}"
+      loop: "{{ mojang_responses.results }}"
+      when:
+        - item.status == 200
+        - item.json is defined
+        - item.json.id is defined
+    
+    - name: Extract UUIDs for ops
+      ansible.builtin.set_fact:
+        ops_entries: "{{ ops_entries | default([]) + [{'uuid': (item.json.id[:8] + '-' + item.json.id[8:12] + '-' + item.json.id[12:16] + '-' + item.json.id[16:20] + '-' + item.json.id[20:]),'name': item.json.name, 'level': 4, 'bypassesPlayerLimit': false}] }}"
+      loop: "{{ mojang_responses.results }}"
+      when:
+        - item.status == 200
+        - item.json is defined
+        - item.json.id is defined
+
+    - name: Ensure whitelist.json exists
+      ansible.builtin.file:
+        path: /etc/minecraft/whitelist.json
+        state: touch
+    
+    - name: Ensure ops.json exists
+      ansible.builtin.file:
+        path: /etc/minecraft/ops.json
+        state: touch
+
+    - name: Read existing whitelist.json
+      ansible.builtin.slurp:
+        src: /etc/minecraft/whitelist.json
+      register: whitelist_file
+      ignore_errors: true
+
+    - name: Parse existing whitelist.json
+      ansible.builtin.set_fact:
+        existing_whitelist: "{{ (whitelist_file['content'] | b64decode | from_json) if (whitelist_file['content'] is defined and whitelist_file['content'] | length > 0) else [] }}"
+
+    - name: Merge whitelist entries
+      ansible.builtin.set_fact:
+        updated_whitelist: "{{ (existing_whitelist | default([])) + whitelist_entries | unique(attribute='uuid') }}"
+
+    - name: Write updated whitelist.json
+      ansible.builtin.copy:
+        content: "{{ updated_whitelist | to_nice_json }}"
+        dest: /etc/minecraft/whitelist.json
+        mode: '0644'
+      register: write_result
+    
+    - name: Read existing ops.json
+      ansible.builtin.slurp:
+        src: /etc/minecraft/ops.json
+      register: ops_file
+      ignore_errors: true
+
+    - name: Parse existing ops.json
+      ansible.builtin.set_fact:
+        existing_ops: "{{ (ops_file['content'] | b64decode | from_json) if (ops_file['content'] is defined and ops_file['content'] | length > 0) else [] }}"
+    
+    - name: Merge ops entries
+      ansible.builtin.set_fact:
+        updated_ops: "{{ (existing_ops | default([])) + ops_entries | unique(attribute='uuid') }}"
+    
+    - name: Write updated ops.json
+      ansible.builtin.copy:
+        content: "{{ updated_ops | to_nice_json }}"
+        dest: /etc/minecraft/ops.json
+        mode: '0644'
+      register: write_result

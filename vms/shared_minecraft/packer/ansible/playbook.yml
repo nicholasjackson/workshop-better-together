@@ -1,0 +1,89 @@
+- name: Minecraft Install with Vault SSH prereqs
+  hosts: all
+  become: true
+  gather_facts: false
+  vars:
+    minecraft_usernames:
+      - "SheriffJackson"
+    vault_namespaces:
+      - testorga
+      - testorgb
+      - testorgc
+      - testorgd
+      - testorge
+      - testorgf
+      - testorgg
+      - testorgh
+      - testorgi
+      - testorgj
+      - testorgk
+      - testorgl
+      - testorgm
+      - testorgn
+      - testorgo
+      - testorgp
+      - testorgq
+      - testorgr
+      - testorgs
+      - testorgt
+      - testorgu
+      - testorgv
+      - testorgw
+      - testorgx
+      - testorgy
+      - testorgz
+      - terraformtitans
+      - vaultvillagers
+      - consulcreepers
+      - nomadnethers
+      - boundaryblazes
+      - waypointwithers
+      - packerpiglins
+      - diamonddevops
+      - redstonerunners
+      - vagrantvexes
+      - obsidianoperators
+      - endermanengineers
+      - cloudguards
+      - cloudcrafters
+      - pipelinepillagers
+      - terraformtowers
+      - statestorrageslimes
+      - moduleminers
+      - sentinelshulkers
+      - resourceravagers
+      - configzombies
+      - secretskeletons
+      - registryraiders
+      - clustercrystals
+      - chaincraft
+      - netherdrakes
+      - stackspiders
+      - swiftaxols
+      - provisionphantoms
+      - platformpandas
+      - networknetherite
+      - securitystriders
+      - orchaminers
+      - containercopper
+      - databasedrowned
+      - servicesilverfish
+      - policyparrots
+      - meshmagma
+      - dockerdolphins
+      - pipelinepiglins
+      - testorga
+
+
+  tasks:
+    - name: "Include minecraft tasks"
+      include_tasks: minecraft.yml
+    
+    - name: "Include minecraft whitelist tasks"
+      include_tasks: minecraft_whitelist.yml
+
+    - name: "Include vault tasks"
+      include_tasks: vault_ssh.yml
+    
+    - name: "Include users tasks"
+      include_tasks: users.yml

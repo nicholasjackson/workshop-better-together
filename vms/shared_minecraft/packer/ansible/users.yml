@@ -1,0 +1,6 @@
+    - name: Create a user 'packer' with a home directory
+      ansible.builtin.user:
+        name: packer
+        create_home: yes
+        groups: sudo
+        append: yes

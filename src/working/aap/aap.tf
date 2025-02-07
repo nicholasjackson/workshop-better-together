@@ -1,17 +1,3 @@
-terraform {
-  required_providers {
-    aap = {
-      source = "ansible/aap"
-      version = "1.1.2"
-    }
-
-    http = {
-      source = "hashicorp/http"
-      version = "3.4.5"
-    }
-  }
-}
-
 # https://registry.terraform.io/providers/ansible/aap/latest
 
 provider "aap" {
@@ -24,7 +10,7 @@ provider "aap" {
 variable "aap_url" {
   type = string
   description = "Ansible Automation Platform URL"
-  default = "https://44.210.128.10"
+  default = "https://44.210.128.100"
 }
 
 variable "aap_username" {
@@ -66,10 +52,28 @@ variable "job_template_name" {
   default = "minecraft_whitelist"
 }
 
+# Get the job template id by name from the AAP
+data "http" "minecraft_accesslist" {
+  url = "${var.aap_url}/api/controller/v2/job_templates/?name=${var.job_template_name}"
+  insecure=true
+
+  request_headers = {
+    Accept        = "application/json"
+    Authorization = "Basic ${base64encode("${var.aap_username}:${var.aap_password}")}"
+  }
+}
+
+locals {
+  response_body = jsondecode(data.http.minecraft_accesslist.response_body)
+  template_id = local.response_body.results[0].id
+  org_id = local.response_body.results[0].organization
+}
+
 # Create a new AAP inventory for the shared minecraft server
 resource "aap_inventory" "dedicated_minecraft" {
   name = "minecraft_dedicated"
   description = "Dedicated Minecraft Server"
+  organization = local.org_id
 }
 
 # Create a new AAP host for the minecraft server
@@ -80,21 +84,6 @@ resource "aap_host" "vm_hosts" {
     "ansible_host"     : "${var.minecraft_hostname}",
     "ansible_port"     : var.ansible_port
 })
-}
-
-# Get the job template id by name from the AAP
-data "http" "minecraft_accesslist" {
-  url = "${var.aap_url}/api/controller/v2/job_templates/?name=${var.job_template_name}"
-
-  request_headers = {
-    Accept        = "application/json"
-    Authorization = "Basic ${base64encode("${var.aap_username}:${var.aap_password}")}"
-  }
-}
-
-locals {
-  response_body = jsondecode(data.http.minecraft_accesslist.response_body)
-  template_id            = local.response_body.results[0].id
 }
 
 resource "aap_job" "minecraft_whitelist" {

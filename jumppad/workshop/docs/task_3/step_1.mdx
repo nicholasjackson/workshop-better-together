@@ -1,24 +1,21 @@
-# Step 1: Build new secure Packer image with Ansible
+# Step 1: Build new secure Packer image using Ansible provisioner
 
 ## **Minecraft machine name**
 ```
 {{ machine_url }}
 ```
+<Task id="packer_build">
 ## 1. switch to the `packer` directory
-
 Open the integrated terminal tab
 ```
 cd packer
 ```
-## 2. validate packer coniguration
-
+## 2. validate packer configuration
 ```
 packer init .
 packer validate .
 ```
-
 You should see the following output:
-
 ```
 root@debian:/workshop/src/working/task3_a_packer# packer validate .
 Error: Unset variable "vault_namespace"
@@ -26,10 +23,8 @@ Error: Unset variable "vault_namespace"
 A used variable must be set or have a default value; see
 https://packer.io/docs/templates/hcl_templates/syntax for details.
 ```
-
 ## 3. populate the required variables
 *Hint: **vault_namespace** is your team name*
-<Task id="packer_build">
 ```hcl
 packer build -var vault_namespace=#your_team_name# .
 ```

@@ -13,6 +13,11 @@ variable "vscode" {
   default     = "vscode"
 }
 
+variable "ansible_pass" {
+  description = "The shared password for the ansible server"
+  default     = ""
+}
+
 resource "book" "better_together" {
   title = "Terrafom, Vault & Packer, with Ansible Automation Platform (AAP)"
 

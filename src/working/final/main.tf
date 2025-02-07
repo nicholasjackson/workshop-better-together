@@ -39,14 +39,47 @@ variable "minecraft_usernames" {
   description = "minecraft username to add whitelist"
 }
 
+variable "job_template_name" {
+  type = string
+  description = "Job Template Name"
+  default = "minecraft_whitelist"
+}
+
+locals {
+  response_body = jsondecode(data.http.minecraft_accesslist.response_body)
+  template_id = local.response_body.results[0].id
+  org_id = local.response_body.results[0].organization
+}
+
+# Get the job template id by name from the AAP
+data "http" "minecraft_accesslist" {
+  url = "${var.aap_url}/api/controller/v2/job_templates/?name=${var.job_template_name}"
+  insecure=true
+
+  request_headers = {
+    Accept        = "application/json"
+    Authorization = "Basic ${base64encode("${var.aap_username}:${var.aap_password}")}"
+  }
+}
+
+
 
 # Create a new AAP inventory for the shared minecraft server
+# https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/inventory
+# Hint: you will need your organization id use the locals provided
+
+
 
 
 
 # Create a new AAP host for the GCP minecraft server set any required variables
+# https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/host
+
+
 
 
 
 # Execute the Job Template to update the minecraft server for access using existing job template - minecraft_whitelist
-
+# credentials are preconfigured and using the same credentials as task 3 no changes are required to the AAP job template
+# https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/job
+# Hint: you will need your organization id use the locals

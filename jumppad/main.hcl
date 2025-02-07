@@ -16,6 +16,10 @@ variable "vscode_token" {
   default = "token"
 }
 
+variable "ansible_pass" {
+  default = "Hashicorp123!sko2025"
+}
+
 resource "template" "vscode_jumppad" {
   source = <<-EOF
   {
@@ -84,6 +88,13 @@ resource "container" "vscode" {
     destination = "/workshop/src"
   }
 
+  volume {
+    source      = "/var/workshop/images/"
+    destination = "/workshop/images"
+  }
+
+  
+
   environment = {
     CONNECTION_TOKEN = variable.vscode_token
     DEFAULT_FOLDER   = "/workshop"
@@ -114,6 +125,7 @@ module "workshop" {
     docs_url          = variable.docs_url
     machine_url       = variable.machine_url
     vscode            = resource.container.vscode.meta.id
+    ansible_pass      = variable.ansible_pass
   }
 }
 

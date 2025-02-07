@@ -1,12 +1,3 @@
-terraform {
-  required_version = ">= 0.13"
-  required_providers {
-    libvirt = {
-      source  = "dmacvicar/libvirt"
-      version = "0.8.1"
-    }
-  }
-}
 
 provider "libvirt" {
   uri = "qemu:///system?socket=/var/run/libvirt/libvirt-sock"
