@@ -71,6 +71,7 @@ resource "aap_host" "vm_hosts" {
 # Get the job template id by name from the AAP
 data "http" "minecraft_accesslist" {
   url = "${var.aap_url}/api/controller/v2/job_templates/?name=${var.job_template_name}"
+  insecure=true
 
   request_headers = {
     Accept        = "application/json"
