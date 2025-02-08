@@ -4,7 +4,9 @@ Vault's [AppRole](https://www.vaultproject.io/docs/auth/approle) authentication 
 
 The AppRole auth method has been preconfigured for each team in their respective namespaces, as such the Role ID and Secret ID are unique to each team and are stored in Vault. This task will guide you through retrieving the Role ID and Secret ID for use with AAP. 
 
-## Retreive AppRole credentials
+With the door now open, you step inside the dimly lit chamber. The air is thick with mystery, and on the far wall, a mechanical lockbox gleams under the flickering lantern light. Inscribed on its surface are strange markings—an ancient security mechanism known as AppRole Authentication. To proceed, you must extract the Role ID and Secret ID from Vault, using them to power up the automation magic of AAP.
+
+## 1. Retreive AppRole credentials
 
 <Task id="read_aap_creds">
 1. Using the same terminal that you logged into Vault with in the prior tasks, retreive the Role ID using the command.
@@ -39,7 +41,7 @@ secret_id_ttl         0s
 3. Make a note of the Role ID and Secret ID as you will need them in the next task.
 </Task>
 
-## Configure AAP Vault SSH credentials
+## 2. Configure AAP Vault SSH credentials
 
 <Task id="configure_aap_vault_creds">
 1. From the Instruqt lab, click on the **Ansible Automation Platform** tab to open the Ansible Automation Platform web interface. (ignore any certificate warnings, this is lab environment)
