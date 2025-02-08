@@ -1,4 +1,4 @@
-# Step 1: Login to HCP Vault to gain access to Vault to retrieve your team’s secret
+# Step 1: Login to HCP Vault to retrieve your team’s secret
 
 
 1.  Open the Instruqt terminal and set the Vault environment variable:
@@ -58,13 +58,43 @@ identity_policies      []
 policies               ["default" "testorga"]
 token_meta_username    testorga
 ```
+4. Read the riddle posted on the tavern wall:
+```
+I hold the whispers of the wind and the stories of the sea. To enter my chamber, seek the city of sin and the state of silver.
+```
+5. Find the Vault secret key using:
+```
+vault kv get -namespace=admin/#your_team_name# secrets/skofy26
+```
+_Replace `#your_team_name#` with your team's name_.
 
+_You should see the following output_
+```
+root@debian:/workshop/src/working# vault kv get -namespace=admin/testorga secrets/skofy26
+==== Secret Path ====
+secrets/data/skofy26
 
+======= Metadata =======
+Key                Value
+---                -----
+created_time       2025-02-04T02:43:17.230018382Z
+custom_metadata    <nil>
+deletion_time      n/a
+destroyed          false
+version            2
 
+==== Data ====
+Key      Value
+---      -----
+city     las vegas
+state    nevada
+```
+6. Look at the output and find the city and state.
+7. Use the retrieved secret as the password to unlock the door in Minecraft.
+
+_🚪 If correct, the door will open_!
 
 ## CUT--HCP Vault Address 
-
-
 
 To access the HCP Vault Dedicated cluster you can use the following FQDN.
 
@@ -76,7 +106,7 @@ https://skoaap-public-vault-7a278d60.8c03478c.z1.hashicorp.cloud:8200
 For this lab,  the HCP Vault Dedicated cluster is accessible over the public internet. Generally, this is not recommended and should be disabled. If there is a requirement to allow public access, we recommend customers to use the IP allow list as measure to limit access and security exposure. More information can be found in the [Manage public network access
 ](https://developer.hashicorp.com/hcp/docs/vault/get-started/manage-public-access).
 
-## CUT - Login to HCP Vault
+## CUT--Login to HCP Vault
 
 <Task id="vault_login">
 1. Click on Instrqut terminal tab to begin.
