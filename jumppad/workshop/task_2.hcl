@@ -3,6 +3,9 @@ resource "chapter" "task_2" {
 
   tasks = {
     vault_login = resource.task.vault_login
+    read_kv_secrets = resource.task.read_kv_secrets
+    configure_aap_vault_creds = resource.task.configure_aap_vault_creds
+    configure_machine_creds = resource.task.configure_machine_creds
   }
 
   page "intro" {
