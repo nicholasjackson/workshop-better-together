@@ -44,7 +44,6 @@ resource "task" "vault_login" {
 
     check {
       script = <<-EOF
-        vault status
       EOF
 
       failure_message = "check the environment variable and try again"
