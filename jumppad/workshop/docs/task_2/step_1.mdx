@@ -2,24 +2,23 @@
 
 ## HCP Vault Address
 
-To access the HCP Vault Dedicated cluster you can use the following FQDN.
+To access the HCP Vault Dedicated cluster you can use the following FQDN:
 
 ```
-https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud::8200
+https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200
 ```
-[Hashicorp Vault](https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud::8200/)
 
-For this lab,  the HCP Vault Dedicated cluster is accessible over the public internet. Generally, this is not recommended and should be disabled. If there is a requirement to allow public access, we recommend customers to use the IP allow list as measure to limit access and security exposure. More information can be found in the [Manage public network access
+For this lab, the HCP Vault Dedicated cluster is accessible over the public internet. Generally, this is not recommended and should be disabled. If there is a requirement to allow public access, we recommend customers to use the IP allow list as measure to limit access and security exposure. More information can be found in the [Manage public network access
 ](https://developer.hashicorp.com/hcp/docs/vault/get-started/manage-public-access).
 
 ## Login to HCP Vault
 
 <Task id="vault_login">
 1. Click on Instrqut terminal tab to begin.
-2. The [Vault CLI](https://developer.hashicorp.com/vault/docs/commands) is pre-installed in the terminal. However, you'll need to set the environment variable `VAULT_ADDR` to the HCP Vault address as by default its `https://127.0.0.1:8200`.
+2. The [Vault CLI](https://developer.hashicorp.com/vault/docs/commands) is pre-installed in the terminal. However, you'll need to set the environment variable `VAULT_ADDR` to the HCP Vault address.
 3. Set the environment variable in the terminal using
 ```
-export VAULT_ADDR=https://skoaap-public-vault-7a278d60.8c03478c.z1.hashicorp.cloud:8200/
+export VAULT_ADDR=https://skoaap-public-vault-7a278d60.8c03478c.z1.hashicorp.cloud:8200
 ```
 4. Check Vault status using the command
 ```
@@ -27,7 +26,7 @@ vault status
 ```
 You should see the following output
 ```
-root@debian:/workshop/src/working# vault status
+# vault status
 Key                      Value
 ---                      -----
 Seal Type                awskms
@@ -51,13 +50,13 @@ Last WAL                 800808
 ```
 5. Login using the `userpass` method with the team's credentials by using the command. 
 ```
-vault login -namespace=admin -method=userpass username=#your_team_name# password='<password>'
+vault login -namespace=admin -method=userpass username='\<your_team_name\>'' password='\<password>\'
 ```
-Replace `#your_team_name#` and `<password>` with your team's credentials.
+Replace `<your_team_name>` and `<password>` with your team's credentials.
 
 You should see the following output
 ```
-vault login -namespace=admin -method=userpass username=testorga
+# vault login -namespace=admin -method=userpass username=testorga
 Password (will be hidden): 
 Success! You are now authenticated. The token information displayed below
 is already stored in the token helper. You do NOT need to run "vault login"
@@ -79,15 +78,15 @@ token_meta_username    testorga
 ## Retrieve KV secrets
 
 <Task id="read_kv_secrets">
-1. Using the same terminal that you logged into Vault with, Retreive a secret from Vault's Key-Value Secrets engine by using the command. 
+1. Using the same terminal that you logged into Vault with, retreive a secret from Vault's KVv2 Secrets engine by using the command. 
 ```
-vault kv get -namespace=admin/#your_team_name# secrets/skofy26
+vault kv get -namespace=admin/\<your_team_name\> secrets/skofy26
 ```
-Replace `#your_team_name#` with your team's name.
+Replace `\<your_team_name\>` with your team's name.
 
 You should see the following output
 ```
-root@debian:/workshop/src/working# vault kv get -namespace=admin/testorga secrets/skofy26
+# vault kv get -namespace=admin/testorga secrets/skofy26
 ==== Secret Path ====
 secrets/data/skofy26
 
