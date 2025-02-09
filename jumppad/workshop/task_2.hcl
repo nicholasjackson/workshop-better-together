@@ -114,3 +114,31 @@ resource "task" "configure_aap_vault_creds" {
   #   }
   # }
 }
+
+resource "task" "configure_machine_creds" {
+  prerequisites = []
+
+  # config {
+  #   user   = "root"
+  #   target = variable.vscode
+  # }
+
+  # condition "vault login" {
+  #   description = "vault login successful"
+
+  #   check {
+  #     script = <<-EOF
+  #       vault status
+  #     EOF
+
+  #     failure_message = "check the environment variable and try again"
+  #   }
+
+  #   solve {
+  #     script = <<-EOF
+  #     EOF
+
+  #     timeout = 60
+  #   }
+  # }
+}
