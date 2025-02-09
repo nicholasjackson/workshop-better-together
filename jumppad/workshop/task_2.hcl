@@ -42,7 +42,7 @@ resource "task" "vault_login" {
     target = variable.vscode
   }
 
-  condition "vault login" {
+  condition "vault_login" {
     description = "vault login successful"
 
     check {
@@ -64,83 +64,80 @@ resource "task" "vault_login" {
 resource "task" "read_kv_secrets" {
   prerequisites = []
 
-  # config {
-  #   user   = "root"
-  #    target = variable.vscode
-  # }
+  config {
+    user   = "root"
+     target = variable.vscode
+  }
 
-  # condition "vault login" {
-  #   description = "vault login successful"
+  condition "read_kv_secrets" {
+    description = "Success - "
 
-  #   check {
-  #     script = <<-EOF
-  #       vault status
-  #     EOF
+    check {
+      script = <<-EOF
+      EOF
 
-  #     failure_message = "check the environment variable and try again"
-  #   }
+      failure_message = "check the environment variable and try again"
+    }
 
-  #   solve {
-  #     script = <<-EOF
-  #     EOF
+    solve {
+      script = <<-EOF
+      EOF
 
-  #     timeout = 60
-  #   }
-  # }
+      timeout = 60
+    }
+  }
 }
 
 resource "task" "configure_aap_vault_creds" {
   prerequisites = []
 
-  # config {
-  #   user   = "root"
-  #   target = variable.vscode
-  # }
+  config {
+    user   = "root"
+    target = variable.vscode
+  }
 
-  # condition "vault login" {
-  #   description = "vault login successful"
+  condition "configure_aap_vault_creds" {
+    description = "Success - "
 
-  #   check {
-  #     script = <<-EOF
-  #       vault status
-  #     EOF
+    check {
+      script = <<-EOF
+      EOF
 
-  #     failure_message = "check the environment variable and try again"
-  #   }
+      failure_message = "check the environment variable and try again"
+    }
 
-  #   solve {
-  #     script = <<-EOF
-  #     EOF
+    solve {
+      script = <<-EOF
+      EOF
 
-  #     timeout = 60
-  #   }
-  # }
+      timeout = 60
+    }
+  }
 }
 
 resource "task" "configure_machine_creds" {
   prerequisites = []
 
-  # config {
-  #   user   = "root"
-  #   target = variable.vscode
-  # }
+  config {
+    user   = "root"
+    target = variable.vscode
+  }
 
-  # condition "vault login" {
-  #   description = "vault login successful"
+  condition "configure_machine_creds" {
+    description = "Success - "
 
-  #   check {
-  #     script = <<-EOF
-  #       vault status
-  #     EOF
+    check {
+      script = <<-EOF
+      EOF
 
-  #     failure_message = "check the environment variable and try again"
-  #   }
+      failure_message = "check the environment variable and try again"
+    }
 
-  #   solve {
-  #     script = <<-EOF
-  #     EOF
+    solve {
+      script = <<-EOF
+      EOF
 
-  #     timeout = 60
-  #   }
-  # }
+      timeout = 60
+    }
+  }
 }
