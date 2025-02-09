@@ -36,6 +36,7 @@ resource "task" "vault_login" {
 
   config {
     user   = "root"
+    target = variable.vscode
   }
 
   condition "vault login" {
