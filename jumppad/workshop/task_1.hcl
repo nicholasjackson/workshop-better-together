@@ -1,5 +1,5 @@
 resource "chapter" "task_1" {
-  title = "1.Set Sail – Deploying the Pirate World with Terraform"
+  title = "Deploy Minecraft with Terraform"
 
   tasks = {
     apply_terraform_configuration = resource.task.apply_terraform_configuration
