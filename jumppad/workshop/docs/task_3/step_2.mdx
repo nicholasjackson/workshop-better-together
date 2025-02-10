@@ -49,7 +49,7 @@ Alternatively you can follow the steps below to use the CLI.
 vi terraform.auto.tfvars
 ```
 
-```
+```bash
 # terraform.auto.tfvars
 aap_username="<your_team_name>_admin" replace <your_team_name> with your team name
 aap_password="" # AAP password {{ ansible_pass }} see the docs at the top of the task page
@@ -59,13 +59,13 @@ image_source="/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qco
 ```
 save the updates
 
-```
+```bash
 esc :wq
 ```
 
 validate the terraform configuration updates
 
-```
+```bash
 terraform init
 terraform validate
 ```
@@ -73,7 +73,7 @@ terraform validate
 once you have validated the terraform configuration, 
 you can run terraform plan to review the changes.
 
-```
+```bash
 terraform plan
 ```
 
