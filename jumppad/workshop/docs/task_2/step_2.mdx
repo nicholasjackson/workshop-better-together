@@ -1,35 +1,28 @@
 # Step 2: Retreive AppRole credentials and configure AAP
 
-In this step, you will retreive the AppRole credentials from Hashicorp Vault and configure Ansible Automation Platform (AAP) to enable the use Hashicorp Vault SSH key signing for Ansible job execution.
+In this step, you will retreive the AppRole credentials and configure AAP to use Vault's SSH key signing for Ansible's job execution.
 
-Vault's <a href="https://www.vaultproject.io/docs/auth/approle" target="_blank" rel="noopener noreferrer">>AppRole</a> authentication (auth) method is used to enable AAP to authenticate with Vault using a Role ID and Secret ID.
+The AppRole auth method has been preconfigured for each team in their respective namespaces, as such the Role ID and Secret ID are unique to each team and are stored in Vault. This task will guide you through retrieving the Role ID and Secret ID for use with AAP. 
 
-The AppRole auth method has been preconfigured for each team in their respective namespaces, 
-as such the Role ID and Secret ID are unique to each team and are stored in Vault. 
-This task will guide you through retrieving the Role ID and Secret ID for use with AAP. 
 ## Retreive AppRole credentials for Ansible Automation Platform
 <Task id="read_aap_creds">
-1. Using the same terminal that you logged into Vault with in the prior tasks, retreive the Role ID using the command.
-```
+1. Using the same terminal that you logged into Vault with in the prior tasks, retreive the Role ID using the command, replace `<your_team_name>` with your team's name.
+```bash
 vault read -namespace=admin/&lt;your_team_name&gt; auth/approle/role/aap/role-id
 ```
-Replace `<your_team_name>` with your team's name.
-
-You should see the following output
-```
+You should see the following output:
+```bash
 # vault read -namespace=admin/testorga auth/approle/role/aap/role-id
 Key        Value
 ---        -----
 role_id    3d05b15f-4262-419a-c609-b3a2633877b4
 ```
-2. Retreive the Secret ID using the command.
-```
+2. Retreive the Secret ID using the command, replace `<your_team_name>` with your team's name.
+```bash
 vault write -namespace=admin/&lt;your_team_name&gt; -force auth/approle/role/aap/secret-id
 ```
-Replace `<your_team_name>` with your team's name.
-
-You should see the following output
-```
+You should see the following output:
+```bash
 # vault write -namespace=admin/testorga -force auth/approle/role/aap/secret-id
 Key                   Value
 ---                   -----
@@ -38,12 +31,13 @@ secret_id_accessor    7978c558-2d0c-5ab9-c178-89ee68bab69c
 secret_id_num_uses    0
 secret_id_ttl         0s
 ```
-3. Make a note of the Role ID and Secret ID as you will need them in the next task.
+3. Copy the Role ID and Secret ID as you will need them in the next task.
 </Task>
+
 ## Configure AAP Vault SSH credentials
 <Task id="configure_aap_vault_creds">
-1. From the Instruqt lab, click on the **Ansible Automation Platform** tab to open the Ansible Automation Platform web interface. (ignore any certificate warnings, this is lab environment)
-2. Enter the username allocated to your team and the password provided. **Hint:** the details can be retrieved from Vault. The Vault path is `secrets/app`
+1. From the Instruqt lab, click on the **Ansible Automation Platform** tab to open the AAP interface. (ignore any certificate warnings, this is lab environment)
+2. Enter the username allocated to your team and the password (stored in Vault, the Vault path is `secrets/app`)
 ![aaplogin](https://dl.dropbox.com/scl/fi/zcugwe69mivn3tu9pgngr/aap_login.png?rlkey=opnq7rvdpe9uirqgmv9hco0oc&st=c9bicjtq&dl=0)
 ```
 Ansible Automation Platform username:&ltyour_team_name&gt_admin
@@ -64,3 +58,8 @@ Ansible Automation Platform password:{{ ansible_pass }}
 ![aaproletestpass](https://dl.dropbox.com/scl/fi/tr0hjml3wl1z27uzn6f9b/approle_testpassed.png?rlkey=xtuopomol6y9qgndrgpvpirp3&st=h4rvlwi9&dl=0)
 8. If the test is successful, click **Save credential** to save the configuration.
 </Task>
+
+<Solution title="Solution: AAP inteface credentials">
+Username: `<your_team_name>_admin`
+Password: `{{ ansible_pass }}`
+</Solution>
