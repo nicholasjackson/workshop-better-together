@@ -37,7 +37,7 @@ secret_id_ttl         0s
 ## Configure AAP Vault SSH credentials
 <Task id="configure_aap_vault_creds">
 1. From the Instruqt lab, click on the **Ansible Automation Platform** tab to open the AAP interface. (ignore any certificate warnings, this is lab environment)
-2. Enter the username allocated to your team and the password (stored in Vault, the Vault path is `secrets/app`).
+2. Enter the username allocated to your team and the password (stored in Vault's KVv2 Secrets Engine, the path is `secrets/app`).
 ![aaplogin](https://dl.dropbox.com/scl/fi/zcugwe69mivn3tu9pgngr/aap_login.png?rlkey=opnq7rvdpe9uirqgmv9hco0oc&st=c9bicjtq&dl=0)
 3. From the left menu, click on **Automation Execution** and then **Credentials**. The `hashicorp_vault_ssh_approle` has been preconfigured but you'll need to input the AppRole Role ID and Secret ID to complete the configuration.
 ![aaprolecreds](https://dl.dropbox.com/scl/fi/l652u0yqcsdiz06qs13k0/approle.png?rlkey=0f7xly71ad9yj7f131w5ykli6&st=tta0f1tf&dl=0)
@@ -45,7 +45,7 @@ secret_id_ttl         0s
 5. Enter the Role ID and Secret ID you retrieved in the previous task into the respective fields.
 ![aaproleconfigure](https://dl.dropbox.com/scl/fi/0ym73sc3pl1cyv61yprwi/approle_config.png?rlkey=se6q0v2v5lljfhjw5k7occr6x&st=qi4a4jdo&dl=0)
 6. Click **Test** (Opens a new window with additional fields).
-    * For `Unsigned Public Key`, insert a unsigned public key. You can use the key provided in the `secrets/aap` path in Vault or use your own if you are feeling adventurous.
+    * For `Unsigned Public Key`, insert a unsigned public key. You can use the `ssh-unsigned-public-key` key provided in the `secrets/aap` path in Vault or use your own if you are feeling adventurous.
     * For `Path to Secret`, insert `ssh`.
     * For `Path to Auth`, insert `approle`.
     * For `Role Name`, insert `aap`.
