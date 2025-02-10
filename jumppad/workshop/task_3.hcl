@@ -6,6 +6,7 @@ resource "chapter" "task_3" {
     update_terraform = resource.task.update_terraform
     update_tfvars = resource.task.update_tfvars
     terraform_apply = resource.task.terraform_apply
+    connect_minecraft = resource.task.connect_minecraft
   }
 
   page "intro" {
