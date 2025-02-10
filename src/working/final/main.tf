@@ -24,7 +24,7 @@ provider "aap" {
 variable "aap_url" {
   type = string
   description = "Ansible Automation Platform URL"
-  default = "https://44.210.128.10"
+  default = "https://44.210.128.100"
 }
 
 variable "aap_username" {
