@@ -5,7 +5,7 @@ resource "chapter" "task_3" {
     packer_build = resource.task.packer_build
     update_terraform = resource.task.update_terraform
     terraform_apply = resource.task.terraform_apply
-    connect_minecraft = resource.task.connect_minecraft
+    #connect_minecraft = resource.task.connect_minecraft
   }
 
   page "intro" {
@@ -118,30 +118,30 @@ resource "task" "terraform_apply" {
 }
 
 
-resource "task" "connect_minecraft" {
-  prerequisites = []
+# resource "task" "connect_minecraft" {
+#   prerequisites = []
 
-  config {
-    user   = "root"
-    target = variable.vscode
-  }
+#   config {
+#     user   = "root"
+#     target = variable.vscode
+#   }
 
-  condition "connect_minecraft" {
-      description = "Confirm you can connect to the Minecraft server before proceeding"
+#   condition "connect_minecraft" {
+#       description = "Confirm you can connect to the Minecraft server before proceeding"
 
-      check {
-        script = <<-EOF
+#       check {
+#         script = <<-EOF
 
-        EOF
+#         EOF
 
-        failure_message = "Validation Failed"
-      }
+#         failure_message = "Validation Failed"
+#       }
 
-      solve {
-        script = <<-EOF
-        EOF
+#       solve {
+#         script = <<-EOF
+#         EOF
 
-        timeout = 60
-      }
-    }
-}
+#         timeout = 60
+#       }
+#     }
+# }
