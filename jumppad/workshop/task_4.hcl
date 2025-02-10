@@ -31,7 +31,7 @@ resource "task" "final_task" {
   }
 
   condition "check final_task" {
-    description = "Success"
+    description = "Success - Confirm you have access using the Minecraft client"
 
     check {
       script = <<-EOF
