@@ -1,5 +1,7 @@
 # Step 2: Retreive AppRole credentials and configure AAP
 
+In this step, you will retreive the AppRole credentials from Hashicorp Vault and configure Ansible Automation Platform (AAP) to enable the use Hashicorp Vault SSH key signing for Ansible job execution.
+
 Vault's <a href="https://www.vaultproject.io/docs/auth/approle" target="_blank" rel="noopener noreferrer">>AppRole</a> authentication (auth) method is used to enable AAP to authenticate with Vault using a Role ID and Secret ID.
 
 The AppRole auth method has been preconfigured for each team in their respective namespaces, 

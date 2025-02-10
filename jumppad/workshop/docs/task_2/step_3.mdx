@@ -1,5 +1,7 @@
-# Step 3: Create machine credentials in AAP
-## Task 2: Update machine credentials in Ansible Automation Platform
+# Step 3: Update machine credentials in AAP
+In this step, you will update the machine credentials in Automation Automation Platform (AAP) to use Hashicorp Vault Signed SSH credential plugin configured in the previous step.
+Machine credentials are associated with Ansible Job templates and allow for authenicated access to a target machine. 
+The machine credentials are used to authenticate with the target machine and execute the Ansible playbook.
 <Task id="configure_machine_creds">
 1. From the left menu, click on **Automation Execution** and then **Credentials**. The `minecraft_ssh_credentials` has been preconfigured but you'll need to input your ssh key for Hashicorp Vault key signing
 ![machinecreds](https://dl.dropbox.com/scl/fi/341ju2vyxuyewtmtugifd/machine_creds.png?rlkey=fi1yf5c2aa1op1zpu1uo6byf8&st=f9v01n50&dl=0)
