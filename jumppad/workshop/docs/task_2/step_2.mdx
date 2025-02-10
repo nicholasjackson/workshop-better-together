@@ -8,7 +8,7 @@ The AppRole auth method has been preconfigured for each team in their respective
 <Task id="read_aap_creds">
 1. Using the same terminal that you logged into Vault with in the prior tasks, retreive the Role ID using the command, replace `<your_team_name>` with your team's name.
 ```bash
-vault read -namespace=admin/&lt;your_team_name&gt; auth/approle/role/aap/role-id
+vault read -namespace=admin/<your_team_name> auth/approle/role/aap/role-id
 ```
 You should see the following output:
 ```bash
@@ -19,7 +19,7 @@ role_id    3d05b15f-4262-419a-c609-b3a2633877b4
 ```
 2. Retreive the Secret ID using the command, replace `<your_team_name>` with your team's name.
 ```bash
-vault write -namespace=admin/&lt;your_team_name&gt; -force auth/approle/role/aap/secret-id
+vault write -namespace=admin/<your_team_name> -force auth/approle/role/aap/secret-id
 ```
 You should see the following output:
 ```bash
@@ -59,7 +59,9 @@ Ansible Automation Platform password:{{ ansible_pass }}
 8. If the test is successful, click **Save credential** to save the configuration.
 </Task>
 
-<Solution title="Solution: AAP inteface credentials">
-Username: `<your_team_name>_admin`
-Password: `{{ ansible_pass }}`
+<Solution title="Solution: AAP interface credentials">
+Replace `<your_team_name>` with your team's name.
+
+Username:&nbsp`<your_team_name>_admin`
+Password:&nbsp `{{ ansible_pass }}`
 </Solution>
