@@ -27,31 +27,3 @@
 
 ## Did I get it right?
 _todo: need to add validation of tavern cooridate (x,y,z)_
-
-## 🏮 Lantern Flickering Animation
-```tsx
-const Lantern = () => (
-  <span
-    style={{
-      display: "inline-block",
-      animation: "flicker 1s infinite alternate",
-      fontSize: "1.5em",
-    }}
-  >
-    🏮
-  </span>
-);
-
-<style>
-  {`
-    @keyframes flicker {
-      0%   { opacity: 1; }
-      25%  { opacity: 0.8; }
-      50%  { opacity: 0.6; }
-      75%  { opacity: 0.9; }
-      100% { opacity: 1; }
-    }
-  `}
-</style>
-
-<p>Follow the <Lantern /> flickering lights to find the lost tavern.</p>
