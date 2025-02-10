@@ -1,29 +1,23 @@
 # Step 1: Final Challenge
+Enable access to the shared Minecraft server by creating a new AAP inventory and executing the existing minecraft AAP job template.
+This job template will enable access to the server by adding your username to the server configuration using Ansible.
 
 GCP Minecraft Server
 ```
-#DNS NAME HERE #.hashicraft.com
+{{ shared_minecraft_instance}}
 ```
 <Task id="final_task">
  #### Create a new AAP inventory for the shared GCP Minecraft server
  * https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/inventory
  * Hint: you will need your organization id use the locals provided
-
-
 #### Create a new AAP host for the GCP minecraft server set any required variables
 * https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/host
 
-
 #### Execute the Job Template to update the minecraft server for access using existing job template - minecraft_whitelist
-
 * credentials are preconfigured and using the same credentials as task 3 no changes are required to the AAP job template
-*  https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/job
-*  Hint: you will need your organization id use the locals
+* https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/job
+* Hint: you will need your organization id use the locals
 
-
-Starter code has bee provided in the final directory
-complete this task in vscode and apply your changes for access to the Minecraft server
-
-Logins to the shared GCP Minecraft server are provided
-
+Starter code has been provided in the final task directory. You will need to
+complete this task in vscode and apply your changes for access to the Minecraft server.
 </Task>
