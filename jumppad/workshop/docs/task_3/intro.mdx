@@ -5,13 +5,13 @@
 * Leveraging Packer with Ansible to build custom images
 * Integrating Terraform with AAP using the AAP provider
 
-### Part 1 - Create a new secure Minecraft server image using Ansible
+### Step 1 - Create a new secure Minecraft server image using Ansible
 
 #### Build the image with Packer
 * Install and configure Minecraft server using the packer Ansible provisioner
 * Use Ansible in Packer to trust the Vault namespace CA certificate for AAP to connect to remote hosts using signed SSH
 
-### Part 2 - Deploy the new image with Terraform and allow using access using Ansible
+### Step 2 - Deploy the new image with Terraform and allow access to the server using access using Ansible Automation Platform
 
 #### Deploy updated terraform 
 * Update your existing Terraform configuration to use the new image and configure the AAP provider to integrate with Ansible to update the Minecraft access list 

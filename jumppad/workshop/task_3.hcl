@@ -97,13 +97,13 @@ resource "task" "update_tfvars" {
   }
 
   condition "update_tfvars" {
-      description = "Success - "
+      description = "Success"
 
       check {
         script = <<-EOF
         EOF
 
-        failure_message = "Validation Failed - "
+        failure_message = "Validation Failed"
       }
 
       solve {
@@ -124,13 +124,41 @@ resource "task" "terraform_apply" {
   }
 
   condition "terraform_apply" {
-      description = "Success - "
+      description = "Success"
 
       check {
         script = <<-EOF
         EOF
 
-        failure_message = "Validation Failed - "
+        failure_message = "Validation Failed"
+      }
+
+      solve {
+        script = <<-EOF
+        EOF
+
+        timeout = 60
+      }
+    }
+}
+
+
+resource "task" "connect_minecraft" {
+  prerequisites = []
+
+  config {
+    user   = "root"
+    target = variable.vscode
+  }
+
+  condition "connect_minecraft" {
+      description = "Success - Confirm you can connect to the Minecraft server before proceeding"
+
+      check {
+        script = <<-EOF
+        EOF
+
+        failure_message = "Validation Failed"
       }
 
       solve {
