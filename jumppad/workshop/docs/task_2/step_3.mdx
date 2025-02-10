@@ -1,8 +1,7 @@
 # Step 3: Configure AAP Machine credentials
-
 In this step, you will update the machine credentials in AAP to use Vault's Signed SSH credential configured in the previous step.
 
-Machine credentials are associated with Ansible's Job templates and allow for authenticated access to a target machine and execution of a Ansible playbook.
+Machine credentials are associated with Ansible's Job templates and allow for authenticated access to a host machine and execution of a Ansible playbook.
 
 AAP will request Vault's SSH Secrets Engine to sign the provided public key. The underlyning machine has already been configured to trust Vault's SSH Secrets Engine public key.
 
