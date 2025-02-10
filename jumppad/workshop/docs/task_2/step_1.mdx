@@ -73,7 +73,7 @@ token_meta_username    testorga
 <Task id="read_kv_secrets">
 1. Using the same terminal that you logged into Vault with, retreive a secret from Vault's KVv2 Secrets Engine by using the command, replace `<your_team_name>` with your team's name.
 ```bash
-vault kv get -namespace=admin/<your_team_name>; secrets/skofy26
+vault kv get -namespace=admin/<your_team_name> secrets/skofy26
 ```
 You should see the following output:
 ```bash

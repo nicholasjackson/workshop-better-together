@@ -62,39 +62,35 @@ Username:&nbsp;`<your_team_name>_admin`
 Password:&nbsp; `{{ ansible_pass }}`
 </Solution>
 
-<Solution title="Solution: Generic SSH keypair">
-Unsigned Public Key:
+<Solution title="Solution: Retrieving SSH keypair from Vault">
+The SSH keypair was generated using Terraform and stored in Vault's KVv2 Secrets Engine.
+
+1. Login to Vault if you haven't already, see step 1 for instructions.
+2. Retreive the SSH keypairs from Vault's KVv2 Secrets Engine by using the command, replace `<your_team_name>` with your team's name.
 ```bash
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC23QWwtMEyN61Wby+0kM/T8chxAgwLVC6rinP6DyNDv5e9MSOfRwGVkW+ZQ9jEE3CiJRmnN1Eku96tCv15ofoTBI9k9laM88lMCqplgw3sjSgdZEAOL//vAusQzT3+zxjCAvInQhCdn8P3rfa/rMAPnz1i/3siAO1U/TQ6wU9cXInAfKdUzwpuG4IkcbACzz53ulekODPPql2yZqY7qDc0BHLzcDUzOhXcHVDx9px582mHZo15g7FRJP00e1UYxECUHEDXQqunIndgvkpgeFTKeOf2ZhT00b9tJequQTMgYAxfmQO25S8MztMTMratND/Ly9AodMXJiWbs5RelGK0F
+vault kv get -namespace=admin/<your_team_name> secrets/aap
 ```
-Private Key:
+You should see the following output:
 ```bash
------BEGIN RSA PRIVATE KEY-----
-MIIEpAIBAAKCAQEAtt0FsLTBMjetVm8vtJDP0/HIcQIMC1Quq4pz+g8jQ7+XvTEj
-n0cBlZFvmUPYxBNwoiUZpzdRJLverQr9eaH6EwSPZPZWjPPJTAqqZYMN7I0oHWRA
-Di//7wLrEM09/s8YwgLyJ0IQnZ/D9632v6zAD589Yv97IgDtVP00OsFPXFyJwHyn
-VM8KbhuCJHGwAs8+d7pXpDgzz6pdsmamO6g3NARy83A1MzoV3B1Q8facefNph2aN
-eYOxUST9NHtVGMRAlBxA10KrpyJ3YL5KYHhUynjn9mYU9NG/bSXqrkEzIGAMX5kD
-tuUvDM7TEzK2rTQ/y8vQKHTFyYlm7OUXpRitBQIDAQABAoIBAQCJifJ2t228pK4G
-nfhmuqjmxCu7/AstFjNIKQoUYgBnO5sY3PXrHhAt/EbRI3vN9sU33+nMoMmydHAG
-/YYrT051sW9dQ/9TYyXbwQXq9kipzH4IpVeclDPPBQXjDEx99Cyt+GNEbedrdziB
-eWJnRrrqxR358SkfKU1ZKF15d96GG3qrXY6+k7FGnKrTgARcDcVhuGAgLTgrN0n4
-iYVpiJICdiRWibKKAdpSPoGJI7Hss6GDt6voXlXURSXc6Rg+QNmE9MGJLjjAvB2n
-+Dtaj6cN2nIPuNgvhknKqBGCkbySeS+kP5jF0hJmpSK6FJWnbt2YhnRNWqw+/zUT
-SV+qow6hAoGBANtN9PmSicpXZOZhaIFnrQ3R3kIEzsQmX4hz13FOzDTd+mu8CmbQ
-Y01fmr6bc8C4zIX/zVAxFZA5TsgFIQJLEHrCn0efINyFTxOt1BgyIA2w1SU2uWtw
-U0jmc5ETtJ4XglSBPsVg2kGh+BRWPZZrX6/5FCpN2cNMTLEp5qG9txuZAoGBANV2
-FhkF/EXguQAWeB6oFdZ4wtxaETv5Vhth8zo06HR42EQHKoMpJKGLpQVVM4NFmjaM
-1SXJoZcJv0CIRmk4xlnPuzrYBgucIxNTKKqKO3THa3mH4xcA7nKIXqQwQk9ju0+m
-TxUrt40ErQ4w/NWd9Dc0m7FHzYSYy93eNzRLjGBNAoGBAMY/FrF10rHjhwbsD3jL
-rBjOG0k6519SARJtBdkcDmXMNNCnUA/ZWatcPZsJE/6oD9sifwt7E68o3xrZ6BkW
-mnMe9LXeF+rBZ9a2UQD+bxNxQ308lymUhPVlvhrr4V74iYyyuXfcMfEa5hQcUdhk
-gD+nvp7veWee1cVhx2d3BMwhAoGACXSUoAEi3pmIuFdGdN0vMnPg9c/LiaOOy+G3
-23Eyhs4/jivfFzZAWCOOaMEQahUwMpBkdKsMzFrzLNGchNat+pZ4DbA5/FOrPhTl
-7T/4SED5IsYBKiixZ0NhJda5aTjauDl+sUphdA6r97/1wySfB7790omCsgfup+JL
-AbcC/dUCgYAtJHGTfxn3V7TrdrnHnHGAWvcoAvMQZJBQpZhBaWhdE1kJrKR9twED
-mM0v6N6ahdjeZ5Erz/oyjP3HFA51heoMdIAtoUWhXLqWTy3OTm8ZwIx8ZtkVjODs
-g1/00JmJ3sVUKOVJos3MYrp9rFshUQN9gLxPMrzls6tHJSLUD/NowA==
------END RSA PRIVATE KEY-----
+# vault kv get -namespace=admin/testorga secrets/aap
+== Secret Path ==
+secrets/data/aap
+
+======= Metadata =======
+Key                Value
+---                -----
+created_time       2025-02-07T05:14:30.763920132Z
+custom_metadata    <nil>
+deletion_time      n/a
+destroyed          false
+version            3
+
+============== Data ==============
+Key                         Value
+---                         -----
+org-password                REDACTED
+org-username                REDACTED
+ssh-unsigned-private-key    REDACTED
+ssh-unsigned-public-key     REDACTED
 ```
 </Solution>
