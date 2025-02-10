@@ -44,15 +44,7 @@ secret_id_ttl         0s
 4. Edit the credentials for the **hashicorp_vault_ssh_approle** credential.
 5. Enter the Role ID and Secret ID you retrieved in the previous task into the respective fields.
 ![aaproleconfigure](https://dl.dropbox.com/scl/fi/0ym73sc3pl1cyv61yprwi/approle_config.png?rlkey=se6q0v2v5lljfhjw5k7occr6x&st=qi4a4jdo&dl=0)
-6. Click **Test** (Opens a new window with additional fields).
-    * For `Unsigned Public Key`, insert a unsigned public key. You can use the `ssh-unsigned-public-key` key provided in the `secrets/aap` path in Vault or use your own if you are feeling adventurous.
-    * For `Path to Secret`, insert `ssh`.
-    * For `Path to Auth`, insert `approle`.
-    * For `Role Name`, insert `aap`.
-![aaproletest](https://dl.dropbox.com/scl/fi/0v9b9hd2qtxwly9h8fhgf/approle_test.png?rlkey=fxsmwm37vb52nns3vuv6pe98n&st=54jmari9&dl=0)
-7. Click *Run* to test the connection.
-![aaproletestpass](https://dl.dropbox.com/scl/fi/tr0hjml3wl1z27uzn6f9b/approle_testpassed.png?rlkey=xtuopomol6y9qgndrgpvpirp3&st=h4rvlwi9&dl=0)
-8. If the test is successful, click **Save credential** to save the configuration.
+8. Click **Save credential** to save the configuration.
 </Task>
 
 <Solution title="Solution: AAP interface credentials">
@@ -60,37 +52,4 @@ Replace `<your_team_name>` with your team's name.
 
 Username:&nbsp;`<your_team_name>_admin`  
 Password:&nbsp; `{{ ansible_pass }}`
-</Solution>
-
-<Solution title="Solution: Retrieving SSH keypair from Vault">
-The SSH keypair was generated using Terraform and stored in Vault's KVv2 Secrets Engine.
-
-1. Login to Vault if you haven't already, see step 1 for instructions.
-2. Retreive the SSH keypairs from Vault's KVv2 Secrets Engine by using the command, replace `<your_team_name>` with your team's name.
-```bash
-vault kv get -namespace=admin/<your_team_name> secrets/aap
-```
-You should see the following output:
-```bash
-# vault kv get -namespace=admin/testorga secrets/aap
-== Secret Path ==
-secrets/data/aap
-
-======= Metadata =======
-Key                Value
----                -----
-created_time       2025-02-07T05:14:30.763920132Z
-custom_metadata    <nil>
-deletion_time      n/a
-destroyed          false
-version            3
-
-============== Data ==============
-Key                         Value
----                         -----
-org-password                REDACTED
-org-username                REDACTED
-ssh-unsigned-private-key    REDACTED
-ssh-unsigned-public-key     REDACTED
-```
 </Solution>

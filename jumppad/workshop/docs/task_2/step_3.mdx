@@ -25,3 +25,36 @@ AAP will request Vault's SSH Secrets Engine to sign the provided public key. The
 5. If the test is successful, click **Finish** and **Save credential** to save the configuration.
 ![savecreds](https://dl.dropbox.com/scl/fi/6afakdgv8ogitvnicf3m7/save_creds.png?rlkey=uj3mjb8418y6nyp9mid50zqp4&st=y31vunx2&dl=0)
 </Task>
+
+<Solution title="Solution: Retrieving SSH keypair from Vault">
+The SSH keypair was generated using Terraform and stored in Vault's KVv2 Secrets Engine.
+
+1. Login to Vault if you haven't already, see step 1 for instructions.
+2. Retreive the SSH keypairs from Vault's KVv2 Secrets Engine by using the command, replace `<your_team_name>` with your team's name.
+```bash
+vault kv get -namespace=admin/<your_team_name> secrets/aap
+```
+You should see the following output:
+```bash
+# vault kv get -namespace=admin/testorga secrets/aap
+== Secret Path ==
+secrets/data/aap
+
+======= Metadata =======
+Key                Value
+---                -----
+created_time       2025-02-07T05:14:30.763920132Z
+custom_metadata    <nil>
+deletion_time      n/a
+destroyed          false
+version            3
+
+============== Data ==============
+Key                         Value
+---                         -----
+org-password                REDACTED
+org-username                REDACTED
+ssh-unsigned-private-key    REDACTED
+ssh-unsigned-public-key     REDACTED
+```
+</Solution>
