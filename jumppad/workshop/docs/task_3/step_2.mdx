@@ -5,9 +5,10 @@
 {{ machine_url }}
 ```
 ## Ansible Automation Platform
-```bash
+```sh
 https://44.210.128.10
 ```
+
 <a href="https://44.210.128.10" target="_blank">Ansible Automation Platform</a>
 ```sh
 username: &ltteam_name&gt_admin
@@ -15,6 +16,7 @@ Ansible Automation password:{{ ansible_pass }}
 ```
 ## Update your existing terraform configuration to use the new packer image
 ### copy files from aap directory to the terraform directory
+
 <Task id="update_terraform">
 ```bash
 ensure your in the terraform directory
@@ -30,13 +32,16 @@ root@debian:/workshop/src/working/terraform#
 </Task>
 
 <Task id="terraform_apply">
+
 update the terraform.auto.tfvars using cli or vscode, or if your more comfortable with vscode you can use that from the workshop tab.
  the vscode editor to make the required updates
 ![vscode-terraform](https://dl.dropbox.com/scl/fi/zq9xbve7g8pp7c50bfcwd/vscode-terraform.png?rlkey=z64crgxgndh7hsnz54m3nliyu&st=myh94xd7&dl=0)
 Alternatively you can follow the steps below to use the CLI.
-```bash
+
+```sh
 vi terraform.auto.tfvars
 ```
+
 ```sh
 # terraform.auto.tfvars
 aap_username="<your_team_name>_admin" replace <your_team_name> with your team name
@@ -46,6 +51,7 @@ minecraft_usernames=[] # update with your minecraft usernames in > ["user1","use
 image_source="/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
 ```
 save the updates
+
 ```sh
 esc :wq
 ```
@@ -56,11 +62,15 @@ validate the terraform configuration updates
 terraform init
 terraform validate
 ```
+
 once you have validated the terraform configuration, you can run terraform plan to review the changes.
+
 ```sh
 terraform plan
 ```
+
 see example output below
+
 ```sh
 root@debian:/workshop/src/working/terraform# terraform plan
 data.http.minecraft_accesslist: Reading...
@@ -82,7 +92,7 @@ Terraform will perform the following actions:
       + pool   = "ubuntu"
       + size   = (known after apply)
       + source = "/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
-    }
+    `}
 
 Plan: 7 to add, 0 to change, 0 to destroy.
 

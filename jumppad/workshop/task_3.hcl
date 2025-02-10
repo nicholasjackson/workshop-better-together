@@ -68,7 +68,7 @@ resource "task" "update_terraform" {
     target = variable.vscode
   }
 
-  condition "check terraform" {
+  condition "update_terraform" {
       description = "Success - aap.tf exists in your Terraform configuration"
 
       check {
@@ -98,7 +98,7 @@ resource "task" "terraform_apply" {
   }
 
   condition "terraform_apply" {
-      description = "Success"
+      description = "Success - Terraform apply completed successfully"
 
       check {
         script = <<-EOF
@@ -127,7 +127,7 @@ resource "task" "connect_minecraft" {
   }
 
   condition "connect_minecraft" {
-      description = "Success - Confirm you can connect to the Minecraft server before proceeding"
+      description = "Confirm you can connect to the Minecraft server before proceeding"
 
       check {
         script = <<-EOF
