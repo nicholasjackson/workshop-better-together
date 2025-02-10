@@ -20,6 +20,7 @@ resource "chapter" "task_3" {
       machine_url = variable.machine_url
     })
   }
+
   page "step_2" {
     content = template_file("docs/task_3/step_2.mdx", {
       docs_url    = variable.docs_url
@@ -27,6 +28,7 @@ resource "chapter" "task_3" {
       ansible_pass = variable.ansible_pass
     })
   }
+  
 }
 
 resource "task" "packer_build" {
@@ -93,7 +95,7 @@ resource "task" "update_tfvars" {
     target = variable.vscode
   }
 
-  condition "check terraform" {
+  condition "update_tfvars" {
       description = "Success - "
 
       check {
@@ -120,7 +122,7 @@ resource "task" "terraform_apply" {
     target = variable.vscode
   }
 
-  condition "check terraform" {
+  condition "terraform_apply" {
       description = "Success - "
 
       check {
