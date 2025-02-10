@@ -43,9 +43,9 @@ Raft Committed Index     1945872
 Raft Applied Index       1945872
 Last WAL                 800808
 ```
-5. Login using the `userpass` method with the team's credentials by using the command, replace `<your_team_name>` and `<password>` with your team's credentials.
+5. Login using the `userpass` method with the team's credentials by using the command, replace `<your_team_name>` with your team's name.
 ```
-vault login -namespace=admin -method=userpass username='&lt;your_team_name&gt;' password='&lt;password&gt;'
+vault login -namespace=admin -method=userpass username='&lt;your_team_name&gt;' password='{{ ansible_pass }}'
 ```
 
 You should see the following output:
