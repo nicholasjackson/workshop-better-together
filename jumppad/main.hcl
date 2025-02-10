@@ -20,6 +20,11 @@ variable "ansible_pass" {
   default = "Hashicorp123!sko2025"
 }
 
+variable "shared_minecraft_instance" {
+  default = "<update this>.hashicraft.com"
+}
+
+
 resource "template" "vscode_jumppad" {
   source = <<-EOF
   {

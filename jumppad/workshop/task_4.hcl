@@ -16,6 +16,7 @@ resource "chapter" "task_4" {
     content = template_file("docs/task_4/step_1.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
+      shared_minecraft_instance = variable.shared_minecraft_instance
     })
   }
 }
