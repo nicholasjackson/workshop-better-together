@@ -18,6 +18,7 @@ resource "chapter" "task_3" {
     content = template_file("docs/task_3/step_1.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
+      ansible_pass = variable.ansible_pass
     })
   }
 

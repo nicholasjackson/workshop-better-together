@@ -18,19 +18,21 @@ resource "chapter" "task_2" {
     content = template_file("docs/task_2/step_1.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
+      ansible_pass = variable.ansible_pass
     })
   }
   page "step_2" {
     content = template_file("docs/task_2/step_2.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
-      ansibe_pass = variable.ansible_pass
+      ansible_pass = variable.ansible_pass
     })
   }
   page "step_3" {
     content = template_file("docs/task_2/step_3.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
+      ansible_pass = variable.ansible_pass
     })
   }
 }
