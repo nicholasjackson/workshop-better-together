@@ -4,7 +4,6 @@ resource "chapter" "task_3" {
   tasks = {
     packer_build = resource.task.packer_build
     update_terraform = resource.task.update_terraform
-    update_tfvars = resource.task.update_tfvars
     terraform_apply = resource.task.terraform_apply
     connect_minecraft = resource.task.connect_minecraft
   }
@@ -89,32 +88,6 @@ resource "task" "update_terraform" {
     }
 }
 
-resource "task" "update_tfvars" {
-  prerequisites = []
-
-  config {
-    user   = "root"
-    target = variable.vscode
-  }
-
-  condition "update_tfvars" {
-      description = "Success"
-
-      check {
-        script = <<-EOF
-        EOF
-
-        failure_message = "Validation Failed"
-      }
-
-      solve {
-        script = <<-EOF
-        EOF
-
-        timeout = 60
-      }
-    }
-}
 
 resource "task" "terraform_apply" {
   prerequisites = []
@@ -129,6 +102,7 @@ resource "task" "terraform_apply" {
 
       check {
         script = <<-EOF
+
         EOF
 
         failure_message = "Validation Failed"
@@ -157,6 +131,7 @@ resource "task" "connect_minecraft" {
 
       check {
         script = <<-EOF
+
         EOF
 
         failure_message = "Validation Failed"
