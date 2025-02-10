@@ -36,10 +36,10 @@ Alternatively you can follow the steps below to use the CLI.
 ```bash
 vi terraform.auto.tfvars
 ```
-```hcl
+```sh
 # terraform.auto.tfvars
-aap_username="#_your_team_name#_admin" replace #_your_team_name# with your team name
-aap_password="" #AAP password see the docs at the top of the task page
+aap_username="<your_team_name>_admin" replace <your_team_name> with your team name
+aap_password="" #AAP password {{ ansible_pass }} see the docs at the top of the task page
 minecraft_hostname="" #this is available in the docs at the top of the task page
 minecraft_usernames=[] #update with your minecraft usernames in > ["user1","user2"]
 image_source="/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
