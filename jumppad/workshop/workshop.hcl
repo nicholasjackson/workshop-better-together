@@ -19,7 +19,7 @@ variable "ansible_pass" {
 }
 
 variable "shared_minecraft_instance" {
-  default = "<update this>.hashicraft.com"
+  default = "sko-minecraft.hashicraft.com"
 }
 
 resource "book" "better_together" {
