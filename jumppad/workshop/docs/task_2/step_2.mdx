@@ -46,6 +46,7 @@ secret_id_ttl         0s
 2. Enter the username allocated to your team and the password provided. **Hint:** the details can be retrieved from Vault. The Vault path is `secrets/app`
 ![aaplogin](https://dl.dropbox.com/scl/fi/zcugwe69mivn3tu9pgngr/aap_login.png?rlkey=opnq7rvdpe9uirqgmv9hco0oc&st=c9bicjtq&dl=0)
 ```
+Ansible Automation Platform username:&ltyour_team_name&gt_admin
 Ansible Automation Platform password:{{ ansible_pass }}
 ```
 3. From the left menu, click on **Automation Execution** and then **Credentials**. The `hashicorp_vault_ssh_approle` has been preconfigured but you'll need to input the AppRole Role ID and Secret ID to complete the configuration

@@ -50,7 +50,6 @@ resource "task" "vault_login" {
 
     check {
       script = <<-EOF
-      vault token lookup
       EOF
 
       failure_message = "check the environment variable and try again"
@@ -74,7 +73,7 @@ resource "task" "read_kv_secrets" {
   }
 
   condition "read_kv_secrets" {
-    description = "Success - "
+    description = "Success"
 
     check {
       script = <<-EOF
@@ -101,7 +100,7 @@ resource "task" "configure_aap_vault_creds" {
   }
 
   condition "configure_aap_vault_creds" {
-    description = "Success - "
+    description = "Success"
 
     check {
       script = <<-EOF
@@ -128,7 +127,7 @@ resource "task" "configure_machine_creds" {
   }
 
   condition "configure_machine_creds" {
-    description = "Success - "
+    description = "Success"
 
     check {
       script = <<-EOF
