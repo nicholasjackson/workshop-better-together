@@ -87,4 +87,3 @@ data "http" "minecraft_accesslist" {
 # Execute the Job Template to update the minecraft server for access using existing job template - minecraft_whitelist
 # credentials are preconfigured and using the same credentials as task 3 no changes are required to the AAP job template
 # https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/job
-# Hint: you will need your organization id use the locals
