@@ -4,6 +4,7 @@ resource "chapter" "task_3" {
   tasks = {
     packer_build = resource.task.packer_build
     update_terraform = resource.task.update_terraform
+    terraform_validate = resource.task.terraform_validate
     terraform_apply = resource.task.terraform_apply
     #connect_minecraft = resource.task.connect_minecraft
   }
@@ -77,6 +78,36 @@ resource "task" "update_terraform" {
         EOF
 
         failure_message = "Validation Failed - aap.tf not found in your Terraform configuration"
+      }
+
+      solve {
+        script = <<-EOF
+        EOF
+
+        timeout = 60
+      }
+    }
+}
+
+resource "task" "terraform_validate" {
+  prerequisites = []
+
+  config {
+    user   = "root"
+    target = variable.vscode
+  }
+
+  condition "terraform validate" {
+      description = "Success - Terraform validate completed successfully"
+
+      check {
+        script = <<-EOF
+        cd /workshop/src/working/terraform
+        terraform init
+        terraform validate
+        EOF
+
+        failure_message = "Validation Failed"
       }
 
       solve {

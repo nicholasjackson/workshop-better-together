@@ -30,9 +30,10 @@ root@debian:/workshop/src/working/terraform#
 ```
 </Task>
 
-<Task id="terraform_apply">
-update the terraform.auto.tfvars using cli or vscode, or if your more comfortable with vscode you can use that from the workshop tab.
- the vscode editor to make the required updates
+<Task id="terraform_validate">
+update the terraform.auto.tfvars using cli or vscode, or if 
+your more comfortable with vscode you can use that from the workshop tab.
+
 ![vscode-terraform](https://dl.dropbox.com/scl/fi/zq9xbve7g8pp7c50bfcwd/vscode-terraform.png?rlkey=z64crgxgndh7hsnz54m3nliyu&st=myh94xd7&dl=0)
 Alternatively you can follow the steps below to use the CLI.
 
@@ -72,9 +73,11 @@ see example output below
 ```
 root@debian:/workshop/src/working/terraform# terraform plan
 data.http.minecraft_accesslist: Reading...
-data.http.minecraft_accesslist: Read complete after 1s [id=https://44.210.128.100/api/controller/v2/job_templates/?name=minecraft_whitelist]
+data.http.minecraft_accesslist: Read complete after 1s [
+  id=https://44.210.128.100/api/controller/v2/job_templates/?name=minecraft_whitelist]
 
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+Terraform used the selected providers to generate the following execution plan. 
+Resource actions are indicated with the following symbols:
   + create
 
 Terraform will perform the following actions:
@@ -97,9 +100,11 @@ Plan: 7 to add, 0 to change, 0 to destroy.
 Changes to Outputs:
   + ip_address    = "192.168.16.100"
   + socat_command = "socat TCP-LISTEN:25565,fork,reuseaddr TCP:192.168.16.100:25565"
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
+──────────────────────────────────────────────────────────────────────────────────────────────────
+Note: You didn't use the -out option to save this plan, 
+so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
 ```
+<Task id="terraform_apply">
 apply the changes
 ```
 terraform apply
