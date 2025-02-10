@@ -28,6 +28,7 @@ aap.tf  main.tf  terraform.auto.tfvars
 root@debian:/workshop/src/working/terraform# 
 ```
 </Task>
+
 <Task id="terraform_apply">
 update the terraform.auto.tfvars using cli or vscode, or if your more comfortable with vscode you can use that from the workshop tab.
  the vscode editor to make the required updates
@@ -56,7 +57,7 @@ terraform init
 terraform validate
 ```
 once you have validated the terraform configuration, you can run terraform plan to review the changes.
-```bash
+```sh
 terraform plan
 ```
 see example output below
@@ -110,6 +111,7 @@ aap_inventory.dedicated_minecraft: Creating...
 libvirt_volume.ubuntu-qcow2: Still creating... [10s elapsed]
 ```
 </Task>
+
 <Task id="connect_minecraft">
 Using your Minecraft client connect to the Minecraft server using the DNS address provided.
 ```
