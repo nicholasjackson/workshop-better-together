@@ -50,6 +50,7 @@ resource "task" "vault_login" {
 
     check {
       script = <<-EOF
+      vault token lookup
       EOF
 
       failure_message = "check the environment variable and try again"
