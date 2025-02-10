@@ -18,6 +18,10 @@ variable "ansible_pass" {
   default     = ""
 }
 
+variable "shared_minecraft_instance" {
+  default = ""
+}
+
 resource "book" "better_together" {
   title = "Terrafom, Vault & Packer, with Ansible Automation Platform (AAP)"
 
