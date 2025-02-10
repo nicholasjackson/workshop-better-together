@@ -4,6 +4,11 @@ terraform {
       source = "ansible/aap"
       version = "1.1.2"
     }
+    
+    http = {
+      source = "hashicorp/http"
+      version = "3.4.5"
+    }
   }
 }
 
