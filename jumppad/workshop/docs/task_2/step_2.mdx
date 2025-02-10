@@ -41,6 +41,9 @@ secret_id_ttl         0s
 <Task id="configure_aap_vault_creds">
 1. From the Instruqt lab, click on the **Ansible Automation Platform** tab to open the Ansible Automation Platform web interface. (ignore any certificate warnings, this is lab environment)
 2. Enter the username allocated to your team and the password provided. **Hint:** the details can be retrieved from Vault. The Vault path is `secrets/app`
+```
+{{ansible_pass}}
+```
 ![aaplogin](https://dl.dropbox.com/scl/fi/zcugwe69mivn3tu9pgngr/aap_login.png?rlkey=opnq7rvdpe9uirqgmv9hco0oc&st=c9bicjtq&dl=0)
 3. From the left menu, click on **Automation Execution** and then **Credentials**. The `hashicorp_vault_ssh_approle` has been preconfigured but you'll need to input the AppRole Role ID and Secret ID to complete the configuration
 ![aaprolecreds](https://dl.dropbox.com/scl/fi/l652u0yqcsdiz06qs13k0/HashiStack-RHEL-Solutions-SKO_screenshots-1.png?rlkey=0f7xly71ad9yj7f131w5ykli6&st=o4rngbpi&dl=0)
