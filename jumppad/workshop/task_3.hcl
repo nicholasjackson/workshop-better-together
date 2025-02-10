@@ -133,7 +133,8 @@ resource "task" "terraform_apply" {
 
       check {
         script = <<-EOF
-
+        cd /workshop/src/working/terraform
+        terraform apply -auto-approve
         EOF
 
         failure_message = "Validation Failed"
