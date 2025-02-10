@@ -24,7 +24,7 @@ resource "chapter" "task_2" {
     content = template_file("docs/task_2/step_2.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
-      ansibe_pass = var.ansibe_pass
+      ansibe_pass = variable.ansibe_pass
     })
   }
   page "step_3" {
