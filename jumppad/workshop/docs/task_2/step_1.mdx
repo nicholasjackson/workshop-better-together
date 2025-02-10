@@ -8,7 +8,7 @@ https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200
 ```
 For this lab, the HCP Vault Dedicated cluster is accessible over the public internet. Generally, this is not recommended and should be disabled. 
 If there is a requirement to allow public access, we recommend customers to use the IP allow list as measure to limit access and security exposure. 
-More information can be found in the <a href="https://developer.hashicorp.com/hcp/docs/vault/get-started/manage-public-access" target="_blank" rel="noopener noreferrer">manage public network access</a>
+More information can be found in the <a href="https://developer.hashicorp.com/hcp/docs/vault/get-started/manage-public-access" target="_blank" rel="noopener noreferrer">manage public network access</a> documentation.
 
 ## Login to HCP Vault
 <Task id="vault_login">
@@ -45,11 +45,10 @@ Raft Committed Index     1945872
 Raft Applied Index       1945872
 Last WAL                 800808
 ```
-5. Login using the `userpass` method with the team's credentials by using the command:
+5. Login using the `userpass` method with the team's credentials by using the command, replace `<your_team_name>` and `<password>` with your team's credentials.
 ```
 vault login -namespace=admin -method=userpass username='&lt;your_team_name&gt;' password='&lt;password&gt;'
 ```
-Replace `<your_team_name>` and `<password>` with your team's credentials.
 
 You should see the following output:
 ```
@@ -70,15 +69,14 @@ identity_policies      []
 policies               ["default" "testorga"]
 token_meta_username    testorga
 ```
+
 </Task>
 ## Retrieve KV secrets
 <Task id="read_kv_secrets">
-1. Using the same terminal that you logged into Vault with, retreive a secret from Vault's KVv2 Secrets Engine by using the command:
+1. Using the same terminal that you logged into Vault with, retreive a secret from Vault's KVv2 Secrets Engine by using the command, replace `<your_team_name>` with your team's name.
 ```
 vault kv get -namespace=admin/&lt;your_team_name&gt; secrets/skofy26
 ```
-Replace `<your_team_name>` with your team's name.
-
 You should see the following output:
 ```
 # vault kv get -namespace=admin/testorga secrets/skofy26
