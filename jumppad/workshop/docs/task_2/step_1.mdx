@@ -3,19 +3,19 @@
 ## HCP Vault Address
 
 To access the HCP Vault Dedicated cluster you can use the following FQDN:
-
 ```
 https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200
 ```
-
-For this lab, the HCP Vault Dedicated cluster is accessible over the public internet. Generally, this is not recommended and should be disabled. If there is a requirement to allow public access, we recommend customers to use the IP allow list as measure to limit access and security exposure. More information can be found in the [Manage public network access
-](https://developer.hashicorp.com/hcp/docs/vault/get-started/manage-public-access).
+For this lab, the HCP Vault Dedicated cluster is accessible over the public internet. Generally, this is not recommended and should be disabled. 
+If there is a requirement to allow public access, we recommend customers to use the IP allow list as measure to limit access and security exposure. 
+More information can be found in the: 
+<a href="https://developer.hashicorp.com/hcp/docs/vault/get-started/manage-public-access" target="_blank">Manage public network access</a>
 
 ## Login to HCP Vault
 
 <Task id="vault_login">
 1. Click on Instruqt terminal tab to begin.
-2. The [Vault CLI](https://developer.hashicorp.com/vault/docs/commands) is pre-installed in the terminal. However, you'll need to set the environment variable `VAULT_ADDR` to the HCP Vault address.
+2. The <a href="https://developer.hashicorp.com/vault/docs/commands" target="_blank">Vault CLI</a> is pre-installed in the terminal. However, you'll need to set the environment variable `VAULT_ADDR` to the HCP Vault address.
 3. Set the environment variable in the terminal using
 ```
 export VAULT_ADDR=https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200
