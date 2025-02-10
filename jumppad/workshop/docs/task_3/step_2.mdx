@@ -5,24 +5,24 @@
 {{ machine_url }}
 ```
 ## Ansible Automation Platform
-```
+```bash
 https://44.210.128.10
 ```
 <a href="https://44.210.128.10" target="_blank">Ansible Automation Platform</a>
-```
+```bash
 username: &ltteam_name&gt_admin
 Ansible Automation password:{{ ansible_pass }}
 ```
 ## Update your existing terraform configuration to use the new packer image
 ### copy files from aap directory to the terraform directory
 <Task id="update_terraform">
-```
+```bash
 ensure your in the terraform directory
 cp ../aap/* .
 ls
 ```
 confirm the files are copied
-```
+```bash
 root@debian:/workshop/src/working/terraform# ls
 aap.tf  main.tf  terraform.auto.tfvars
 root@debian:/workshop/src/working/terraform# 
@@ -33,7 +33,7 @@ update the terraform.auto.tfvars using cli or vscode, or if your more comfortabl
  the vscode editor to make the required updates
 ![vscode-terraform](https://dl.dropbox.com/scl/fi/zq9xbve7g8pp7c50bfcwd/vscode-terraform.png?rlkey=z64crgxgndh7hsnz54m3nliyu&st=myh94xd7&dl=0)
 Alternatively you can follow the steps below to use the CLI.
-```
+```bash
 vi terraform.auto.tfvars
 ```
 ```hcl
@@ -45,22 +45,22 @@ minecraft_usernames=[] #update with your minecraft usernames in > ["user1","user
 image_source="/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
 ```
 save the updates
-```
+```bash
 esc :wq
 ```
 </Task>
 validate the terraform configuration updates
 <Task id="terraform_apply">
-```
+```bash
 terraform init
 terraform validate
 ```
 once you have validated the terraform configuration, you can run terraform plan to review the changes.
-```
+```bash
 terraform plan
 ```
 see example output below
-```
+```hcl
 root@debian:/workshop/src/working/terraform# terraform plan
 data.http.minecraft_accesslist: Reading...
 data.http.minecraft_accesslist: Read complete after 1s [id=https://44.210.128.100/api/controller/v2/job_templates/?name=minecraft_whitelist]
@@ -92,13 +92,13 @@ Changes to Outputs:
 Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
 ```
 apply the changes
-```
+```bash
 terraform apply
 ```
 confirm apply by typing yes
 
 see example run below 
-```
+```bash
   Enter a value: yes
 
 libvirt_network.minecraft: Creating...
