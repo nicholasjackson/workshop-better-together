@@ -1,4 +1,4 @@
-- name: Update whitelist.json with locking and retries
+- name: Update minecraft whitelist
   hosts: all
   become: false
   vars:
