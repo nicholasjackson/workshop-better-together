@@ -5,6 +5,9 @@ Machine credentials are associated with Ansible's Job templates and allow for au
 
 AAP will request Vault's SSH Secrets Engine to sign the provided public key. The underlyning machine has already been configured to trust Vault's SSH Secrets Engine public key.
 
+## Retrieve SSH keypair from Vault
+You'll need to retrieve the SSH keypair from Vault's KVv2 Secrets Engine to configure the machine credentials in AAP, they are located in the `secrets/aap` path in Vault or use your own if you are feeling adventurous.
+
 ## Configure AAP Machine credentials
 <Task id="configure_aap_machine_creds">
 1. From the left menu, click on **Automation Execution** and then **Credentials**. The `minecraft_ssh_credentials` has been preconfigured but you'll need to input your SSK keypair.
@@ -16,7 +19,7 @@ AAP will request Vault's SSH Secrets Engine to sign the provided public key. The
 4. Click the **Signed SSH Certificate** key icon to open the **Select external credential** configuration window.
     ![selectexternalcredential](/assets/task_2/aap_machine_creds_ssh.png)
     * From the *Credential* dropdown list, select **hashicorp_vault_ssh_approle**. 
-    * For `Unsigned Public Key`, insert a unsigned public key. You can use the `ssh-unsigned-public-key` key provided in the `secrets/aap` path in Vault or use your own if you are feeling adventurous.
+    * For `Unsigned Public Key`, insert a unsigned public key. 
     * For `Path to Secret`, insert `ssh`.
     * For `Path to Auth`, insert `approle`.
     * For `Role Name`, insert `aap`.
