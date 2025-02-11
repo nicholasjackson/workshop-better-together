@@ -28,6 +28,7 @@ resource "book" "better_together" {
   chapters = [
     resource.chapter.introduction,
     resource.chapter.task_1,
+    resource.chapter.task_1b,
     resource.chapter.task_2,
     resource.chapter.task_3,
     resource.chapter.task_4
