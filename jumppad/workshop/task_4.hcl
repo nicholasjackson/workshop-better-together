@@ -27,6 +27,27 @@ resource "chapter" "task_4" {
       shared_minecraft_instance = variable.shared_minecraft_instance
     })
   }
+   page "step_2a" {
+    content = template_file("docs/task_4/step_2a.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+      shared_minecraft_instance = variable.shared_minecraft_instance
+    })
+  }
+   page "step_2b" {
+    content = template_file("docs/task_4/step_2b.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+      shared_minecraft_instance = variable.shared_minecraft_instance
+    })
+  }
+   page "step_2c" {
+    content = template_file("docs/task_4/step_2c.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+      shared_minecraft_instance = variable.shared_minecraft_instance
+    })
+  }
   page "outro" {
     content = template_file("docs/task_4/outro.mdx", {
       docs_url    = variable.docs_url
