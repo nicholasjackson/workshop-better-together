@@ -1,5 +1,10 @@
 # Step 2: Update Existing Terraform to Deploy New Secure Packer Image with AAP provider
 
+With the Minecraft server image built, it's time to deploy it using Terraform. But beware—the final gateway to the treasure remains locked. Only by configuring Terraform to integrate with Ansible can you prove your worth and gain access!
+
+# 1. Essential Details for Deployment
+Before making any changes, take note of the essential machine details and AAP credentials:
+
 ## Machine Name
 ```
 {{ machine_url }}
@@ -8,11 +13,15 @@
 ```bash
 https://44.210.128.10
 ```
-<a href="https://44.210.128.10" target="_blank">Ansible Automation Platform</a>
+Go to <a href="https://44.210.128.10" target="_blank">Ansible Automation Platform</a>
 ```bash
 username: <team_name>_admin
 Ansible Automation password:{{ ansible_pass }}
 ```
+# 2. Prepare Your Terraform Configuration
+Now, let's configure Terraform to deploy the new image and integrate with AAP.
+
+## CUT
 <Task id="update_terraform">
 ## Update your existing terraform configuration to use the new packer image
 ### copy files from aap directory to the terraform directory
@@ -39,6 +48,7 @@ root@debian:/workshop/src/working/terraform#
 ```
 </Task>
 
+# 3. Update Terraform Variables and Validate Terraform
 <Task id="terraform_validate">
 update the terraform.auto.tfvars using cli or vscode, or if 
 your more comfortable with vscode you can use that from the workshop tab.
@@ -116,6 +126,8 @@ so Terraform can't guarantee to take exactly these actions if you run "terraform
 ```
 
 </Task>
+ 
+# 4. Deploy Terraform
 
 <Task id="terraform_apply">
 apply the changes
@@ -138,9 +150,38 @@ libvirt_volume.ubuntu-qcow2: Still creating... [10s elapsed]
 ```
 </Task>
 
+# 5. Connect Minecraft Server
 <Task id="connect_minecraft">
 Using your Minecraft client connect to the Minecraft server using the DNS address provided.
 ```
 {{ machine_url }}
 ```
 </Task>
+
+# 6.Validate Your Deployment in Minecraft
+Now that your Minecraft server is up and running, it’s time to test your deployment!
+
+a. Launch Minecraft and connect to your deployed server using the machine name:
+```
+minecraft.container.local.jmpd.in
+```
+b. Enter the world and check the environment:
+* Confirm that the server is accessible.
+* Verify that the spawn point is correct.
+* Ensure that your custom settings from Ansible & Terraform were applied.
+
+c. Test User Access Permissions:
+* If you set specific users in Terraform, check if they can join and interact.
+* Try to break/place blocks if survival mode is enabled.
+* Ensure only the whitelisted users can connect.
+
+d. Solve the Hidden Coordinates Puzzle:
+* Look at the Terraform output from Step 5.
+* It contains mysterious coordinates – go there in Minecraft!
+* At the location, you will find a hidden sign with a secret message.
+* Note down this message – you’ll need it for the final challenge.
+
+🚀 Once you have validated the server and solved the puzzle, you’ve completed Task 3!
+
+
+
