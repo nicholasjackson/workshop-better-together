@@ -20,6 +20,20 @@ resource "chapter" "task_4" {
       shared_minecraft_instance = variable.shared_minecraft_instance
     })
   }
+  page "step_2" {
+    content = template_file("docs/task_4/step_2.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+      shared_minecraft_instance = variable.shared_minecraft_instance
+    })
+  }
+  page "outro" {
+    content = template_file("docs/task_4/outro.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+      shared_minecraft_instance = variable.shared_minecraft_instance
+    })
+  }
 }
 
 resource "task" "final_task" {

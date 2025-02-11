@@ -30,6 +30,14 @@ resource "chapter" "task_3" {
       ansible_pass = variable.ansible_pass
     })
   }
+
+   page "outro" {
+    content = template_file("docs/task_3/outro.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+      ansible_pass = variable.ansible_pass
+    })
+  }
   
 }
 
