@@ -4,7 +4,7 @@ set -e
 
 # Install Java
 apt-get update
-apt-get install -y openjdk-21-jre-headless
+apt-get install -y openjdk-17-jre-headless
 
 # Install Rcon
 curl -L -o rcon-cli.tar.gz https://github.com/itzg/rcon-cli/releases/download/1.6.10/rcon-cli_1.6.10_linux_amd64.tar.gz
@@ -21,12 +21,16 @@ echo "eula=true" > ./eula.txt
 
 ## Download the server jar and run the installer
 curl -L -o fabric-installer.jar https://maven.fabricmc.net/net/fabricmc/fabric-installer/1.0.1/fabric-installer-1.0.1.jar
-java -Xmx2G -jar fabric-installer.jar server -mcversion 1.21.4 -downloadMinecraft
+java -Xmx2G -jar fabric-installer.jar server -mcversion 1.20.1 -downloadMinecraft
 
 ## Add the world
-curl -L -o buccaneers_bay.tar.gz https://github.com/nicholasjackson/workshop-better-together/releases/download/v0.0.0/buccaneers_bay.tar.gz
-tar -xzf buccaneers_bay.tar.gz
-mv ./buccaneers_bay ./world
+curl -L -o task_1.tar.gz https://storage.googleapis.com/jumppad_sko/world_task_1.tar.gz
+tar -xzf task_1.tar.gz
+mv ./task_1 ./world
+
+## Add the mods
+curl -L -o mods.tar.gz https://storage.googleapis.com/jumppad_sko/minecraft_mods.tar.gz
+tar -xzf mods.tar.gz
 
 ## Create the systemd service
 cat <<EOF > /etc/systemd/system/minecraft.service
@@ -37,6 +41,7 @@ After=network.target
 [Service]
 WorkingDirectory=/etc/minecraft
 ExecStart=/usr/bin/java -Xmx2G -Xms2G -jar fabric-server-launch.jar nogui
+EnvironmentFile=/etc/minecraft/env/minecraft.env
 
 [Install]
 WantedBy=multi-user.target

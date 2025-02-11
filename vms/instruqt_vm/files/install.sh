@@ -69,7 +69,7 @@ systemctl disable apparmor
 
 ## Create the workshop directories
 mkdir -p /var/workshop/images/base
-mkdir -p /var/workshop/images/minecraft_1
+mkdir -p /var/workshop/images/minecraft_task_1
 mkdir -p /var/workshop/pools
 
 ## Add the base qemu images
@@ -77,8 +77,8 @@ curl -L -o ubuntu_base.tar https://storage.googleapis.com/jumppad_sko/ubuntu-240
 tar -xzf ubuntu_base.tar -C /var/workshop/images/base
 
 ## Add the minecraft image for task 1
-curl -L -o minecraft_base.tar https://storage.googleapis.com/jumppad_sko/minecraft_base.tar
-tar -xzf minecraft_base.tar -C /var/workshop/images/minecraft_1
+curl -L -o minecraft-task-1.tar.gz https://storage.googleapis.com/jumppad_sko/minecraft-task-1.tar.gz
+tar -xzf minecraft-task-1.tar.gz -C /var/workshop/images/minecraft_task_1
 
 ## Add a dirty redirect to the static ip for the minecraft server
 cat <<EOF > /etc/systemd/system/minecraft_redirect.service

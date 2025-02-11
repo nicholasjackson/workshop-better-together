@@ -12,6 +12,18 @@ provider "libvirt" {
   uri = "qemu:///system?socket=/var/run/libvirt/libvirt-sock"
 }
 
+variable "vault_addr" {
+  type        = string
+  description = "Vault address"
+  default     = "https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200"
+}
+
+variable "vault_namespace" {
+  type        = string
+  description = "Vault namespace"
+  default     = "admin/testorga"
+}
+
 variable "server_mac_addr" {
   type        = string
   description = "Fixed MAC address for the server, to enable static ip"
@@ -47,7 +59,8 @@ resource "libvirt_pool" "ubuntu" {
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = "ubuntu-qcow2"
   pool   = libvirt_pool.ubuntu.name
-  source = "/var/workshop/images/minecraft_1/minecraft-vm.qcow2"
+  #source = "/var/workshop/images/minecraft_1/minecraft-vm.qcow2"
+  source = "../../../vms/build/minecraft_task_1/minecraft-task-1.qcow2"
 }
 
 resource "libvirt_domain" "domain-ubuntu" {
@@ -84,6 +97,30 @@ resource "libvirt_domain" "domain-ubuntu" {
     type        = "spice"
     listen_type = "address"
     autoport    = true
+  }
+
+  connection {
+    type     = "ssh"
+    user     = "packer"
+    password = "packer"
+    host     = var.server_ip_addr
+  }
+
+  provisioner "file" {
+    content  = <<-EOF
+      VAULT_ADDR=${var.vault_addr}
+      VAULT_NAMESPACE=${var.vault_namespace}
+    EOF
+
+    destination = "/tmp/minecraft.env"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo mkdir /etc/minecraft/env",
+      "sudo mv /tmp/minecraft.env /etc/minecraft/env/minecraft.env",
+      "sudo systemctl restart minecraft"
+    ]
   }
 }
 
