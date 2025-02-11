@@ -1,5 +1,5 @@
 resource "chapter" "task_4" {
-  title = "4.Use AAP to update the shared Minecraft server access list"
+  title = "Task 4"
 
   tasks = {
     final_task = resource.task.final_task

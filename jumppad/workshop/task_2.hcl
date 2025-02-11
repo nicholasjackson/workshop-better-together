@@ -35,6 +35,13 @@ resource "chapter" "task_2" {
       ansible_pass = variable.ansible_pass
     })
   }
+  page "outro.mdx" {
+    content = template_file("docs/outro/outro.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+      ansible_pass = variable.ansible_pass
+    })
+  }
 }
 
 resource "task" "vault_login" {
