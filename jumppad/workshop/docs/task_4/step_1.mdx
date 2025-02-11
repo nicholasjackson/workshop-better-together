@@ -25,9 +25,12 @@ complete this task in vscode and apply your changes for access to the shared GCP
 * credentials are preconfigured and using the same credentials as task 3 no changes are required to the AAP job template
 
 Once you have successfully completed the task, you can verify the Ansible job execution in AAP
-You can see below, the job template has been executed successfully and the job has been completed.
-The Vault signed SSH certificate has been injected into the execution environment and used to authenticate a remote run on the shared GCP Minecraft server.
-You can also see the debug output from the job execution showing the result of updating the Minecraft server access list.
+Login to the AAP web console and from the tab **Ansible Automation Platform**
+
+* The job template executed successfully in Ansible Automation Platform (AAP), completing the intended task
+* The Vault-signed SSH certificate was successfully injected into the execution environment and used to authenticate with the shared GCP Minecraft server
+* The debug output from the job execution displays the results of updating the Minecraft server's access list, confirming the changes were applied
+
 ![aaprun](/assets/task_4/task4-aap.png)
 
 
