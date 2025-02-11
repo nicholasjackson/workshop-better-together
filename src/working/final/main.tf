@@ -71,7 +71,7 @@ data "http" "minecraft_accesslist" {
 
 # Create a new AAP inventory for the shared minecraft server
 # https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/inventory
-# Hint: you will need your organization id use the locals provided
+# Hint: you will need your organization id use the locals provided (org_id)
 
 
 
@@ -79,11 +79,14 @@ data "http" "minecraft_accesslist" {
 
 # Create a new AAP host for the GCP minecraft server set any required variables
 # https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/host
+# Hint: For access to the GCP minecraft server you will need to set minecraft_usernames
+# The remote host can be managed via Ansible using the standard SSH port (22)
 
 
 
 
 
-# Execute the Job Template to update the minecraft server for access using existing job template - minecraft_whitelist
+# Execute the existing Job Template to update the minecraft server for access using existing job template - minecraft_whitelist
 # credentials are preconfigured and using the same credentials as task 3 no changes are required to the AAP job template
 # https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/job
+# Hint: you will need to set the job_template_id (see locals) and inventory_id
