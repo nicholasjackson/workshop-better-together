@@ -35,6 +35,12 @@ resource "chapter" "task_1" {
       machine_url = variable.machine_url
     })
   }
+    page "step_5" {
+    content = template_file("docs/task_1/step_5.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+    })
+  }
     page "outtro" {
     content = template_file("docs/task_1/outro.mdx", {
       docs_url    = variable.docs_url
