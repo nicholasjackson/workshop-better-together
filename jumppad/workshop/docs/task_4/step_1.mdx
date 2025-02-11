@@ -9,7 +9,7 @@ GCP Minecraft Server
 <Task id="final_task">
 Starter code has been provided in the final task directory. You will need to
 complete this task in vscode and apply your changes for access to the shared GCP Minecraft server, where the final challenge will Start.
-![vscode](https://dl.dropbox.com/scl/fi/joo63fextc6j4yhsv8sy1/vscode.png?rlkey=pd7lz40k3kegnjbw56etrr6kb&st=9r8gav95&dl=0)
+![vscode](/assets/task_4/task4-vscode.png)
 
 ## 1.Create a new AAP inventory for the shared GCP Minecraft server
 <a href="https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/inventory" target="_blank" rel="noopener noreferrer">ansible/aap/latest/docs/resources/inventory</a>
@@ -23,4 +23,13 @@ complete this task in vscode and apply your changes for access to the shared GCP
 ## 3. Execute the Job Template to update the minecraft server for access using existing job template - minecraft_whitelist
 <a href="https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/job" target="_blank" rel="noopener noreferrer">ansible/aap/latest/docs/resources/job</a>
 * credentials are preconfigured and using the same credentials as task 3 no changes are required to the AAP job template
+
+Once you have successfully completed the task, you can verify the Ansible job execution in AAP
+You can see below, the job template has been executed successfully and the job has been completed.
+The Vault signed SSH certificate has been injected into the execution environment and used to authenticate a remote run on the shared GCP Minecraft server.
+You can also see the debug output from the job execution showing the result of updating the Minecraft server access list.
+![aaprun](/assets/task_4/task4-aap.png)
+
+
+
 </Task>
