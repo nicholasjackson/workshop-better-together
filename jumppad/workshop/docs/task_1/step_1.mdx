@@ -21,7 +21,7 @@ terraform apply -auto-approve
 
 <Task id="apply_terraform_configuration">
 To deploy the Minecraft server you need to run the following commands:
-```
+```bash
 cd terraform
 terraform init
 terraform apply
@@ -34,13 +34,12 @@ Did you manage that? If not you can find the solution below.
 
 ## need to customize
 
-<Solution title="Solution: configure kubernetes auth">
+## need to customize
 
+<Solution title="Solution: terraform apply">
 ```bash
-vault write auth/kubernetes/config \
-  token_reviewer_jwt=@/usr/src/k8s.token \
-  kubernetes_host="https://kubernetes.default.svc:443" \
-  kubernetes_ca_cert=@/usr/src/k8s.crt
+cd terraform
+terraform init
+terraform apply -auto-approve
 ```
-
 </Solution>

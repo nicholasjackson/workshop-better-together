@@ -4,63 +4,89 @@
 ```
 {{ machine_url }}
 ```
-## Ansible automation Platform
-
-```
+## Ansible Automation Platform
+```sh
 https://44.210.128.10
 ```
-
-## Update your existing terraform configuration to use the new packer image
-
-### copy files from aap directory to the terraform directory
-<Task id="update_terraform">
+<a href="https://44.210.128.10" target="_blank">Ansible Automation Platform</a>
+```bash
+username: <team_name>_admin
+Ansible Automation password:{{ ansible_pass }}
 ```
+<Task id="update_terraform">
+## Update your existing terraform configuration to use the new packer image
+### copy files from aap directory to the terraform directory
+In this task we are updating the existing Terraform configuration to use the 
+new packer image and apply user access using the AAP provider.
+The additional required to integrate the AAP provider is already provided in the aap directory,
+copy the contents to your Terraform directory.
+
+```bash
+ensure your in the terraform directory
+
+<Task id="update_terraform">
+```bash
 ensure your in the terraform directory
 cp ../aap/* .
 ls
 ```
 confirm the files are copied
-```
+```bash
 root@debian:/workshop/src/working/terraform# ls
 aap.tf  main.tf  terraform.auto.tfvars
 root@debian:/workshop/src/working/terraform# 
 ```
 </Task>
-<Task id="update_tfvars">
-update the terraform.auto.tfvars using cli, or if your more comfortable with vscode you can use that as well from the workshop tab
-```
+
+<Task id="terraform_validate">
+update the terraform.auto.tfvars using cli or vscode, or if 
+your more comfortable with vscode you can use that from the workshop tab.
+
+![vscode-terraform](https://dl.dropbox.com/scl/fi/zq9xbve7g8pp7c50bfcwd/vscode-terraform.png?rlkey=z64crgxgndh7hsnz54m3nliyu&st=myh94xd7&dl=0)
+Alternatively you can follow the steps below to use the CLI.
+
+```bash
 vi terraform.auto.tfvars
 ```
-```hcl
+
+```bash
 # terraform.auto.tfvars
-aap_username="#_your_team_name#_admin" replace #_your_team_name# with your team name
-aap_password="" #AAP password see the docs at the top of the task page
-minecraft_hostname="" #this is available in the docs at the top of the task page
-minecraft_usernames=[] #update with your minecraft usernames in > ["user1","user2"]
+aap_username="<team_name>_admin" replace <team_name> with your team name
+aap_password="" # AAP password {{ ansible_pass }} see the docs at the top of the task page
+minecraft_hostname="" # your minecraft hostname is {{ machine_url }}
+minecraft_usernames=[] # update with your minecraft usernames in > ["user1","user2"]
 image_source="/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
 ```
 save the updates
-```
+
+```bash
 esc :wq
 ```
-</Task>
+
 validate the terraform configuration updates
-<Task id="terraform_apply">
-```
+
+```bash
 terraform init
 terraform validate
 ```
-once you have validated the terraform configuration, you can run terraform plan to review the changes.
-```
+
+once you have validated the terraform configuration, 
+you can run terraform plan to review the changes.
+
+```bash
 terraform plan
 ```
+
 see example output below
+
 ```
 root@debian:/workshop/src/working/terraform# terraform plan
 data.http.minecraft_accesslist: Reading...
-data.http.minecraft_accesslist: Read complete after 1s [id=https://44.210.128.100/api/controller/v2/job_templates/?name=minecraft_whitelist]
+data.http.minecraft_accesslist: Read complete after 1s [
+  id=https://44.210.128.100/api/controller/v2/job_templates/?name=minecraft_whitelist]
 
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+Terraform used the selected providers to generate the following execution plan. 
+Resource actions are indicated with the following symbols:
   + create
 
 Terraform will perform the following actions:
@@ -83,9 +109,14 @@ Plan: 7 to add, 0 to change, 0 to destroy.
 Changes to Outputs:
   + ip_address    = "192.168.16.100"
   + socat_command = "socat TCP-LISTEN:25565,fork,reuseaddr TCP:192.168.16.100:25565"
-───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
+────────────────────────────────────────────────────────────────────────────────────────────
+Note: You didn't use the -out option to save this plan, 
+so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
 ```
+
+</Task>
+
+<Task id="terraform_apply">
 apply the changes
 ```
 terraform apply
@@ -103,5 +134,12 @@ libvirt_volume.ubuntu-qcow2: Creating...
 libvirt_network.minecraft: Creation complete after 0s [id=ae0aa162-528d-4ec2-9556-fcd0000d4131]
 aap_inventory.dedicated_minecraft: Creating...
 libvirt_volume.ubuntu-qcow2: Still creating... [10s elapsed]
+```
+</Task>
+
+<Task id="connect_minecraft">
+Using your Minecraft client connect to the Minecraft server using the DNS address provided.
+```
+{{ machine_url }}
 ```
 </Task>

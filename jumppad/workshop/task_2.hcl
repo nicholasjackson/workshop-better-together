@@ -3,6 +3,9 @@ resource "chapter" "task_2" {
 
   tasks = {
     vault_login = resource.task.vault_login
+    read_kv_secrets = resource.task.read_kv_secrets
+    configure_aap_vault_creds = resource.task.configure_aap_vault_creds
+    configure_machine_creds = resource.task.configure_aap_machine_creds
   }
 
   page "intro" {
@@ -15,18 +18,21 @@ resource "chapter" "task_2" {
     content = template_file("docs/task_2/step_1.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
+      ansible_pass = variable.ansible_pass
     })
   }
   page "step_2" {
     content = template_file("docs/task_2/step_2.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
+      ansible_pass = variable.ansible_pass
     })
   }
   page "step_3" {
     content = template_file("docs/task_2/step_3.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
+      ansible_pass = variable.ansible_pass
     })
   }
 }
@@ -34,82 +40,108 @@ resource "chapter" "task_2" {
 resource "task" "vault_login" {
   prerequisites = []
 
-  # config {
-  #   user   = "root"
-  # }
+  config {
+    user   = "root"
+    target = variable.vscode
+  }
 
-  # condition "vault login" {
-  #   description = "vault login successful"
+  condition "vault_login" {
+    description = "vault login successful"
 
-  #   check {
-  #     script = <<-EOF
-  #       vault status
-  #     EOF
+    check {
+      script = <<-EOF
+      vault token lookup
+      EOF
 
-  #     failure_message = "check the environment variable and try again"
-  #   }
+      failure_message = "check the environment variable and try again"
+    }
 
-  #   solve {
-  #     script = <<-EOF
-  #     EOF
+    solve {
+      script = <<-EOF
+      EOF
 
-  #     timeout = 60
-  #   }
-  # }
+      timeout = 60
+    }
+  }
 }
 
 resource "task" "read_kv_secrets" {
   prerequisites = []
 
-  # config {
-  #   user   = "root"
-  #    target = variable.vscode
-  # }
+  config {
+    user   = "root"
+     target = variable.vscode
+  }
 
-  # condition "vault login" {
-  #   description = "vault login successful"
+  condition "read_kv_secrets" {
+    description = "Success - "
 
-  #   check {
-  #     script = <<-EOF
-  #       vault status
-  #     EOF
+    check {
+      script = <<-EOF
+      EOF
 
-  #     failure_message = "check the environment variable and try again"
-  #   }
+      failure_message = "check the environment variable and try again"
+    }
 
-  #   solve {
-  #     script = <<-EOF
-  #     EOF
+    solve {
+      script = <<-EOF
+      EOF
 
-  #     timeout = 60
-  #   }
-  # }
+      timeout = 60
+    }
+  }
 }
 
 resource "task" "configure_aap_vault_creds" {
   prerequisites = []
 
-  # config {
-  #   user   = "root"
-  #   target = variable.vscode
-  # }
+  config {
+    user   = "root"
+    target = variable.vscode
+  }
 
-  # condition "vault login" {
-  #   description = "vault login successful"
+  condition "configure_aap_vault_creds" {
+    description = "Success - "
 
-  #   check {
-  #     script = <<-EOF
-  #       vault status
-  #     EOF
+    check {
+      script = <<-EOF
+      EOF
 
-  #     failure_message = "check the environment variable and try again"
-  #   }
+      failure_message = "check the environment variable and try again"
+    }
 
-  #   solve {
-  #     script = <<-EOF
-  #     EOF
+    solve {
+      script = <<-EOF
+      EOF
 
-  #     timeout = 60
-  #   }
-  # }
+      timeout = 60
+    }
+  }
+}
+
+resource "task" "configure_aap_machine_creds" {
+  prerequisites = []
+
+  config {
+    user   = "root"
+    target = variable.vscode
+  }
+
+  condition "configure_machine_creds" {
+    description = "Success - "
+
+    check {
+      script = <<-EOF
+      EOF
+
+      failure_message = "check the environment variable and try again"
+    }
+
+    solve {
+      script = <<-EOF
+      EOF
+
+      timeout = 60
+    }
+  }
 }

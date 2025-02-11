@@ -50,6 +50,12 @@ variable "job_template_name" {
   default = "minecraft_whitelist"
 }
 
+variable "increment_run" {
+  type = string
+  default = "1"
+  
+}
+
 locals {
   response_body = jsondecode(data.http.minecraft_accesslist.response_body)
   template_id = local.response_body.results[0].id
@@ -71,22 +77,39 @@ data "http" "minecraft_accesslist" {
 
 # Create a new AAP inventory for the shared minecraft server
 # https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/inventory
-# Hint: you will need your organization id use the locals provided (org_id)
-
-
-
-
+# Hint: you will need your organization id use the locals provided
+# Create a new AAP inventory for the shared minecraft server
+resource "aap_inventory" "shared_minecraft" {
+  name = "minecraft_dedicated"
+  description = "Shared GCP Minecraft Server"
+  organization = local.org_id
+}
 
 # Create a new AAP host for the GCP minecraft server set any required variables
 # https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/host
-# Hint: For access to the GCP minecraft server you will need to set minecraft_usernames
-# The remote host can be managed via Ansible using the standard SSH port (22)
 
+resource "aap_host" "vm_hosts" {
+  inventory_id = aap_inventory.shared_minecraft.id
+  name         = var.minecraft_hostname  # Use the hostname for each VM
+  variables    = jsonencode({
+    "ansible_host"     : "${var.minecraft_hostname}",
+    "ansible_port"     : 22
+})
+}
 
-
-
-
-# Execute the existing Job Template to update the minecraft server for access using existing job template - minecraft_whitelist
+# Execute the Job Template to update the minecraft server for access using existing job template - minecraft_whitelist
 # credentials are preconfigured and using the same credentials as task 3 no changes are required to the AAP job template
 # https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/job
-# Hint: you will need to set the job_template_id (see locals) and inventory_id
+
+resource "aap_job" "minecraft_whitelist" {
+  job_template_id = local.template_id
+  inventory_id    = aap_inventory.shared_minecraft.id
+  extra_vars      = jsonencode({
+    "minecraft_usernames" : var.minecraft_usernames
+  })
+
+  triggers = {
+    "${var.minecraft_hostname}" : "${var.increment_run}"
+  }
+  
+}

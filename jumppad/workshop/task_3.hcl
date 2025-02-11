@@ -4,8 +4,9 @@ resource "chapter" "task_3" {
   tasks = {
     packer_build = resource.task.packer_build
     update_terraform = resource.task.update_terraform
-    update_tfvars = resource.task.update_tfvars
+    terraform_validate = resource.task.terraform_validate
     terraform_apply = resource.task.terraform_apply
+
   }
 
   page "intro" {
@@ -18,8 +19,10 @@ resource "chapter" "task_3" {
     content = template_file("docs/task_3/step_1.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
+      ansible_pass = variable.ansible_pass
     })
   }
+
   page "step_2" {
     content = template_file("docs/task_3/step_2.mdx", {
       docs_url    = variable.docs_url
@@ -27,6 +30,7 @@ resource "chapter" "task_3" {
       ansible_pass = variable.ansible_pass
     })
   }
+  
 }
 
 resource "task" "packer_build" {
@@ -65,7 +69,7 @@ resource "task" "update_terraform" {
     target = variable.vscode
   }
 
-  condition "check terraform" {
+  condition "update_terraform" {
       description = "Success - aap.tf exists in your Terraform configuration"
 
       check {
@@ -85,7 +89,7 @@ resource "task" "update_terraform" {
     }
 }
 
-resource "task" "update_tfvars" {
+resource "task" "terraform_validate" {
   prerequisites = []
 
   config {
@@ -93,14 +97,17 @@ resource "task" "update_tfvars" {
     target = variable.vscode
   }
 
-  condition "check terraform" {
-      description = "Success - "
+  condition "terraform validate" {
+      description = "Success - Terraform validate completed successfully"
 
       check {
         script = <<-EOF
+        cd /workshop/src/working/terraform
+        terraform init
+        terraform validate
         EOF
 
-        failure_message = "Validation Failed - "
+        failure_message = "Validation Failed"
       }
 
       solve {
@@ -112,6 +119,7 @@ resource "task" "update_tfvars" {
     }
 }
 
+
 resource "task" "terraform_apply" {
   prerequisites = []
 
@@ -120,14 +128,16 @@ resource "task" "terraform_apply" {
     target = variable.vscode
   }
 
-  condition "check terraform" {
-      description = "Success - "
+  condition "terraform_apply" {
+      description = "Success - Terraform apply completed successfully"
 
       check {
         script = <<-EOF
+        cd /workshop/src/working/terraform
+        terraform apply -auto-approve
         EOF
 
-        failure_message = "Validation Failed - "
+        failure_message = "Validation Failed"
       }
 
       solve {
