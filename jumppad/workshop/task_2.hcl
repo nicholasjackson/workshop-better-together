@@ -1,5 +1,5 @@
 resource "chapter" "task_2" {
-  title = "2.Vault with AAP"
+  title = "Task 2"
 
   tasks = {
     vault_login = resource.task.vault_login
@@ -30,6 +30,13 @@ resource "chapter" "task_2" {
   }
   page "step_3" {
     content = template_file("docs/task_2/step_3.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+      ansible_pass = variable.ansible_pass
+    })
+  }
+    page "outro" {
+    content = template_file("docs/task_2/outro.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
       ansible_pass = variable.ansible_pass

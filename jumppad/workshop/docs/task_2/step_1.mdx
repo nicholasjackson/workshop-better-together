@@ -1,6 +1,105 @@
-# Step 1: Login to HCP Vault and retrieve secrets
-## HCP Vault Address
-To access the HCP Vault Dedicated cluster you can use the following FQDN:
+# Step 1: Login to HCP Vault to retrieve your team’s secret
+
+
+1.  Open the Instruqt terminal and set the Vault environment variable:
+```
+export VAULT_ADDR=https://skoaap-public-vault-7a278d60.8c03478c.z1.hashicorp.cloud:8200/
+```
+_For this lab,  the HCP Vault Dedicated cluster is accessible over the public internet. Generally, this is not recommended and should be disabled. If there is a requirement to allow public access, we recommend customers to use the IP allow list as measure to limit access and security exposure. More information can be found in the [Manage public network access
+](https://developer.hashicorp.com/hcp/docs/vault/get-started/manage-public-access)_.
+2.  Verify Vault is running:
+```
+vault status
+```
+_You should see the following output_
+```
+root@debian:/workshop/src/working# vault status
+Key                      Value
+---                      -----
+Seal Type                awskms
+Recovery Seal Type       shamir
+Initialized              true
+Sealed                   false
+Total Recovery Shares    1
+Threshold                1
+Version                  1.18.1+ent
+Build Date               2024-10-29T14:21:43Z
+Storage Type             raft
+Cluster Name             7410e4d3-427f-4e06-a4c9-c6cbd2e06302
+Cluster ID               b7f56871-297b-db81-96c4-6100dfdc6b5b
+HA Enabled               true
+HA Cluster               https://10.219.255.89:8201
+HA Mode                  active
+Active Since             2025-02-04T19:34:59.808584379Z
+Raft Committed Index     1945872
+Raft Applied Index       1945872
+Last WAL                 800808
+```
+3. Login using the `userpass` method with the team's credentials by using the command. 
+```
+vault login -namespace=admin -method=userpass username=#your_team_name# password='<password>'
+```
+_Replace `#your_team_name#` and `<password>` with your team's credentials_.
+
+_You should see the following output_
+```
+vault login -namespace=admin -method=userpass username=testorga
+Password (will be hidden): 
+Success! You are now authenticated. The token information displayed below
+is already stored in the token helper. You do NOT need to run "vault login"
+again. Future Vault requests will automatically use this token.
+
+Key                    Value
+---                    -----
+token                  REDACTED
+token_accessor         REDACTED
+token_duration         1h
+token_renewable        true
+token_policies         ["default" "testorga"]
+identity_policies      []
+policies               ["default" "testorga"]
+token_meta_username    testorga
+```
+4. Read the riddle posted on the tavern wall:
+```
+I hold the whispers of the wind and the stories of the sea. To enter my chamber, seek the city of sin and the state of silver.
+```
+5. Find the Vault secret key using:
+```
+vault kv get -namespace=admin/#your_team_name# secrets/skofy26
+```
+_Replace `#your_team_name#` with your team's name_.
+
+_You should see the following output_
+```
+root@debian:/workshop/src/working# vault kv get -namespace=admin/testorga secrets/skofy26
+==== Secret Path ====
+secrets/data/skofy26
+
+======= Metadata =======
+Key                Value
+---                -----
+created_time       2025-02-04T02:43:17.230018382Z
+custom_metadata    <nil>
+deletion_time      n/a
+destroyed          false
+version            2
+
+==== Data ====
+Key      Value
+---      -----
+city     las vegas
+state    nevada
+```
+6. Look at the output and find the city and state.
+7. Use the retrieved secret as the password to unlock the door in Minecraft.
+
+_🚪 If correct, the door will open_!
+
+## CUT--HCP Vault Address 
+
+To access the HCP Vault Dedicated cluster you can use the following FQDN.
+
 ```
 https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200
 ```
@@ -8,7 +107,8 @@ For this lab, the HCP Vault Dedicated cluster is accessible over the public inte
 If there is a requirement to allow public access, we recommend customers to use the IP allow list as measure to limit access and security exposure. 
 More information can be found in the <a href="https://developer.hashicorp.com/hcp/docs/vault/get-started/manage-public-access" target="_blank" rel="noopener noreferrer">manage public network access</a>
 
-## Login to HCP Vault
+## CUT--Login to HCP Vault
+
 <Task id="vault_login">
 1. From the Instruqt lab, click on Instruqt terminal tab to begin.
 2. The <a href="https://developer.hashicorp.com/vault/docs/commands" target="_blank" rel="noopener noreferrer">Vault CLI</a> is pre-installed in the terminal. However, you'll need to set the environment variable `VAULT_ADDR` to the HCP Vault address. Set the environment variable in the terminal using:
@@ -69,7 +169,9 @@ token_meta_username    testorga
 ```
 
 </Task>
-## Retrieve KV secrets
+
+## To CUT--Retrieve KV secrets
+
 <Task id="read_kv_secrets">
 1. Using the same terminal that you logged into Vault with, retreive a secret from Vault's KVv2 Secrets Engine by using the command, replace `<team_name>` with your team's name.
 ```bash

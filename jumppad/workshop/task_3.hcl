@@ -1,5 +1,5 @@
 resource "chapter" "task_3" {
-  title = "3.Packer and Terraform with AAP"
+  title = "Task 3"
 
   tasks = {
     packer_build = resource.task.packer_build
@@ -25,6 +25,14 @@ resource "chapter" "task_3" {
 
   page "step_2" {
     content = template_file("docs/task_3/step_2.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+      ansible_pass = variable.ansible_pass
+    })
+  }
+
+   page "outro" {
+    content = template_file("docs/task_3/outro.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
       ansible_pass = variable.ansible_pass

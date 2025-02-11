@@ -1,5 +1,5 @@
 resource "chapter" "task_4" {
-  title = "4.Use AAP to update the shared Minecraft server access list"
+  title = "Task 4"
 
   tasks = {
     final_task = resource.task.final_task
@@ -15,6 +15,20 @@ resource "chapter" "task_4" {
 
   page "step_1" {
     content = template_file("docs/task_4/step_1.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+      shared_minecraft_instance = variable.shared_minecraft_instance
+    })
+  }
+  page "step_2" {
+    content = template_file("docs/task_4/step_2.mdx", {
+      docs_url    = variable.docs_url
+      machine_url = variable.machine_url
+      shared_minecraft_instance = variable.shared_minecraft_instance
+    })
+  }
+  page "outro" {
+    content = template_file("docs/task_4/outro.mdx", {
       docs_url    = variable.docs_url
       machine_url = variable.machine_url
       shared_minecraft_instance = variable.shared_minecraft_instance
