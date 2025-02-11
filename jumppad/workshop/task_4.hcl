@@ -1,5 +1,5 @@
 resource "chapter" "task_4" {
-  title = "Task 4"
+  title = "4.Final Challenge"
 
   tasks = {
     final_task = resource.task.final_task
