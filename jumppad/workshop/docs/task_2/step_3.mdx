@@ -8,6 +8,8 @@ AAP will request Vault's SSH Secrets Engine to sign the provided public key. The
 ## Retrieve SSH keypair from Vault
 You'll need to retrieve the SSH keypair from Vault's KVv2 Secrets Engine to configure the machine credentials in AAP, they are located in the `secrets/aap` path in Vault or use your own if you are feeling adventurous.
 
+You can refer back to the task **Retrieve KV secrets** in **Step 1** for guidnance.
+
 ## Configure AAP Machine credentials
 <Task id="configure_aap_machine_creds">
 1. From the left menu, click on **Automation Execution** and then **Credentials**. The `minecraft_ssh_credentials` has been preconfigured but you'll need to input your SSK keypair.
@@ -50,6 +52,6 @@ REDACTED
 ```
 You should see the following output:
 ```bash
-ssh-ed25519 REDTACED
+ssh-ed25519 REDTACTED
 ```
 </Solution>
