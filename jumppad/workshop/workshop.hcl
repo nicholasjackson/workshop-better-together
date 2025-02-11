@@ -15,7 +15,7 @@ variable "vscode" {
 
 variable "ansible_pass" {
   description = "The shared password for the ansible server"
-  default     = ""
+  default     = "Hashicorp123!sko2025"
 }
 
 variable "shared_minecraft_instance" {
