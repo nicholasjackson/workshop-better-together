@@ -1,7 +1,14 @@
-# Step 2: Verify the Deployment
+# Step 2: Connect to your Minecraft Server
+1. Use SSH from the terminal tab to connect to your Minecraft server and verify it is running:
+
+```bash
+ssh packer@localhost -p2222 
+``` 
+2. Select Yes for known host then input `packer` as password when prompted
 
 * Check the status of the Minecraft service:
 
-```
+```bash
 systemctl status minecraft
 ```
+*_If everything is running correctly, you’re ready to set sail_!*
