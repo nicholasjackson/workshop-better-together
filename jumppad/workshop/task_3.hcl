@@ -1,5 +1,5 @@
 resource "chapter" "task_3" {
-  title = "Task 3"
+  title = "3.Packer and Terraform with AAP"
 
   tasks = {
     packer_build = resource.task.packer_build

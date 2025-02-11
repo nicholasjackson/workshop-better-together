@@ -1,5 +1,5 @@
 resource "chapter" "task_2" {
-  title = "Task 2"
+  title = "2.HCP Vault with AAP"
 
   tasks = {
     vault_login = resource.task.vault_login
