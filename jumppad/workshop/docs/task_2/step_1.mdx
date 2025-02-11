@@ -8,7 +8,7 @@ export VAULT_ADDR=https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.clo
 _For this lab,  the HCP Vault Dedicated cluster is accessible over the public internet. Generally, this is not recommended and should be disabled. If there is a requirement to allow public access, we recommend customers to use the IP allow list as measure to limit access and security exposure. More information can be found in the [Manage public network access
 ](https://developer.hashicorp.com/hcp/docs/vault/get-started/manage-public-access)_.
 2.  Verify Vault is running:
-```
+```bash
 vault status
 ```
 _You should see the following output_
@@ -36,10 +36,10 @@ Raft Applied Index       1945872
 Last WAL                 800808
 ```
 3. Login using the `userpass` method with the team's credentials by using the command. 
+```bash
+vault login -ns=admin -method=userpass username=<team_name> password='{{ ansible_pass }}'
 ```
-vault login -namespace=admin -method=userpass username=#your_team_name# password='<password>'
-```
-_Replace `#your_team_name#` and `<password>` with your team's credentials_.
+_Replace `<team_name>` and `<password>` with your team's credentials_.
 
 _You should see the following output_
 ```
@@ -62,13 +62,14 @@ token_meta_username    testorga
 ```
 4. Read the riddle posted on the tavern wall:
 ```
-I hold the whispers of the wind and the stories of the sea. To enter my chamber, seek the city of sin and the state of silver.
+I hold the whispers of the wind and the stories of the sea. 
+To enter my chamber, seek the city of sin and the state of silver.
 ```
 5. Find the Vault secret key using:
+```bash
+vault kv get -namespace=admin/<team_name> secrets/skofy26
 ```
-vault kv get -namespace=admin/#your_team_name# secrets/skofy26
-```
-_Replace `#your_team_name#` with your team's name_.
+_Replace `<team_name>` with your team's name_.
 
 _You should see the following output_
 ```
@@ -103,7 +104,6 @@ https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200
 For this lab, the HCP Vault Dedicated cluster is accessible over the public internet. Generally, this is not recommended and should be disabled. 
 If there is a requirement to allow public access, we recommend customers to use the IP allow list as measure to limit access and security exposure. 
 More information can be found in the <a href="https://developer.hashicorp.com/hcp/docs/vault/get-started/manage-public-access" target="_blank" rel="noopener noreferrer">manage public network access</a>
-
 
 <Task id="vault_login">
 1. From the Instruqt lab, click on Instruqt terminal tab to begin.
