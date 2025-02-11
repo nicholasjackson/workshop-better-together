@@ -1,0 +1,32 @@
+# Step 2 Configure a user for your Minecraft User.
+
+Each team has a unique namespace in Vault, this is rooted under the `admin` namespace.
+For example if your team name is `team1`, your namespace will be `admin/team1`.
+
+Within your namespace `userpass' authentication method is enabled. This allows you to create users and assign policies to them.
+In order to open the iron door, you need to create a user for your Minecraft user and ensure that the user has the correct policy 
+attached granting access to the `tavern_key` secret engine and open the iron door.
+
+We will use the username of your Minecraft user as the userpass user and the Minecraft UUID as the password.
+
+To retrieve this information, you can head over to the following URL: [https://mcuuid.net/](https://mcuuid.net/).
+
+Then enter your Minecraft user and click the Lookup button, you should see something like this:
+
+![](/assets/task_1b/mcuuid.png)
+
+You need to copy the Full UUID value and use it as the password for the user.
+
+Let's create a user for your Minecraft user in the `userpassf' authentication method.
+
+```bash
+vault write -ns=admin/<your team> /auth/userpass/users/<minecraft user> password='<minecraft uuid>'
+```
+
+You should see some output like the following:
+
+```bash
+Success! Data written to: auth/userpass/users/<minecraft user>
+```
+
+Now that is done, let's create a policy for the user.

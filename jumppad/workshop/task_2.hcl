@@ -2,10 +2,10 @@ resource "chapter" "task_2" {
   title = "2.HCP Vault with AAP"
 
   tasks = {
-    vault_login = resource.task.vault_login
-    read_kv_secrets = resource.task.read_kv_secrets
+    vault_login               = resource.task.vault_login
+    read_kv_secrets           = resource.task.read_kv_secrets
     configure_aap_vault_creds = resource.task.configure_aap_vault_creds
-    configure_machine_creds = resource.task.configure_aap_machine_creds
+    configure_machine_creds   = resource.task.configure_aap_machine_creds
   }
 
   page "intro" {
@@ -14,31 +14,27 @@ resource "chapter" "task_2" {
       machine_url = variable.machine_url
     })
   }
+
   page "step_1" {
     content = template_file("docs/task_2/step_1.mdx", {
-      docs_url    = variable.docs_url
-      machine_url = variable.machine_url
+      docs_url     = variable.docs_url
+      machine_url  = variable.machine_url
       ansible_pass = variable.ansible_pass
     })
   }
+
   page "step_2" {
     content = template_file("docs/task_2/step_2.mdx", {
-      docs_url    = variable.docs_url
-      machine_url = variable.machine_url
+      docs_url     = variable.docs_url
+      machine_url  = variable.machine_url
       ansible_pass = variable.ansible_pass
     })
   }
-  page "step_3" {
-    content = template_file("docs/task_2/step_3.mdx", {
-      docs_url    = variable.docs_url
-      machine_url = variable.machine_url
-      ansible_pass = variable.ansible_pass
-    })
-  }
-    page "outro" {
+
+  page "outro" {
     content = template_file("docs/task_2/outro.mdx", {
-      docs_url    = variable.docs_url
-      machine_url = variable.machine_url
+      docs_url     = variable.docs_url
+      machine_url  = variable.machine_url
       ansible_pass = variable.ansible_pass
     })
   }
@@ -77,7 +73,7 @@ resource "task" "read_kv_secrets" {
 
   config {
     user   = "root"
-     target = variable.vscode
+    target = variable.vscode
   }
 
   condition "read_kv_secrets" {

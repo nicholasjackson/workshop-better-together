@@ -1,0 +1,79 @@
+# Step 1: Login to HCP Vault to confgure userpass authentication
+
+To access the HCP Vault Dedicated cluster you can use the following FQDN:
+```
+https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200
+```
+
+For this lab, the HCP Vault Dedicated cluster is accessible over the public internet. Generally, this is not recommended and should be disabled. 
+If there is a requirement to allow public access, we recommend customers to use the IP allow list as measure to limit access and security exposure. 
+More information can be found in the <a href="https://developer.hashicorp.com/hcp/docs/vault/get-started/manage-public-access" target="_blank" rel="noopener noreferrer">manage public network access</a>
+
+<Task id="vault_login">
+1. From the Instruqt lab, click on Instruqt terminal tab to begin.
+2. The <a href="https://developer.hashicorp.com/vault/docs/commands" target="_blank" rel="noopener noreferrer">Vault CLI</a> is pre-installed in the terminal. The `VAULT_ADDR` environment variable has also been set for you.
+
+```bash
+export VAULT_ADDR=https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200
+```
+
+4. Check Vault status using the command:
+
+```bash
+vault status
+```
+
+You should see the following output:
+
+```bash
+# vault status
+Key                      Value
+---                      -----
+Seal Type                awskms
+Recovery Seal Type       shamir
+Initialized              true
+Sealed                   false
+Total Recovery Shares    1
+Threshold                1
+Version                  1.18.1+ent
+Build Date               2024-10-29T14:21:43Z
+Storage Type             raft
+Cluster Name             7410e4d3-427f-4e06-a4c9-c6cbd2e06302
+Cluster ID               b7f56871-297b-db81-96c4-6100dfdc6b5b
+HA Enabled               true
+HA Cluster               https://10.219.255.89:8201
+HA Mode                  active
+Active Since             2025-02-04T19:34:59.808584379Z
+Raft Committed Index     1945872
+Raft Applied Index       1945872
+Last WAL                 800808
+```
+
+5. Login using the `userpass` method with the team's credentials by using the command, replace `<team_name>` with your team's name.
+
+```bash
+vault login -ns=admin -method=userpass username='<team_name>' password='{{ ansible_pass }}'
+```
+
+You should see the following output:
+
+```bash
+# vault login -ns=admin -method=userpass username=testorga
+Password (will be hidden): 
+Success! You are now authenticated. The token information displayed below
+is already stored in the token helper. You do NOT need to run "vault login"
+again. Future Vault requests will automatically use this token.
+
+Key                    Value
+---                    -----
+token                  REDACTED
+token_accessor         REDACTED
+token_duration         1h
+token_renewable        true
+token_policies         ["default" "testorga"]
+identity_policies      []
+policies               ["default" "testorga"]
+token_meta_username    testorga
+```
+
+</Task>
