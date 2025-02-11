@@ -20,7 +20,7 @@ You need to copy the Full UUID value and use it as the password for the user.
 Let's create a user for your Minecraft user in the `userpassf' authentication method.
 
 ```bash
-vault write -ns=admin/<your team> /auth/userpass/users/<minecraft user> password='<minecraft uuid>'
+vault write -ns=admin/<your team> /auth/userpass/users/<minecraft user lowercase> password='<minecraft uuid>'
 ```
 
 You should see some output like the following:
