@@ -54,7 +54,7 @@ Last WAL                 800808
 ```
 
 5. Login using the `userpass` method with the team's credentials by using the command,
-`${TEAM_NAME}` should be exported already see step 2.
+TEAM_NAME should be exported to env already see step 2.
 
 ```bash
 vault login -ns=admin -method=userpass username="${TEAM_NAME}" password='{{ ansible_pass }}'
