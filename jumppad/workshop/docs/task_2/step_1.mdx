@@ -7,7 +7,8 @@ With the door now open, you step inside the dimly lit chamber. The air is thick 
 
 ## 1. Retreive AppRole credentials
 
-1. Using the same terminal that you logged into Vault with in the prior tasks, retreive the Role ID using the command, replace `<team_name>` with your team's name.
+1. Using the same terminal that you logged into Vault with in the prior tasks, retreive the Role ID using the command, 
+env var for `TEAM_NAME` should already be set with your team's name.
 ```bash
 vault read -ns=admin/${TEAM_NAME} auth/approle/role/aap/role-id
 ```
@@ -18,7 +19,7 @@ Key        Value
 ---        -----
 role_id    3d05b15f-4262-419a-c609-b3a2633877b4
 ```
-2. Retreive the Secret ID using the command, env var for TEAM_NAME should already be set with your team's name.
+2. Retreive the Secret ID using the command, env var for `TEAM_NAME` should already be set with your team's name.
 ```bash
 vault write -ns=admin/${TEAM_NAME} -f auth/approle/role/aap/secret-id
 ```
@@ -57,9 +58,6 @@ AAP_Password:`{{ ansible_pass }}`
 5. Enter the Role ID and Secret ID you retrieved in the previous task into the respective fields.
 ![aaproleconfigure](https://dl.dropbox.com/scl/fi/0ym73sc3pl1cyv61yprwi/approle_config.png?rlkey=se6q0v2v5lljfhjw5k7occr6x&st=qi4a4jdo&dl=0)
 8. Click **Save credential** to save the configuration.
-
-
-
 
 
 <Solution title="Solution: Update AAP AppRole credentials">
