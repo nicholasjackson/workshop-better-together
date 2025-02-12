@@ -30,3 +30,12 @@ Success! Data written to: auth/userpass/users/<minecraft user>
 ```
 
 Now that is done, let's create a policy for the user.
+
+<Solution title="Solution: vault cli">
+```bash
+export TEAM_NAME=<your team>
+export MCUUID=<full mcuuid>
+export MINECRAFT_USER=<your lowercase minecraft user>
+vault write -ns=admin/${TEAM_NAME} /auth/userpass/users/${MINECRAFT_USER} password=${MCUUID}
+```
+</Solution>
