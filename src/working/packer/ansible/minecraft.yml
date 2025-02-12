@@ -40,6 +40,7 @@
         url: https://maven.fabricmc.net/net/fabricmc/fabric-installer/1.0.1/fabric-installer-1.0.1.jar
         dest: /etc/minecraft/fabric-installer.jar
 
+  # does this version need to revert to 1.20.1? for compatibility with client and mods? - TBC - to test
     - name: Run Fabric installer
       command: >
         java -Xmx2G -jar fabric-installer.jar server -mcversion 1.21.4 -downloadMinecraft
