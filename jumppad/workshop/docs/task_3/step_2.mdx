@@ -70,7 +70,6 @@ resource "aap_job" "minecraft_whitelist" {
 }
 ```
 
-
 Before proceeding ensure your in the terraform directory from the terminal
 
 ```bash
@@ -84,13 +83,11 @@ root@debian:/workshop/src/working/terraform# ls
 aap.tf  main.tf providers.tf  terraform.auto.tfvars
 root@debian:/workshop/src/working/terraform# 
 ```
-
 </Task>
 
 
-
-# 3. Update Terraform Variables and Validate Terraform
 <Task id="terraform_validate">
+# 3. Update Terraform variables and validate Terraform configuration
 update the terraform.auto.tfvars using cli or vscode, or if 
 your more comfortable with vscode you can use that from the workshop tab.
 
@@ -165,12 +162,12 @@ Changes to Outputs:
 Note: You didn't use the -out option to save this plan, 
 so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
 ```
-
 </Task>
  
-# 4. Deploy Terraform
+
 
 <Task id="terraform_apply">
+# 4. Deploy Terraform Configuration
 apply the changes
 ```
 terraform apply
@@ -192,12 +189,11 @@ libvirt_volume.ubuntu-qcow2: Still creating... [10s elapsed]
 </Task>
 
 # 5. Connect Minecraft Server
-<Task id="connect_minecraft">
+
 Using your Minecraft client connect to the Minecraft server using the DNS address provided.
 ```
 {{ machine_url }}
 ```
-</Task>
 
 # 6.Validate Your Deployment in Minecraft
 Now that your Minecraft server is up and running, it’s time to test your deployment!
