@@ -34,12 +34,13 @@ Success! Uploaded policy: tavern
 
 Now that the policy is created, you can attach it to the user you created in the previous step.
 
-<Solution title="Solution: vault cli">
-export TEAM_NAME='<your team>'
-
+<Solution title="Solution: vault cli policy">
+```bash
+export TEAM_NAME=<your team>
 vault policy write -ns=admin/${TEAM_NAME} tavern - <<EOF
 path "secrets/data/tavern_key" {
   capabilities = ["read"]
 }
 EOF
+```
 </Solution>
