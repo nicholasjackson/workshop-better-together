@@ -19,7 +19,7 @@ path "secrets/data/tavern_key" {
 You can add this policy to Vault using the following command:
 
 ```bash
-vault policy write -ns=admin/<your team> tavern - <<EOF
+vault policy write -ns=admin/${TEAM_NAME} tavern - <<EOF
 path "secrets/data/tavern_key" {
   capabilities = ["read"]
 }
@@ -34,7 +34,8 @@ Success! Uploaded policy: tavern
 
 Now that the policy is created, you can attach it to the user you created in the previous step.
 
-<Solution title="Solution: vault cli policy">
+<Solution title="Solution: Vault cli">
+check your env vars are set correctly
 ```bash
 export TEAM_NAME=<your team>
 vault policy write -ns=admin/${TEAM_NAME} tavern - <<EOF

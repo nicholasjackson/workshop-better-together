@@ -1,7 +1,7 @@
 # Step 4: Attach the policy to the user
 
 ```bash
-vault write -ns admin/<your team> auth/userpass/users/<your lowercase minecraft user>/policies token_policies="tavern"
+vault write -ns admin/${TEAM_NAME} auth/userpass/users/${MINECRAFT_USER}/policies token_policies="tavern"
 ```
 
 You should see the following output:
@@ -16,6 +16,7 @@ task.
 
 
 <Solution title="Solution: vault cli">
+check your env vars are set correctly
 ```bash
 export TEAM_NAME='<your team>'
 export MINECRAFT_USER='<your lowercase minecraft user>'
