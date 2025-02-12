@@ -11,9 +11,36 @@ You'll need to retrieve the SSH keypair from Vault's KVv2 Secrets Engine to conf
 
 You can refer back to the task **Retrieve KV secrets** in **Step 1** for guidnance.
 
+<Solution title="Solution: Retrieving SSH keypair from Vault">
+The SSH keypair was generated using Terraform and stored in Vault's KVv2 Secrets Engine.
+
+1. Login to Vault if you haven't already, see step 1 for instructions.
+2. Retreive the SSH private key from Vault's KVv2 Secrets Engine by using the command, 
+env var for ${TEAM_NAME} should already be set with your team's name.
+```bash
+ vault kv get -ns=admin/${TEAM_NAME} -field=ssh-unsigned-private-key secrets/aap
+```
+You should see the following output:
+```bash
+vault kv get -ns=admin/testorga -field=ssh-unsigned-private-key secrets/aap
+-----BEGIN OPENSSH PRIVATE KEY-----
+REDACTED
+-----END OPENSSH PRIVATE KEY-----
+```
+3. Retreive the SSH public key from Vault's KVv2 Secrets Engine by using the command, 
+env var for ${TEAM_NAME} should already be set with your team's name.
+```bash
+ vault kv get -ns=admin/${TEAM_NAME} -field=ssh-unsigned-public-key secrets/aap
+```
+You should see the following output:
+```bash
+ssh-ed25519 REDTACTED
+```
+</Solution>
+
 ## Configure AAP Machine credentials
 
-1. From the left menu, click on **Automation Execution** and then **Credentials**. The `minecraft_ssh_credentials` has been preconfigured but you'll need to input your SSK keypair.
+1. From the left menu, click on **Automation Execution** and then **Infrastructure** and **Credentials**. The `minecraft_ssh_credentials` has been preconfigured but you'll need to input your SSK keypair.
 ![machinecreds](/assets/task_2/aap_machine_creds.png)
 2. Click the edit icon for **minecraft_ssh_credentials**.
 ![machinecredsedit](/assets/task_2/aap_machine_creds_edit.png)
@@ -31,27 +58,3 @@ You can refer back to the task **Retrieve KV secrets** in **Step 1** for guidnan
 6. If the test is successful, click **Finish** and **Save credential** to save the configuration.
 ![savecreds](https://dl.dropbox.com/scl/fi/6afakdgv8ogitvnicf3m7/save_creds.png?rlkey=uj3mjb8418y6nyp9mid50zqp4&st=y31vunx2&dl=0)
 
-<Solution title="Solution: Retrieving SSH keypair from Vault">
-The SSH keypair was generated using Terraform and stored in Vault's KVv2 Secrets Engine.
-
-1. Login to Vault if you haven't already, see step 1 for instructions.
-2. Retreive the SSH private key from Vault's KVv2 Secrets Engine by using the command, replace `<team_name>` with your team's name.
-```bash
- vault kv get -ns=admin/<team_name> -field=ssh-unsigned-private-key secrets/aap
-```
-You should see the following output:
-```bash
-vault kv get -ns=admin/testorga -field=ssh-unsigned-private-key secrets/aap
------BEGIN OPENSSH PRIVATE KEY-----
-REDACTED
------END OPENSSH PRIVATE KEY-----
-```
-3. Retreive the SSH public key from Vault's KVv2 Secrets Engine by using the command, replace `<team_name>` with your team's name.
-```bash
- vault kv get -ns=admin/<team_name> -field=ssh-unsigned-public-key secrets/aap
-```
-You should see the following output:
-```bash
-ssh-ed25519 REDTACTED
-```
-</Solution>
