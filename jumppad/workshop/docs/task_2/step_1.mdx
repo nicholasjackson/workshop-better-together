@@ -46,6 +46,10 @@ vault write -ns=admin/${TEAM_NAME} -f auth/approle/role/aap/secret-id
 
 1. From the Instruqt lab, click on the **Ansible Automation Platform** tab to open the AAP interface. (ignore any certificate warnings, this is lab environment)
 2. Enter the username allocated to your team and the password (stored in Vault's KVv2 Secrets Engine, the path is `secrets/app`. You can refer back to the task **Retrieve KV secrets** in **Step 1** for guidnance.).
+```bash
+AAP_Username:`<team_name>_admin`  
+AAP_Password:`{{ ansible_pass }}`
+```
 ![aaplogin](https://dl.dropbox.com/scl/fi/zcugwe69mivn3tu9pgngr/aap_login.png?rlkey=opnq7rvdpe9uirqgmv9hco0oc&st=c9bicjtq&dl=0)
 3. From the left menu, click on **Automation Execution** and then **Credentials**. The `hashicorp_vault_ssh_approle` has been preconfigured but you'll need to input the AppRole Role ID and Secret ID to complete the configuration.
 ![aaprolecreds](https://dl.dropbox.com/scl/fi/l652u0yqcsdiz06qs13k0/approle.png?rlkey=0f7xly71ad9yj7f131w5ykli6&st=tta0f1tf&dl=0)
