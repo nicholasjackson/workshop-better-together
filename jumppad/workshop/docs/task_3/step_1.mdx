@@ -36,6 +36,7 @@ The below code block has been added to the Packer hcl template to include the An
 The Ansible playbook will perform the following tasks:
 - Install and configure the Minecraft server
 - Configure sshd for to trust the Vault server public keys for your namespace
+see the playbook below:
 ```yaml
 - name: Minecraft Install with Vault SSH prereqs
   hosts: all
@@ -48,6 +49,8 @@ The Ansible playbook will perform the following tasks:
     - name: "Include vault tasks"
       include_tasks: vault_ssh.yml
 ```
+you can browse the playbook files in the `ansible` directory. To view the code for each of the referenced tasks in the playbook.
+![vault_task](/assets/task_3/ansible-task.png)
 
 # 2. Build New Secure Packer Image
 <Task id="packer_build">
