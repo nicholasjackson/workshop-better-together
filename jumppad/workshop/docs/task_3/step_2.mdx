@@ -19,7 +19,7 @@ Ansible Automation password:{{ ansible_pass }}
 ```
 # 2. Prepare Your Terraform Configuration
 Now, let's configure Terraform to deploy the new image and integrate with AAP.
-<Task id="update_terraform">
+
 ## Update your existing terraform configuration to use the new packer image
 ### copy files from aap directory to the terraform directory
 In this task we are updating the existing Terraform configuration to use the 
@@ -81,9 +81,12 @@ root@debian:/workshop/src/working/terraform# ls
 aap.tf  main.tf providers.tf  terraform.auto.tfvars
 root@debian:/workshop/src/working/terraform# 
 ```
+<Task id="update_terraform">
+check the files are copied
 </Task>
+
 # 3. Update Terraform variables and validate Terraform configuration
-<Task id="terraform_validate">
+
 update the terraform.auto.tfvars using cli or vscode, or if 
 your more comfortable with vscode you can use that from the workshop tab.
 
@@ -107,9 +110,9 @@ save the updates
 ```bash
 esc :wq
 ```
-
+<Task id="terraform_validate">
 validate the terraform configuration updates
-
+</Task>
 ```bash
 terraform init
 terraform validate
@@ -158,11 +161,7 @@ Changes to Outputs:
 Note: You didn't use the -out option to save this plan, 
 so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
 ```
-</Task>
- 
 
-
-<Task id="terraform_apply">
 # 4. Deploy Terraform Configuration
 apply the changes
 ```
@@ -182,7 +181,6 @@ libvirt_network.minecraft: Creation complete after 0s [id=ae0aa162-528d-4ec2-955
 aap_inventory.dedicated_minecraft: Creating...
 libvirt_volume.ubuntu-qcow2: Still creating... [10s elapsed]
 ```
-</Task>
 
 # 5. Connect Minecraft Server
 
