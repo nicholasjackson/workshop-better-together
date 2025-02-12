@@ -1,5 +1,5 @@
 resource "chapter" "task_1b" {
-  title = "2. Configure Vault to Access the Treasure"
+  title = "1b. Configure Vault to Access the Treasure"
 
   page "Introduction" {
     content = template_file("docs/task_1b/intro.mdx", {
