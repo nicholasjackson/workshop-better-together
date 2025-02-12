@@ -12,3 +12,12 @@ Success! Data written to: auth/userpass/users/<your minecraft user>/policies
 
 Now you can open the Iron Door and retrieve Blackbeards treasure that you are going to need for the next 
 task.
+
+
+
+<Solution title="Solution: vault cli">
+export TEAM_NAME='<your team>'
+export MINECRAFT_USER='<your lowercase minecraft user>'
+vault write -ns admin/${TEAM_NAME} auth/userpass/users/${MINECRAFT_USER}/policies token_policies="tavern"
+</Solution>
+
