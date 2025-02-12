@@ -57,7 +57,7 @@ Last WAL                 800808
 `${TEAM_NAME}` should be exported already see step 2.
 
 ```bash
-vault login -ns=admin -method=userpass username=${TEAM_NAME} password='{{ ansible_pass }}'
+vault login -ns=admin -method=userpass username="${TEAM_NAME}" password='{{ ansible_pass }}'
 ```
 
 You should see the following output:
