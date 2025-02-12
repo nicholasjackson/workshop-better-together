@@ -79,32 +79,5 @@ resource "task" "apply_terraform_configuration" {
 
 
 
-# resource "task" "connect_to_minecraft" {
-#   prerequisites = []
-
-#   # config {
-#   #   user   = "root"
-#   #   target = variable.vscode
-#   # }
-
-#   # condition "terraform created" {
-#   #   description = "Terraform configuration has been created"
-
-#   #   check {
-#   #     script = <<-EOF
-#   #     validate file exists "/workshop/src/working/terraform/main.tf"
-#   #     EOF
-
-#   #     failure_message = "Please create and run the Terraform configuration"
-#   #   }
-
-#   #   solve {
-#   #     script = <<-EOF
-#   #     EOF
-
-#   #     timeout = 60
-#   #   }
-#   # }
-# }
 
 
