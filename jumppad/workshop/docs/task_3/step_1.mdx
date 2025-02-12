@@ -35,7 +35,7 @@ The below code block has been added to the Packer hcl template to include the An
 
 The Ansible playbook will perform the following tasks:
 - Install and configure the Minecraft server
-- Configure sshd for to trust the Vault server public keys for your namespace
+- Configure sshd to trust the Vault server public keys for your namespace
 see the playbook below:
 ```yaml
 - name: Minecraft Install with Vault SSH prereqs
@@ -75,7 +75,7 @@ https://packer.io/docs/templates/hcl_templates/syntax for details.
 <Task id="packer_build">
 ## 3. populate the required variables
 *Hint: **vault_namespace** is your team name*
-env var: `TEAM_NAME` should should be set to your team name, check `env`
+env var: `TEAM_NAME` should already be set to your team name, check `env`
 ```bash
 packer build -var vault_namespace="${TEAM_NAME}" .
 ```
