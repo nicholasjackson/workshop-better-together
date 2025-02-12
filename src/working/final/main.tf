@@ -77,7 +77,7 @@ data "http" "minecraft_accesslist" {
 
 
 
-# Create a new AAP host for the GCP minecraft server set any required variables
+# Create a new AAP host for the GCP minecraft server set any required variables, and add it to the created inventory
 # https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/host
 # Hint: For access to the GCP minecraft server you will need to set minecraft_usernames
 # The remote host can be managed via Ansible using the standard SSH port (22)
