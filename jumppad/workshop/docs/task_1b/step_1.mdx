@@ -15,6 +15,9 @@ More information can be found in the <a href="https://developer.hashicorp.com/hc
 
 ```bash
 export VAULT_ADDR=https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200
+```
+update `<team_name>` with your team name
+```bash
 export TEAM_NAME=<team_name>
 ```
 
@@ -50,12 +53,9 @@ Raft Applied Index       1945872
 Last WAL                 800808
 ```
 
-5. Login using the `userpass` method with the team's credentials by using the command, replace `<team_name>` with your team's name.
+5. Login using the `userpass` method with the team's credentials by using the command,
+`${TEAM_NAME}` should be exported already see step 2.
 
-```
-vault login -ns=admin -method=userpass username='<team_name>' password='{{ ansible_pass }}'
-```
-scripted
 ```bash
 vault login -ns=admin -method=userpass username=${TEAM_NAME} password='{{ ansible_pass }}'
 ```
