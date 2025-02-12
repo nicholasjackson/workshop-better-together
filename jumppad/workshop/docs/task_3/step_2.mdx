@@ -29,7 +29,49 @@ new packer image and apply user access using the AAP provider.
 The additional required to integrate the AAP provider is already provided in the aap directory,
 copy the contents to your Terraform directory.
 
-ensure your in the terraform directory
+
+The AAP provider allows application teams to directly manage their application inventory and can coexist with dynamic inventories that may be managed using cloud metadata.
+We use the Ansible Automation Platform **ansible/aap** provider to perform the following tasks. 
+
+* create an inventory in your AAP organization
+* create a host in the inventory amd assign the ansible_host and ansible_port
+* execute an existing job template to give your minecraft username access to a the minecraft server
+
+see code snippert below:
+```hcl
+# Create a new AAP inventory for the your minecraft server
+resource "aap_inventory" "dedicated_minecraft" {
+  name = "minecraft_dedicated"
+  description = "Dedicated Minecraft Server"
+  organization = local.org_id
+}
+
+# Create a new AAP host for the minecraft server
+resource "aap_host" "vm_hosts" {
+  inventory_id = aap_inventory.dedicated_minecraft.id
+  name         = var.minecraft_hostname  # Use the hostname for each VM
+  variables    = jsonencode({
+    "ansible_host"     : "${var.minecraft_hostname}",
+    "ansible_port"     : var.ansible_port
+})
+}
+
+resource "aap_job" "minecraft_whitelist" {
+  job_template_id = local.template_id
+  inventory_id    = aap_inventory.dedicated_minecraft.id
+  extra_vars      = jsonencode({
+    "minecraft_usernames" : var.minecraft_usernames
+  })
+
+  triggers = {
+    "${var.minecraft_hostname}" : "${var.trigger_run}"
+  }
+  
+}
+```
+
+
+Before proceeding ensure your in the terraform directory from the terminal
 
 ```bash
 # ensure your in the terraform directory
@@ -42,7 +84,10 @@ root@debian:/workshop/src/working/terraform# ls
 aap.tf  main.tf providers.tf  terraform.auto.tfvars
 root@debian:/workshop/src/working/terraform# 
 ```
+
 </Task>
+
+
 
 # 3. Update Terraform Variables and Validate Terraform
 <Task id="terraform_validate">
