@@ -12,7 +12,7 @@ You'll need to retrieve the SSH keypair from Vault's KVv2 Secrets Engine to conf
 You can refer back to the task **Retrieve KV secrets** in **Step 1** for guidnance.
 
 ## Configure AAP Machine credentials
-<Task id="configure_aap_machine_creds">
+
 1. From the left menu, click on **Automation Execution** and then **Credentials**. The `minecraft_ssh_credentials` has been preconfigured but you'll need to input your SSK keypair.
 ![machinecreds](/assets/task_2/aap_machine_creds.png)
 2. Click the edit icon for **minecraft_ssh_credentials**.
@@ -30,7 +30,6 @@ You can refer back to the task **Retrieve KV secrets** in **Step 1** for guidnan
 ![testcreds](https://dl.dropbox.com/scl/fi/imql8636prbjh266ajko3/test_creds.png?rlkey=jirr6jockxoil2uwgcsn1n7v1&st=673mumkf&dl=0)
 6. If the test is successful, click **Finish** and **Save credential** to save the configuration.
 ![savecreds](https://dl.dropbox.com/scl/fi/6afakdgv8ogitvnicf3m7/save_creds.png?rlkey=uj3mjb8418y6nyp9mid50zqp4&st=y31vunx2&dl=0)
-</Task>
 
 <Solution title="Solution: Retrieving SSH keypair from Vault">
 The SSH keypair was generated using Terraform and stored in Vault's KVv2 Secrets Engine.
