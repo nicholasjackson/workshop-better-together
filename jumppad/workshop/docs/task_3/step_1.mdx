@@ -4,6 +4,51 @@
 ```
 {{ machine_url }}
 ```
+In this step, you will build a new secure Packer image using Ansible provisioner . 
+The Packer image will be used to create a new Minecraft server.
+The below code block has been added to the Packer hcl template to include the Ansible provisioner and execute a playbook.
+
+```hcl
+   provisioner "ansible" {
+    playbook_file = "${path.cwd}/ansible/playbook.yml"
+    user          = "packer"
+
+    ansible_env_vars = [
+      "ANSIBLE_DEPRECATION_WARNINGS=False",
+      "ANSIBLE_HOST_KEY_CHECKING=False",
+      "ANSIBLE_NOCOLOR=True",
+      "ANSIBLE_NOCOWS=1",
+      "VAULT_NAMESPACE=${var.vault_namespace}",
+      "VAULT_URL=${var.vault_url}",
+      "ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3",
+      "ANSIBLE_REMOTE_TEMP=/tmp/ansible"
+    ]
+
+    extra_arguments = [
+      "--ssh-extra-args",
+      "-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa -o IdentitiesOnly=yes",
+      "--scp-extra-args",
+      "'-O'"
+    ]
+  }
+```
+
+The Ansible playbook will perform the following tasks:
+- Install and configure the Minecraft server
+- Configure sshd for to trust the Vault server public keys for your namespace
+```yaml
+- name: Minecraft Install with Vault SSH prereqs
+  hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: "Include minecraft tasks"
+      include_tasks: minecraft.yml
+
+    - name: "Include vault tasks"
+      include_tasks: vault_ssh.yml
+```
+
 # 2. Build New Secure Packer Image
 <Task id="packer_build">
 ## 1. switch to the `packer` directory
