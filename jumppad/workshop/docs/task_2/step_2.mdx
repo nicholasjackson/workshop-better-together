@@ -16,7 +16,7 @@ The SSH keypair was generated using Terraform and stored in Vault's KVv2 Secrets
 
 1. Login to Vault if you haven't already, see step 1 for instructions.
 2. Retreive the SSH private key from Vault's KVv2 Secrets Engine by using the command, 
-env var for ${TEAM_NAME} should already be set with your team's name.
+env var for TEAM_NAME should already be set with your team's name.
 ```bash
  vault kv get -ns=admin/${TEAM_NAME} -field=ssh-unsigned-private-key secrets/aap
 ```
@@ -28,7 +28,7 @@ REDACTED
 -----END OPENSSH PRIVATE KEY-----
 ```
 3. Retreive the SSH public key from Vault's KVv2 Secrets Engine by using the command, 
-env var for ${TEAM_NAME} should already be set with your team's name.
+env var for TEAM_NAME should already be set with your team's name.
 ```bash
  vault kv get -ns=admin/${TEAM_NAME} -field=ssh-unsigned-public-key secrets/aap
 ```
