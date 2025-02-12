@@ -80,10 +80,11 @@ env var: `TEAM_NAME` should already be set to your team name, check `env`
 packer build -var vault_namespace="${TEAM_NAME}" .
 ```
 </Task>
-<Solution title="packer_build">
+<Solution title="Solution: Packer build">
 check your env vars are set correctly `env`
 ```bash
 echo $TEAM_NAME
+packer init .
 packer build -var vault_namespace="${TEAM_NAME}"
 ```
 </Solution>
