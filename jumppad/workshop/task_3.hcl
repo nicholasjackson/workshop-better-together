@@ -60,6 +60,9 @@ resource "task" "packer_build" {
 
     solve {
       script = <<-EOF
+      cd /workshop/src/working/packer
+      packer init .
+      packer build -var vault_namespace="${TEAM_NAME}"
       EOF
 
       timeout = 60
