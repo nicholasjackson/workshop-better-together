@@ -37,7 +37,7 @@ secret_id_ttl         0s
 
 <Solution title="Solution: vault cli">
 ```bash
-export TEAM_NAME='<your team>'
+echo $TEAM_NAME
 vault read -ns=admin/${TEAM_NAME} auth/approle/role/aap/role-id
 vault write -ns=admin/${TEAM_NAME} -f auth/approle/role/aap/secret-id
 ```
