@@ -51,6 +51,10 @@ variable "job_template_name" {
   description = "Job template name"
   default = "minecraft_whitelist"
 }
+variable "trigger_run" {
+  type = string
+  default = "1"
+}
 
 # Get the job template id by name from the AAP
 data "http" "minecraft_accesslist" {
@@ -69,7 +73,7 @@ locals {
   org_id = local.response_body.results[0].organization
 }
 
-# Create a new AAP inventory for the shared minecraft server
+# Create a new AAP inventory for the your minecraft server
 resource "aap_inventory" "dedicated_minecraft" {
   name = "minecraft_dedicated"
   description = "Dedicated Minecraft Server"
@@ -92,5 +96,9 @@ resource "aap_job" "minecraft_whitelist" {
   extra_vars      = jsonencode({
     "minecraft_usernames" : var.minecraft_usernames
   })
+
+  triggers = {
+    "${var.minecraft_hostname}" : "${var.trigger_run}"
+  }
   
 }

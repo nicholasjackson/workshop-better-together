@@ -50,10 +50,9 @@ variable "job_template_name" {
   default = "minecraft_whitelist"
 }
 
-variable "increment_run" {
+variable "trigger_run" {
   type = string
   default = "1"
-  
 }
 
 locals {
@@ -109,7 +108,7 @@ resource "aap_job" "minecraft_whitelist" {
   })
 
   triggers = {
-    "${var.minecraft_hostname}" : "${var.increment_run}"
+    "${var.minecraft_hostname}" : "${var.trigger_run}"
   }
   
 }
