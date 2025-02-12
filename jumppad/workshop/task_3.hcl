@@ -88,6 +88,8 @@ resource "task" "update_terraform" {
 
       solve {
         script = <<-EOF
+        cd /workshop/src/working/terraform/
+        cp ../aap/* .
         EOF
 
         timeout = 60
