@@ -42,6 +42,6 @@ check your env vars are set correctly `env`
 export TEAM_NAME=<your team>
 export MCUUID=<full mcuuid>
 export MINECRAFT_USER=<your lowercase minecraft user>
-vault write -ns=admin/${TEAM_NAME} /auth/userpass/users/${MINECRAFT_USER} password=${MCUUID}
+vault write -ns=admin/${TEAM_NAME} /auth/userpass/users/${MINECRAFT_USER} password="${MCUUID}"
 ```
 </Solution>
