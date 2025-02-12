@@ -17,10 +17,15 @@ Then enter your Minecraft user and click the Lookup button, you should see somet
 
 You need to copy the Full UUID value and use it as the password for the user.
 
-Let's create a user for your Minecraft user in the `userpassf' authentication method.
+```bash
+export MCUUID=<full mcuuid>
+export MINECRAFT_USER=<your lowercase minecraft user>
+```
+
+Let's create a user for your Minecraft user in the `userpass' authentication method.
 
 ```bash
-vault write -ns=admin/<your team> /auth/userpass/users/<minecraft user lowercase> password='<minecraft uuid>'
+vault write -ns=admin/${TEAM_NAME} /auth/userpass/users/${MINECRAFT_USER} password="${MCUUID}"
 ```
 
 You should see some output like the following:
