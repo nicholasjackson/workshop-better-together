@@ -4,7 +4,6 @@ With the Minecraft server image built, it's time to deploy it using Terraform. B
 
 # 1. Essential Details for Deployment
 Before making any changes, take note of the essential machine details and AAP credentials:
-
 ## Machine Name
 ```
 {{ machine_url }}
@@ -20,7 +19,6 @@ Ansible Automation password:{{ ansible_pass }}
 ```
 # 2. Prepare Your Terraform Configuration
 Now, let's configure Terraform to deploy the new image and integrate with AAP.
-
 <Task id="update_terraform">
 ## Update your existing terraform configuration to use the new packer image
 ### copy files from aap directory to the terraform directory
@@ -84,10 +82,8 @@ aap.tf  main.tf providers.tf  terraform.auto.tfvars
 root@debian:/workshop/src/working/terraform# 
 ```
 </Task>
-
-
-<Task id="terraform_validate">
 # 3. Update Terraform variables and validate Terraform configuration
+<Task id="terraform_validate">
 update the terraform.auto.tfvars using cli or vscode, or if 
 your more comfortable with vscode you can use that from the workshop tab.
 
