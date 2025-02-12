@@ -37,7 +37,7 @@ Now that the policy is created, you can attach it to the user you created in the
 <Solution title="Solution: Vault cli">
 check your env vars are set correctly `env`
 ```bash
-export TEAM_NAME=<your team>
+echo $TEAM_NAME
 vault policy write -ns=admin/${TEAM_NAME} tavern - <<EOF
 path "secrets/data/tavern_key" {
   capabilities = ["read"]

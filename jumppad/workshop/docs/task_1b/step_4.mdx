@@ -18,8 +18,8 @@ task.
 <Solution title="Solution: vault cli">
 check your env vars are set correctly `env`
 ```bash
-export TEAM_NAME='<your team>'
-export MINECRAFT_USER='<your lowercase minecraft user>'
+echo $TEAM_NAME
+echo $MINECRAFT_USER
 vault write -ns admin/${TEAM_NAME} auth/userpass/users/${MINECRAFT_USER}/policies token_policies="tavern"
 ```
 </Solution>
