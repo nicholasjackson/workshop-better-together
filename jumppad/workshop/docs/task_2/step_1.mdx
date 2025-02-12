@@ -18,7 +18,7 @@ Key        Value
 ---        -----
 role_id    3d05b15f-4262-419a-c609-b3a2633877b4
 ```
-2. Retreive the Secret ID using the command, env var for ${TEAM_NAME} should already be set with your team's name.
+2. Retreive the Secret ID using the command, env var for TEAM_NAME should already be set with your team's name.
 ```bash
 vault write -ns=admin/${TEAM_NAME} -f auth/approle/role/aap/secret-id
 ```
