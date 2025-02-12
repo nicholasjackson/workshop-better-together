@@ -24,6 +24,9 @@ variable "shared_minecraft_instance" {
   default = "sko-minecraft.hashicraft.com"
 }
 
+variable "vault_url" {
+  default = "https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200"
+}
 
 resource "template" "vscode_jumppad" {
   source = <<-EOF
@@ -131,6 +134,7 @@ module "workshop" {
     machine_url       = variable.machine_url
     vscode            = resource.container.vscode.meta.id
     ansible_pass      = variable.ansible_pass
+    vault_url         = variable.vault_url
   }
 }
 

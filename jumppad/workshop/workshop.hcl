@@ -22,6 +22,11 @@ variable "shared_minecraft_instance" {
   default = "sko-minecraft.hashicraft.com"
 }
 
+variable "vault_url" {
+  default = "https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200"
+}
+
+
 resource "book" "better_together" {
   title = "Terrafom, Vault & Packer, with Ansible Automation Platform (AAP)"
 
