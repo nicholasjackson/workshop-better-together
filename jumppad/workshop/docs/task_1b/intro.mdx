@@ -1,23 +1,26 @@
 # Introduction
 
-## 🚪 The Locked Door – Vault Secrets & Hidden Clues
+## 🔐 Configure Vault to Access the Treasure
 
 ## 🧭 Learning Objectives:
 By completing this task, you will:
 
-* ✅ Authenticate with HashiCorp Vault to retrieve secrets.
-* ✅ Configure Vault that allows your Minecraft user access to a secret.
-* ✅ Solve in-game puzzles to unlock the hidden door inside the tavern.
-* ✅ Locate and open the treasure chest to retrieve the book of secrets for Task 3.
+* ✅ Log in to HCP Vault using userpass authentication.
+* ✅ Create a new user and assign a Vault policy.
+* ✅ Grant your Minecraft user access to the tavern_key secret (needed to open the iron door).
+* ✅ Practice secure secrets management in a real-world scenario.
+
 
 ## 📖 Scenario:
 
-You’ve arrived at Blackbeard’s Tavern, a mysterious hideout filled with secrets. Rumors speak of a locked door hiding a legendary treasure chest. To enter, you must solve a riddle to reveal the access policy stored in Vault. Once inside, another puzzle awaits, guiding you to a hidden book that holds the key to your next adventure.
+You’ve navigated the dark halls of Blackbeard’s domain, only to face yet another locked barrier—an iron door rumored to guard a vital treasure. To unlock it, you must enlist the help of Vault. First, you log in to the HCP Vault Dedicated cluster. Then, you create a user for your Minecraft character, forging the credentials needed to authenticate and access the hidden path. Finally, by crafting and binding a Vault policy to this user, you’ll gain the precise permission to retrieve the tavern_key secret and swing the door wide open.
 
-Will you crack the secrets and claim the prize, or will you be lost in the depths of the tavern forever? 🏴‍☠️💀
+Will you triumph over Vault’s guardianship and claim the secret that awaits beyond?
 
 ## Under the Hood
 
-1. Log into Vault using the provided credentials. 
-2. Configure Userpass authentication for your Minecraft user.
-3. Create a policy that allows your Minecraft user to access a secret in Vault.
+1. You set up a user account (matching your Minecraft handle) that authenticates via simple username/password.
+2. Each team has its own sub-namespace (e.g., admin/team1) to prevent interference and allow unique configurations.
+Vault Policies: By writing a policy (tavern), you control who can read what secret (the tavern_key path).
+3. Attaching the policy to the new user ensures only that user can fetch the door’s secret.
+Armed with these steps, you’ll soon open the iron door and claim Blackbeard’s missing piece of the treasure puzzle!
