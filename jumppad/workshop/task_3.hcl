@@ -5,8 +5,6 @@ resource "chapter" "task_3" {
     packer_build = resource.task.packer_build
     update_terraform = resource.task.update_terraform
     terraform_validate = resource.task.terraform_validate
-    terraform_apply = resource.task.terraform_apply
-
   }
 
   page "intro" {
