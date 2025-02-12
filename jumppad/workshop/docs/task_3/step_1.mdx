@@ -84,6 +84,7 @@ packer build -var vault_namespace="${TEAM_NAME}" .
 check your env vars are set correctly `env`
 ```bash
 echo $TEAM_NAME
+cd /workshop/src/working/packer
 packer init .
 packer build -var vault_namespace="${TEAM_NAME}"
 ```
