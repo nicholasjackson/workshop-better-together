@@ -163,14 +163,11 @@ so Terraform can't guarantee to take exactly these actions if you run "terraform
 # 4. Deploy Terraform Configuration
 apply the changes
 ```
-terraform apply
+terraform apply -auto-approve
 ```
-confirm apply by typing yes
 
 see example run below 
 ```
-  Enter a value: yes
-
 libvirt_network.minecraft: Creating...
 libvirt_pool.ubuntu: Creating...
 libvirt_pool.ubuntu: Creation complete after 0s [id=267dcea0-e95e-45d5-957c-24c30602d529]
@@ -179,21 +176,10 @@ libvirt_network.minecraft: Creation complete after 0s [id=ae0aa162-528d-4ec2-955
 aap_inventory.dedicated_minecraft: Creating...
 libvirt_volume.ubuntu-qcow2: Still creating... [10s elapsed]
 ```
-
-# 5. Connect Minecraft Server
-
-Using your Minecraft client connect to the Minecraft server using the DNS address provided.
-```
-{{ machine_url }}
-```
-
 # 6.Validate Your Deployment in Minecraft
 Now that your Minecraft server is up and running, it’s time to test your deployment!
 
-a. Launch Minecraft and connect to your deployed server using the machine name:
-```
-minecraft.container.local.jmpd.in
-```
+a. Launch Minecraft and connect to your deployed server using the machine name.
 b. Enter the world and check the environment:
 * Confirm that the server is accessible.
 * Verify that the spawn point is correct.
