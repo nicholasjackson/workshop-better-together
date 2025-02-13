@@ -12,7 +12,7 @@ Before making any changes, take note of the essential machine details and AAP cr
 ```bash
 https://44.210.128.100
 ```
-Go to <Link href="https://44.210.128.100" target="_blank">Ansible Automation Platform</Link>
+Go to the Ansible Automation Platform tab and login with your credential:
 ```bash
 username: <team_name>_admin
 Ansible Automation password:{{ ansible_pass }}
@@ -28,11 +28,11 @@ copy the contents to your Terraform directory.
 The AAP provider allows application teams to directly manage their application inventory and can coexist with dynamic inventories that may be managed using cloud metadata.
 We use the Ansible Automation Platform **ansible/aap** provider to perform the following tasks. 
 
-* create an inventory in your AAP organization
-* create a host in the inventory amd assign the ansible_host and ansible_port
-* execute an existing job template passing in as a variable your minecraft username to allow access to a the minecraft server
+* Create an inventory in your AAP organization.
+* Create a host in the inventory amd assign the ansible_host and ansible_port.
+* Execute an existing job template passing in as a variable your minecraft username to allow access to a the minecraft server.
 
-see code snippert below:
+_see the sample code snippert below_:
 ```hcl
 # Create a new AAP inventory for the your minecraft server
 resource "aap_inventory" "dedicated_minecraft" {
@@ -65,7 +65,7 @@ resource "aap_job" "minecraft_whitelist" {
 }
 ```
 
-Before proceeding ensure your in the terraform directory from the terminal.
+1. Before proceeding ensure your in the terraform directory from the terminal.
 Switch to the terraform directory and copy the files from the aap directory to Terraform directory.
 See below:
 ```bash
@@ -73,23 +73,22 @@ cd /workshop/src/working/terraform
 cp ../aap/* .
 ls
 ```
-confirm the files are copied
+2. Confirm the files are copied by listing those files out: 
 ```bash
 root@debian:/workshop/src/working/terraform# ls
-aap.tf  main.tf providers.tf  terraform.auto.tfvars
-root@debian:/workshop/src/working/terraform# 
 ```
+_You should see these files in the terraform directory as aap.tf,  main.tf providers.tf, and  terraform.auto.tfvars_.
+
+## 🔍 Did You Get It Right?
+
 <Task id="update_terraform">
 check the files are copied
 </Task>
 
-# 3. Update Terraform Variables and Validate Terraform Configuration
-
-update the terraform.auto.tfvars using cli or vscode, or if 
-your more comfortable with vscode you can use that from the workshop tab.
+3. Update the terraform.auto.tfvars using cli or vscode, or if you are more comfortable with the vscode you can use that from the workshop tab.
 
 ![vscode-terraform](https://dl.dropbox.com/scl/fi/zq9xbve7g8pp7c50bfcwd/vscode-terraform.png?rlkey=z64crgxgndh7hsnz54m3nliyu&st=myh94xd7&dl=0)
-Alternatively you can follow the steps below to use the CLI.
+_Alternatively you can follow the steps below to use the CLI_.
 
 ```bash
 vi terraform.auto.tfvars
@@ -103,11 +102,13 @@ minecraft_hostname="" # your minecraft hostname is {{ machine_url }}
 minecraft_usernames=[] # update with your minecraft usernames in > ["user1","user2"]
 image_source="/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
 ```
-save the updates
+4. Save the updates:
 
 ```bash
 esc :wq
 ```
+## 🔍 Did You Get It Right?
+
 <Task id="terraform_validate">
 validate the terraform configuration updates
 </Task>
@@ -116,14 +117,14 @@ terraform init
 terraform validate
 ```
 
-once you have validated the terraform configuration, 
+5. Once you have validated the terraform configuration, 
 you can run terraform plan to review the changes.
 
 ```bash
 terraform plan
 ```
 
-see example output below
+_see example output below_:
 
 ```
 root@debian:/workshop/src/working/terraform# terraform plan
@@ -160,13 +161,12 @@ Note: You didn't use the -out option to save this plan,
 so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
 ```
 
-# 4. Deploy Terraform Configuration
-apply the changes
+6. Deploy Terraform Configuration:
 ```
 terraform apply -auto-approve
 ```
 
-see example run below 
+_see example run below_: 
 ```
 libvirt_network.minecraft: Creating...
 libvirt_pool.ubuntu: Creating...
@@ -176,7 +176,7 @@ libvirt_network.minecraft: Creation complete after 0s [id=ae0aa162-528d-4ec2-955
 aap_inventory.dedicated_minecraft: Creating...
 libvirt_volume.ubuntu-qcow2: Still creating... [10s elapsed]
 ```
-# 6. Validate Your Deployment in Minecraft
+7. Validate Your Deployment in Minecraft
 Now that your Minecraft server is up and running, it’s time to test your deployment!
 
 a. Launch Minecraft and connect to your deployed server using the machine name.

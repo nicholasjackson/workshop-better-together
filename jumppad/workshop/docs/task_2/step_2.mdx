@@ -6,10 +6,12 @@ Machine credentials are associated with Ansible's Job templates and allow for au
 AAP will request Vault's SSH Secrets Engine to sign the provided public key. 
 The base machine for your Minecraft will be configured to trust Vault's SSH Secrets Engine public key in Task 3 using Packer and Ansible provisioner.
 
-## Retrieve SSH keypair from Vault
+## 1. Retrieve SSH keypair from Vault
 You'll need to retrieve the SSH keypair from Vault's KVv2 Secrets Engine to configure the machine credentials in AAP, they are located in the `secrets/aap` path in Vault or use your own if you are feeling adventurous.
 
-You can refer back to the task **Retrieve KV secrets** in **Step 1** for guidnance.
+You can refer back to the last step for guidance.
+
+## 🔍 Did You Get It Right?
 
 <Solution title="Solution: Retrieving SSH keypair from Vault">
 The SSH keypair was generated using Terraform and stored in Vault's KVv2 Secrets Engine.
@@ -38,7 +40,7 @@ ssh-ed25519 REDTACTED
 ```
 </Solution>
 
-## Configure AAP Machine credentials
+## 2. Configure AAP Machine credentials
 
 1. From the left menu, click on **Automation Execution** and then **Infrastructure** and **Credentials**. The `minecraft_ssh_credentials` has been preconfigured but you'll need to input your SSK keypair.
 ![machinecreds](/assets/task_2/aap_machine_creds.png)
@@ -58,6 +60,7 @@ ssh-ed25519 REDTACTED
 6. If the test is successful, click **Finish** and **Save credential** to save the configuration.
 ![savecreds](https://dl.dropbox.com/scl/fi/6afakdgv8ogitvnicf3m7/save_creds.png?rlkey=uj3mjb8418y6nyp9mid50zqp4&st=y31vunx2&dl=0)
 
+## 🔍 Did You Get It Right?
 
 <Solution title="Solution: Update AAP Machine credentials">
 ```

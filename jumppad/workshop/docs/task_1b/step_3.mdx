@@ -4,11 +4,11 @@ The user you just added to the `userpass` authentication method will alow your M
 user to authenticate to Vault. But, in order to access the `tavern_key` secret you will need to 
 create a policy and attach it to the user.
 
-Let's create a policy called `tavern` that allows access to the `tavern_key`.
+1. Create a policy called `tavern` that allows access to the `tavern_key`.
 
-The `tavern_key` secret is in the Vault kv2 secret engine at the path `secrets/data/tavern_key`.
+_The `tavern_key` secret is in the Vault kv2 secret engine at the path `secrets/data/tavern_key`_.
 
-A policy that would allow read access to this secret would look like the following:
+_A policy that would allow read access to this secret would look like the following_:
 
 ```javascript
 path "secrets/data/tavern_key" {
@@ -16,7 +16,7 @@ path "secrets/data/tavern_key" {
 }
 ```
 
-You can add this policy to Vault using the following command:
+2. Add this policy to Vault using the following command:
 
 ```bash
 vault policy write -ns=admin/${TEAM_NAME} tavern - <<EOF
@@ -26,13 +26,15 @@ path "secrets/data/tavern_key" {
 EOF
 ```
 
-You should see the following output:
+_You should see the following output_:
 
 ```bash
 Success! Uploaded policy: tavern
 ```
 
-Now that the policy is created, you can attach it to the user you created in the previous step.
+Now that the policy is created, you can attach it to the user in the next step.
+
+## 🔍 Did You Get It Right?
 
 <Solution title="Solution: Vault cli">
 check your env vars are set correctly `env`

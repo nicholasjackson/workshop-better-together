@@ -32,7 +32,7 @@ Ansible Automation password:{{ ansible_pass }}
 
 ## 3. Execute the Job Template to update the minecraft server for access using existing job template - minecraft_whitelist
 <Link href="https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/job" target="_blank" rel="noopener noreferrer">ansible/aap/latest/docs/resources/job</Link>
-* credentials are preconfigured and using the same credentials as task 3 no changes are required to the AAP job template
+* Hint: credentials are preconfigured and using the same credentials as task 3 no changes are required to the AAP job template.
 
 Once you have successfully completed the task, you can verify the Ansible job execution in AAP.
 Login to the AAP web console and from the tab **Ansible Automation Platform**, using `<teamname_admin>` and passwword (see AAP login details at the top).
@@ -44,6 +44,8 @@ You can see the job status and output in the menu on the left side of the screen
 * The debug output from the job execution displays the results of updating the Minecraft server's access list, confirming the changes were applied
 
 ![aaprun](/assets/task_4/task4-aap.png)
+
+## 🔍 Did You Get It Right?
 
 <Solution title="Solution: Gain access to the shared GCP Minecraft server using AAP">
 ```bash
