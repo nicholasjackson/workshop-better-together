@@ -79,7 +79,7 @@ data "http" "minecraft_accesslist" {
 # Hint: you will need your organization id use the locals provided
 # Create a new AAP inventory for the shared minecraft server
 resource "aap_inventory" "shared_minecraft" {
-  name = "minecraft_dedicated"
+  name = "minecraft_shared"
   description = "Shared GCP Minecraft Server"
   organization = local.org_id
 }
