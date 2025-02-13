@@ -26,6 +26,11 @@ variable "gemini_api_key" {
   type = string
 }
 
+variable "image_source" {
+  type = string
+  default = "/var/workshop/images/minecraft_task_1/minecraft-task-1.qcow2"
+}
+
 resource "libvirt_network" "minecraft" {
   # the name used by libvirt
   name = "minecraft"
@@ -49,7 +54,7 @@ resource "libvirt_pool" "ubuntu" {
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = "ubuntu-qcow2"
   pool   = libvirt_pool.ubuntu.name
-  source = "/var/workshop/images/minecraft_task_1/minecraft-task-1.qcow2"
+  source = var.image_source 
 }
 
 resource "libvirt_domain" "domain-ubuntu" {
