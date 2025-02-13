@@ -9,13 +9,15 @@ attached granting access to the `tavern_key` secret engine and open the iron doo
 
 We will use the username of your Minecraft user as the userpass user and the Minecraft UUID as the password.
 
-To retrieve this information, you can head over to the following URL: [https://mcuuid.net/](https://mcuuid.net/).
+1. To retrieve this information, you can head over to the following URL: [https://mcuuid.net/](https://mcuuid.net/).
 
-Then enter your Minecraft user and click the Lookup button, you should see something like this:
+2. Enter your Minecraft user and click the Lookup button. 
+
+_You should see something like this_:
 
 ![](/assets/task_1b/mcuuid.png)
 
-You need to copy the Full UUID value and use it as the password for the user.
+3. Copy the Full UUID value and use it as the password for the user.
 export as env vars the following:
 
 ```bash
@@ -23,19 +25,21 @@ export MCUUID=<full mcuuid>
 export MINECRAFT_USER=<your minecraft user>
 ```
 
-Let's create a user for your Minecraft user in the `userpass' authentication method.
+4. Create a user for your Minecraft user in the `userpass' authentication method.
 
 ```bash
 vault write -ns=admin/${TEAM_NAME} /auth/userpass/users/${MINECRAFT_USER@L} password="${MCUUID}"
 ```
 
-You should see some output like the following:
+_You should see some output like the following_:
 
 ```bash
 Success! Data written to: auth/userpass/users/<minecraft user>
 ```
 
-Now that is done, let's create a policy for the user.
+Now that is done, let's create a policy for the user in the next step.
+
+## 🔍 Did You Get It Right?
 
 <Solution title="Solution: vault cli">
 check your env vars are set correctly `env`

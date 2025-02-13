@@ -50,17 +50,16 @@ You can browse the playbook files from the **workshop tab** and then the **packe
 
 # Build New Secure Packer Image
 
-## 1. switch to the `packer` directory
-Open the integrated terminal tab
+1. Switch to the `packer` directory and open the integrated terminal tab: 
 ```bash
 cd packer
 ```
-## 2. validate packer configuration
+2. Validate packer configuration:
 ```bash
 packer init .
 packer validate .
 ```
-You should see the following output:
+_You should see the following output_:
 ```
 root@debian:/workshop/src/working/task3_a_packer# packer validate .
 Error: Unset variable "vault_namespace"
@@ -68,8 +67,11 @@ Error: Unset variable "vault_namespace"
 A used variable must be set or have a default value; see
 https://packer.io/docs/templates/hcl_templates/syntax for details.
 ```
+## _Can you debug and fix this error_?
+## 🔍 Did You Get It Right?
+
 <Task id="packer_build">
-## 3. populate the required variables
+## Populate the required variables
 *Hint: **vault_namespace** is your team name*
 env var: `TEAM_NAME` should already be set to your team name, check `env`
 ```bash

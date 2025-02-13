@@ -1,18 +1,18 @@
-# 💻 Step 1: Retreive AppRole credentials and configure AAP
+# 💻 Step 1: Retreive AppRole Credentials and Configure AAP
 In this step, you will retreive the AppRole credentials and configure AAP to use Vault's SSH key signing for Ansible's job execution.
 
 The AppRole auth method has been preconfigured for each team in their respective namespaces, as such the Role ID and Secret ID are unique to each team and are stored in Vault. This task will guide you through retrieving the Role ID and Secret ID for use with AAP. 
 
 With the door now open, you step inside the dimly lit chamber. The air is thick with mystery, and on the far wall, a mechanical lockbox gleams under the flickering lantern light. Inscribed on its surface are strange markings—an ancient security mechanism known as AppRole Authentication. To proceed, you must extract the Role ID and Secret ID from Vault, using them to power up the automation magic of AAP.
 
-## 1. Retreive AppRole credentials
+## 1. Retreive AppRole Credentials
 
 1. Using the same terminal that you logged into Vault with in the prior tasks, retreive the Role ID using the command, 
 env var for `TEAM_NAME` should already be set with your team's name.
 ```bash
 vault read -ns=admin/${TEAM_NAME} auth/approle/role/aap/role-id
 ```
-You should see the following output:
+_You should see the following output_:
 ```bash
 # vault read -ns=admin/testorga auth/approle/role/aap/role-id
 Key        Value
@@ -23,7 +23,7 @@ role_id    3d05b15f-4262-419a-c609-b3a2633877b4
 ```bash
 vault write -ns=admin/${TEAM_NAME} -f auth/approle/role/aap/secret-id
 ```
-You should see the following output:
+_You should see the following output_:
 ```bash
 # vault write -ns=admin/testorga -f auth/approle/role/aap/secret-id
 Key                   Value
@@ -35,6 +35,8 @@ secret_id_ttl         0s
 ```
 3. Copy the `role_id` and `secret_id` as you will need them in the next task.
 
+## 🔍 Did You Get It Right?
+
 <Solution title="Solution: vault cli">
 ```bash
 echo $TEAM_NAME
@@ -43,10 +45,10 @@ vault write -ns=admin/${TEAM_NAME} -f auth/approle/role/aap/secret-id
 ```
 </Solution>
 
-## 2. Configure AAP Vault SSH credentials
+## 2. Configure AAP Vault SSH Credentials
 
 1. From the Instruqt lab, click on the **Ansible Automation Platform** tab to open the AAP interface. (ignore any certificate warnings, this is lab environment)
-2. Enter the username allocated to your team and the password (stored in Vault's KVv2 Secrets Engine, the path is `secrets/app`. You can refer back to the task **Retrieve KV secrets** in **Step 1** for guidnance.).
+2. Enter the username allocated to your team and the password (stored in Vault's KVv2 Secrets Engine, the path is `secrets/app`. You can refer back to the task **Retrieve KV secrets** in **Step 1** for guidnance.
 ```bash
 AAP_Username:`<team_name>_admin`  
 AAP_Password:`{{ ansible_pass }}`
@@ -59,6 +61,7 @@ AAP_Password:`{{ ansible_pass }}`
 ![aaproleconfigure](https://dl.dropbox.com/scl/fi/0ym73sc3pl1cyv61yprwi/approle_config.png?rlkey=se6q0v2v5lljfhjw5k7occr6x&st=qi4a4jdo&dl=0)
 8. Click **Save credential** to save the configuration.
 
+## 🔍 Did You Get It Right?
 
 <Solution title="Solution: Update AAP AppRole credentials">
 ```

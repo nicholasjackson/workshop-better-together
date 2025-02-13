@@ -11,10 +11,10 @@ More information can be found in the <Link href="https://developer.hashicorp.com
 
 
 1. From the Instruqt lab, click on Instruqt terminal tab to begin.
-2. The <Link href="https://developer.hashicorp.com/vault/docs/commands" target="_blank" rel="noopener noreferrer">Vault CLI</Link> is pre-installed in the terminal. The `VAULT_ADDR` environment variable has also been set for you.
+2. The Vault CLI is pre-installed in the terminal. The `VAULT_ADDR` environment variable has also been set for you.
 
-You also sete the `TEAM_NAME` environment variable to your team name in the previous step so you are ready
-to go.
+_Since you already set the `TEAM_NAME` environment variable to your team name in the previous step, you are ready
+to go._
 
 3. Check Vault status using the command:
 
@@ -22,7 +22,7 @@ to go.
 vault status
 ```
 
-You should see the following output:
+_You should see the following output_:
 
 ```bash
 # vault status
@@ -55,7 +55,7 @@ TEAM_NAME should be exported to env already see step 2.
 vault login -ns=admin -method=userpass username="${TEAM_NAME}" password='{{ ansible_pass }}'
 ```
 
-You should see the following output:
+_You should see the following output_:
 
 ```bash
 # vault login -ns=admin -method=userpass username=testorga
