@@ -20,9 +20,9 @@
         update_cache: yes
         upgrade: yes
 
-    - name: Install OpenJDK 21 JRE Headless
+    - name: Install OpenJDK 17 JRE Headless
       apt:
-        name: openjdk-21-jre-headless
+        name: openjdk-17-jre-headless
         state: present
 
     - name: Download Rcon CLI
@@ -59,7 +59,7 @@
 
     - name: Run Fabric installer
       command: >
-        java -Xmx2G -jar fabric-installer.jar server -mcversion 1.21.4 -downloadMinecraft
+        java -Xmx2G -jar fabric-installer.jar server -mcversion 1.20.1 -downloadMinecraft
       args:
         chdir: /etc/minecraft
 
@@ -97,7 +97,6 @@
       systemd:
         name: minecraft
         enabled: yes
-        state: started
 
     - name: Create Minecraft properties
       copy:
@@ -139,7 +138,7 @@
           max-world-size=29999984
           motd=Welcome to SKO
           network-compression-threshold=256
-          online-mode=true
+          online-mode=false
           op-permission-level=4
           pause-when-empty-seconds=60
           player-idle-timeout=0

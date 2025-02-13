@@ -15,8 +15,29 @@ variable "cloudflare_zone" {
   type = string
 }
 
+variable "minecraft_url" {
+  type = string
+}
+
+variable "minecraft_user" {
+  type = string
+}
+
+variable "minecraft_pass" {
+  type = string
+}
+
+variable "gemini_api_key" {
+  type = string
+}
+
 data "google_compute_network" "default" {
   name = "default"
+}
+
+resource "tls_private_key" "packer-key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
 }
 
 resource "google_service_account" "default" {
@@ -31,9 +52,13 @@ resource "google_compute_instance" "default" {
 
   tags = ["sko"]
 
+  metadata = {
+    ssh-keys = "packer:${tls_private_key.packer-key.public_key_openssh}"
+  }
+
   boot_disk {
     initialize_params {
-      image = "jumppad/better-workshop-sharedmc-1"
+      image = "jumppad/better-workshop-sharedmc-2"
       labels = {
         my_label = "value"
       }
@@ -57,6 +82,31 @@ resource "google_compute_instance" "default" {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     email  = google_service_account.default.email
     scopes = ["cloud-platform"]
+  }
+
+  connection {
+    type        = "ssh"
+    user        = "packer"
+    private_key = tls_private_key.packer-key.private_key_pem
+    host        = self.network_interface.0.access_config.0.nat_ip
+  }
+
+  provisioner "file" {
+    content  = <<-EOF
+      MINECRAFT_URL=${var.minecraft_url}
+      MINECRAFT_USER=${var.minecraft_user}
+      GEMINI_API_KEY=${var.gemini_api_key}
+    EOF
+
+    destination = "/tmp/bot.env"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo mkdir /etc/bot/env",
+      "sudo mv /tmp/bot.env /etc/bot/env/bot.env",
+      "sudo systemctl restart bot"
+    ]
   }
 }
 

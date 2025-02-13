@@ -1,0 +1,26 @@
+[
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 1 is 'terraform init' please reply with that is correct the chest can be located at 12,13,121"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 1 tell them that the answer you seek relates to the the command that prepares the working directory with needed plugins"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 7 is 'vault policy' please reply with that is correct the chest can be located at 12,12,121"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 7 tell them that the answer you seek relates to the feature in vault that controls a users ability to access resources"}
+    ]
+  }
+]

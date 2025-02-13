@@ -81,6 +81,9 @@
     
     - name: "Include minecraft whitelist tasks"
       include_tasks: minecraft_whitelist.yml
+    
+    - name: "Include bot service tasks"
+      include_tasks: bot.yml
 
     - name: "Include vault tasks"
       include_tasks: vault_ssh.yml

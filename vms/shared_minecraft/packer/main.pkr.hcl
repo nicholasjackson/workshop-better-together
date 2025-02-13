@@ -17,7 +17,7 @@ packer {
 
 variable "image_version" {
   type    = string
-  default = "1"
+  default = "2"
 }
 
 variable "project_id" {

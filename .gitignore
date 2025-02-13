@@ -5,3 +5,4 @@ terraform.tfstate
 terraform.tfstate.backup
 build
 worlds
+node_modules
