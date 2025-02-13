@@ -36,7 +36,7 @@ resource "libvirt_network" "minecraft" {
   name = "minecraft"
   mode = "nat"
 
-  addresses = ["192.168.16.1/24"]
+  addresses = ["192.168.16.0/24"]
 
   dhcp {
     enabled = true
