@@ -11,8 +11,6 @@ Starter code has been provided in the final task directory. You will need to
 complete this task in vscode and apply your changes for access to the shared GCP Minecraft server, where the final Minecraft challenge will Start.
 ![vscode](/assets/task_4/task4-vscode.png)
 
-## 1. Create a new AAP inventory for the shared GCP Minecraft server
-
 Note: The GCP Minecraft server is already running and accessible via SSH on port 22.
 ```
 {{ shared_minecraft_instance}}
@@ -21,6 +19,8 @@ Ansible Automation Platform login details:
 ```bash
 username: <team_name>_admin
 Ansible Automation password:{{ ansible_pass }}
+
+## 1. Create a new AAP inventory for the shared GCP Minecraft server
 ```
 <Link href="https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/inventory" target="_blank" rel="noopener noreferrer">ansible/aap/latest/docs/resources/inventory</Link>
  * Hint: you will need your organization id use the locals provided
