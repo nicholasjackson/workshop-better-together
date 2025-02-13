@@ -14,6 +14,14 @@ variable "server_ip_addr" {
   default     = "192.168.16.100"
 }
 
+variable "vault_addr" {
+  type = string
+}
+
+variable "vault_namespace" {
+  type = string
+}
+
 variable "gemini_api_key" {
   type = string
 }
@@ -41,7 +49,7 @@ resource "libvirt_pool" "ubuntu" {
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = "ubuntu-qcow2"
   pool   = libvirt_pool.ubuntu.name
-  source = "/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
+  source = "/var/workshop/images/minecraft_task_1/minecraft-task-1.qcow2"
 }
 
 resource "libvirt_domain" "domain-ubuntu" {
@@ -99,12 +107,25 @@ resource "libvirt_domain" "domain-ubuntu" {
 
     destination = "/tmp/bot.env"
   }
+  
+  provisioner "file" {
+    content  = <<-EOF
+      VAULT_ADDR=${var.vault_addr}
+      VAULT_NAMESPACE=${var.vault_namespace}
+    EOF
+
+    destination = "/tmp/minecraft.env"
+  }
 
   provisioner "remote-exec" {
     inline = [
-      "sudo mkdir /etc/bot/env",
+      "sudo mkdir -p /etc/minecraft/env",
+      "sudo mv /tmp/minecraft.env /etc/minecraft/env/minecraft.env",
+      "sudo systemctl restart minecraft",
+
+      "sudo mkdir -p /etc/bot/env",
       "sudo mv /tmp/bot.env /etc/bot/env/bot.env",
-//      "sudo systemctl restart bot"
+
     ]
   }
 }
