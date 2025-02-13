@@ -2,9 +2,19 @@
   hosts: all
   become: true
   gather_facts: false
+  vars:
+    minecraft_usernames:
+      - "HashiCorp_Nic"
+      - "SheriffJackson"
   tasks:
     - name: "Include minecraft tasks"
       include_tasks: minecraft.yml
+    
+    - name: "Include minecraft whitelist"
+      include_tasks: minecraft_whitelist.yml
+    
+    - name: "Include minecraft bot"
+      include_tasks: bot.yml
 
     - name: "Include vault tasks"
       include_tasks: vault_ssh.yml

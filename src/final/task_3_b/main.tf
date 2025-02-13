@@ -24,6 +24,10 @@ variable "server_ip_addr" {
   default     = "192.168.16.100"
 }
 
+variable "gemini_api_key" {
+  type = string
+}
+
 resource "libvirt_network" "minecraft" {
   # the name used by libvirt
   name = "minecraft"
@@ -84,6 +88,34 @@ resource "libvirt_domain" "domain-ubuntu" {
     type        = "spice"
     listen_type = "address"
     autoport    = true
+  }
+  
+  connection {
+    type        = "ssh"
+    user        = "packer"
+    password    = "packer"
+    host        = var.server_ip_addr 
+  }
+
+  provisioner "file" {
+    content  = <<-EOF
+      MINECRAFT_URL="localhost"
+      MINECRAFT_USER="HashiCorp_Nic"
+      MINECRAFT_STARTING_LOCATION="-1106 63 -1652"
+      MINECRAFT_ENABLE_FOLLOW="true"
+      GEMINI_API_KEY=${var.gemini_api_key}
+      GEMINI_HISTORY_FILE="./history/task_2.json"
+    EOF
+
+    destination = "/tmp/bot.env"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo mkdir /etc/bot/env",
+      "sudo mv /tmp/bot.env /etc/bot/env/bot.env",
+//      "sudo systemctl restart bot"
+    ]
   }
 }
 

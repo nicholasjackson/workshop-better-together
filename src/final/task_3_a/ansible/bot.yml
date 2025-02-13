@@ -1,0 +1,48 @@
+    - name: Download Nodesource setup
+      get_url:
+        url: https://deb.nodesource.com/setup_23.x
+        dest: /tmp/nodesource_setup.sh
+
+    - name: Run the install
+      command: >
+        chmod +x /tmp/nodesource_setup.sh
+        /tmp/nodesource_setup.sh
+
+    - name: Install Node JS
+      apt:
+        name: nodejs
+        state: present
+
+    - name: Fetch the bot
+      get_url:
+        url: https://storage.googleapis.com/jumppad_sko/bot_v0.0.1.tar.gz
+        dest: /tmp/bot.tar.gz
+
+    - name: Extract Bot files
+      unarchive:
+        src: /tmp/bot.tar.gz
+        dest: /etc
+        remote_src: yes
+
+    - name: Create Bot systemd service
+      copy:
+        dest: /etc/systemd/system/bot.service
+        content: |
+          [Unit]
+          Description=Minecraft Bot
+          After=network.target
+
+          [Service]
+          WorkingDirectory=/etc/bot
+          ExecStart=/usr/bin/node main.js
+          EnvironmentFile=/etc/bot/env/bot.env
+          Restart=always
+          RestartSec=30
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Enable and start Bot service
+      systemd:
+        name: bot
+        enabled: yes

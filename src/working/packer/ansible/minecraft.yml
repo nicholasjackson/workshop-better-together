@@ -3,9 +3,9 @@
       apt:
         update_cache: yes
 
-    - name: Install OpenJDK 21 JRE Headless
+    - name: Install OpenJDK 17 JRE Headless
       apt:
-        name: openjdk-21-jre-headless
+        name: openjdk-17-jre-headless
         state: present
 
     - name: Download Rcon CLI
@@ -40,27 +40,41 @@
         url: https://maven.fabricmc.net/net/fabricmc/fabric-installer/1.0.1/fabric-installer-1.0.1.jar
         dest: /etc/minecraft/fabric-installer.jar
 
-  # does this version need to revert to 1.20.1? for compatibility with client and mods? - TBC - to test
     - name: Run Fabric installer
       command: >
-        java -Xmx2G -jar fabric-installer.jar server -mcversion 1.21.4 -downloadMinecraft
+        java -Xmx2G -jar fabric-installer.jar server -mcversion 1.20.1 -downloadMinecraft
       args:
         chdir: /etc/minecraft
 
     - name: Download Minecraft world
       get_url:
-        url: https://github.com/nicholasjackson/workshop-better-together/releases/download/v0.0.0/buccaneers_bay.tar.gz
-        dest: /etc/minecraft/buccaneers_bay.tar.gz
+        url: https://storage.googleapis.com/jumppad_sko/world_task_3_2.tar.gz
+        dest: /etc/minecraft/world_task_3.tar.gz
 
     - name: Extract Minecraft world
       unarchive:
-        src: /etc/minecraft/buccaneers_bay.tar.gz
+        src: /etc/minecraft/world_task_3.tar.gz
         dest: /etc/minecraft
         remote_src: yes
 
     - name: Move extracted world directory
       command: >
-        mv /etc/minecraft/buccaneers_bay /etc/minecraft/world
+        mv /etc/minecraft/task_3 /etc/minecraft/world
+    
+    - name: Download Minecraft mods
+      get_url:
+        url: https://storage.googleapis.com/jumppad_sko/mods_v0.0.1.tar.gz
+        dest: /etc/minecraft/mods.tar.gz
+
+    - name: Extract Minecraft mods
+      unarchive:
+        src: /etc/minecraft/mods.tar.gz
+        dest: /etc/minecraft
+        remote_src: yes
+
+    - name: Move extracted mods directory
+      command: >
+        mv /etc/minecraft/server_mods /etc/minecraft/mods
 
     - name: Create Minecraft systemd service
       copy:
@@ -77,20 +91,76 @@
           [Install]
           WantedBy=multi-user.target
 
-    - name: Ensure RCON is enabled and password is set
-      lineinfile:
-        path: /etc/minecraft/server.properties
-        regexp: "{{ item.regexp }}"
-        line: "{{ item.line }}"
-        create: yes
-      with_items:
-        - regexp: '^enable-rcon='
-          line: 'enable-rcon=true'
-        - regexp: '^rcon.password='
-          line: 'rcon.password=password'
-          
     - name: Enable and start Minecraft service
       systemd:
         name: minecraft
         enabled: yes
         state: started
+
+    - name: Create Minecraft properties
+      copy:
+        dest: /etc/minecraft/server.properties
+        content: |
+          #Minecraft server properties
+          #Thu Feb 06 10:21:30 UTC 2025
+          accepts-transfers=false
+          allow-flight=false
+          allow-nether=true
+          broadcast-console-to-ops=true
+          broadcast-rcon-to-ops=true
+          bug-report-link=
+          difficulty=easy
+          enable-command-block=false
+          enable-jmx-monitoring=false
+          enable-query=false
+          enable-rcon=true
+          enable-status=true
+          enforce-secure-profile=true
+          enforce-whitelist=true
+          entity-broadcast-range-percentage=100
+          force-gamemode=true
+          function-permission-level=2
+          gamemode=survival
+          generate-structures=true
+          generator-settings={}
+          hardcore=false
+          hide-online-players=false
+          initial-disabled-packs=
+          initial-enabled-packs=vanilla
+          level-name=world
+          level-seed=
+          level-type=minecraft\:normal
+          log-ips=true
+          max-chained-neighbor-updates=1000000
+          max-players=100
+          max-tick-time=60000
+          max-world-size=29999984
+          motd=Welcome to SKO
+          network-compression-threshold=256
+          online-mode=false
+          op-permission-level=4
+          pause-when-empty-seconds=60
+          player-idle-timeout=0
+          prevent-proxy-connections=false
+          pvp=true
+          query.port=25565
+          rate-limit=0
+          rcon.password=password
+          rcon.port=25575
+          region-file-compression=deflate
+          require-resource-pack=false
+          resource-pack=
+          resource-pack-id=
+          resource-pack-prompt=
+          resource-pack-sha1=
+          server-ip=
+          server-port=25565
+          simulation-distance=10
+          spawn-monsters=true
+          spawn-protection=16
+          sync-chunk-writes=true
+          text-filtering-config=
+          text-filtering-version=0
+          use-native-transport=true
+          view-distance=10
+          white-list=true
