@@ -77,6 +77,18 @@
           [Install]
           WantedBy=multi-user.target
 
+    - name: Ensure RCON is enabled and password is set
+      lineinfile:
+        path: /etc/minecraft/server.properties
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        create: yes
+      with_items:
+        - regexp: '^enable-rcon='
+          line: 'enable-rcon=true'
+        - regexp: '^rcon.password='
+          line: 'rcon.password=password'
+          
     - name: Enable and start Minecraft service
       systemd:
         name: minecraft
