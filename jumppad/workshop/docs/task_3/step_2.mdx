@@ -17,15 +17,13 @@ Go to <Link href="https://44.210.128.100" target="_blank">Ansible Automation Pla
 username: <team_name>_admin
 Ansible Automation password:{{ ansible_pass }}
 ```
-# 2. Prepare Your Terraform Configuration
+# 2. Update existing Terraform Configuration
 Now, let's configure Terraform to deploy the new image and integrate with AAP.
-## Update your existing terraform configuration to use the new packer image
-### copy files from aap directory to the terraform directory
+
 In this task we are updating the existing Terraform configuration to use the 
 new packer image and apply user access using the AAP provider.
 The additional required to integrate the AAP provider is already provided in the aap directory,
 copy the contents to your Terraform directory.
-
 
 The AAP provider allows application teams to directly manage their application inventory and can coexist with dynamic inventories that may be managed using cloud metadata.
 We use the Ansible Automation Platform **ansible/aap** provider to perform the following tasks. 
@@ -68,9 +66,10 @@ resource "aap_job" "minecraft_whitelist" {
 ```
 
 Before proceeding ensure your in the terraform directory from the terminal
-
+Switch to the terraform directory and copy the files from the aap directory to Terraform directory
+See below:
 ```bash
-# ensure your in the terraform directory
+cd /workshop/src/working/terraform
 cp ../aap/* .
 ls
 ```
