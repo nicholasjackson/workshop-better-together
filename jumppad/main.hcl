@@ -9,7 +9,7 @@ variable "docs_url" {
 
 variable "machine_url" {
   description = "The URL for the Minecraft server"
-  default     = "minecraft.container.local.jmpd.in"
+  #default     = "minecraft.container.local.jmpd.in"
 }
 
 variable "vscode_token" {
