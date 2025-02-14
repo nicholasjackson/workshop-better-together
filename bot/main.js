@@ -4,6 +4,8 @@ const mineflayer = require('mineflayer')
 const pathfinder = require('mineflayer-pathfinder').pathfinder
 const Movements = require('mineflayer-pathfinder').Movements
 const { GoalNear } = require('mineflayer-pathfinder').goals
+const pvp = require('mineflayer-pvp').plugin
+
 
 const {
   GoogleGenerativeAI,
@@ -56,11 +58,13 @@ function createBot() {
 
   const bot = mineflayer.createBot(options)
   bot.loadPlugin(pathfinder);
- 
+  bot.loadPlugin(pvp);
+
   bot.on('spawn', () => {
     // teleport to the starting location
     console.log("Bot spawn, telporting to: " + startingLocation);
     bot.chat("/tp " + startingLocation);
+    bot.chat("/gamemode creative");
 
     const defaultMove = new Movements(bot);
     defaultMove.canDig = false;
@@ -88,10 +92,11 @@ function createBot() {
     var chatSession;
 
     // check if we have a session for this user
-    if(!sessions.has(username)) {
+    if (!sessions.has(username)) {
       chatSession = model.startChat({
         generationConfig,
-        history: defaultHistory});
+        history: defaultHistory
+      });
 
       sessions.set(username, chatSession);
     } else {
@@ -112,12 +117,12 @@ function createBot() {
       const lines = splitStringByWordFixedLength(sanitized, 200);
 
       // send these back to the player with a delay to avoid getting kicked
-      var n=1;
+      var n = 1;
       for (const line of lines) {
         setTimeout(() => {
           console.log("Sending: " + line);
           bot.chat("/msg " + username + " " + line);
-        },n*500);
+        }, n * 500);
         n++;
       }
 
@@ -126,22 +131,49 @@ function createBot() {
         const re = new RegExp("([-0-9]+),? ?([-0-9]+),? ?([-0-9]+),? ?");
         result = re.exec(sanitized);
 
-        if(result != null) {
+        if (result != null) {
           console.log("Moving to: " + result[1] + "," + result[2] + "," + result[3]);
           bot.pathfinder.setGoal(new GoalNear(result[1], result[2], result[3], 1));
         }
       }
 
     });
+  })
 
+  // Called when the bot has killed it's target.
+  bot.on('stoppedAttacking', () => {
+    console.log("Stopped attacking");
+
+    // If the bot is guarding a position, return to that position
+    const pos = startingLocation.split(' ');
+
+    bot.pathfinder.setGoal(new GoalNear(pos[0], pos[1], pos[2], 1));
+  })
+
+  // Check for new enemies to attack
+  bot.on('physicsTick', () => {
+    // Only look for mobs within 16 blocks
+    const filter = e => e.type === 'mob' && e.position.distanceTo(bot.entity.position) < 16 &&
+      e.displayName !== 'Armor Stand' // Mojang classifies armor stands as mobs for some reason?
+
+    const entity = bot.nearestEntity(entity => {
+      return entity.type === 'hostile' && entity.position.distanceTo(bot.entity.position) < 16
+    });
+
+    if (entity) {
+      // Start attacking
+      bot.pvp.attack(entity)
+    }
   })
 
   bot.on('end', () => {
     console.log("Bot ended");
 
     // restart the bot
-    const bot = createBot();
-    setLookInterval(bot);
+    setTimeout(() => {
+      const bot = createBot();
+      setLookInterval(bot);
+    }, 2000);
   });
 
   bot.on('error', (err) => {
@@ -177,7 +209,7 @@ function setLookInterval(mybot) {
     items.sort((a, b) => a[1] - b[1]);
 
     mybot.lookAt(mybot.players[items[0][0]].entity.position.offset(0, 1.6, 0));
-  },2000);
+  }, 2000);
 }
 
 function splitStringByWordFixedLength(str, maxLength) {
