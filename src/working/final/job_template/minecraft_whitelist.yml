@@ -1,115 +1,115 @@
 - name: Update minecraft whitelist
   hosts: all
-  become: false
+  become: true
   vars:
     minecraft_usernames:
       - "SheriffJackson"
   tasks:
-    - name: Create UUID tool
-      ansible.builtin.copy:
-        content: |
-          import java.nio.charset.StandardCharsets;
-          import java.util.UUID;
+    - block:
+      - name: Create UUID tool
+        ansible.builtin.copy:
+          content: |
+            import java.nio.charset.StandardCharsets;
+            import java.util.UUID;
 
-          public class MinecraftOfflineUUID {
+            public class MinecraftOfflineUUID {
 
-            public static UUID getOfflineUUID(String playerName) {
-              // Create the string with the "OfflinePlayer:" prefix
-              String offlinePlayerName = "OfflinePlayer:" + playerName;
+              public static UUID getOfflineUUID(String playerName) {
+                // Create the string with the "OfflinePlayer:" prefix
+                String offlinePlayerName = "OfflinePlayer:" + playerName;
 
-              // Convert the string to bytes using UTF-8 encoding
-              byte[] playerNameBytes = offlinePlayerName.getBytes(StandardCharsets.UTF_8);
+                // Convert the string to bytes using UTF-8 encoding
+                byte[] playerNameBytes = offlinePlayerName.getBytes(StandardCharsets.UTF_8);
 
-              // Generate the UUID based on the bytes
-              return UUID.nameUUIDFromBytes(playerNameBytes);
+                // Generate the UUID based on the bytes
+                return UUID.nameUUIDFromBytes(playerNameBytes);
+              }
+
+              public static void main(String[] args) {
+                // Example usage
+                String playerName = args[0];
+                UUID offlineUUID = getOfflineUUID(playerName);
+
+                // Print the generated UUID
+                System.out.print(offlineUUID);
+              }
             }
+          dest: /etc/minecraft/MinecraftOfflineUUID.java
+          mode: '0644'
 
-            public static void main(String[] args) {
-              // Example usage
-              String playerName = args[0];
-              UUID offlineUUID = getOfflineUUID(playerName);
+      - name: Generate UUIDs for whitelist
+        loop: "{{ minecraft_usernames }}"
+        register: java_responses
+        command: java -jar /etc/minecraft/MinecraftOfflineUUID.java "{{ item }}"
 
-              // Print the generated UUID
-              System.out.print(offlineUUID);
-            }
-          }
-        dest: /etc/minecraft/MinecraftOfflineUUID.java
-        mode: '0644'
+      - name: Create entires
+        set_fact:
+          whitelist_entries: "{{ whitelist_entries | default([]) + [{'uuid': item.stdout,'name': item.item}] }}"
+        loop: "{{ java_responses.results }}"
+      
+      - name: Show whitelist entries
+        debug:
+          msg: "{{ whitelist_entries }}"
 
-    - name: Generate UUIDs for whitelist
-      loop: "{{ minecraft_usernames }}"
-      register: java_responses
-      command: java -jar /etc/minecraft/MinecraftOfflineUUID.java "{{ item }}"
+      - name: Check if lock file exists and is not stale
+        ansible.builtin.stat:
+          path: /etc/minecraft/whitelist.lock
+        register: lockfile
 
-    - name: Create entires
-      set_fact:
-        whitelist_entries: "{{ whitelist_entries | default([]) + [{'uuid': item.stdout,'name': item.item}] }}"
-      loop: "{{ java_responses.results }}"
-    
-    - name: Show whitelist entries
-      debug:
-        msg: "{{ whitelist_entries }}"
+      - name: Remove stale lock file
+        ansible.builtin.file:
+          path: /etc/minecraft/whitelist.lock
+          state: absent
+        when:
+          - lockfile.stat.exists
+          - (ansible_date_time.epoch | int) - (lockfile.stat.mtime | int) > lock_timeout
 
-    - name: Check if lock file exists and is not stale
-      ansible.builtin.stat:
-        path: /etc/minecraft/whitelist.lock
-      register: lockfile
+      - name: Check lock file again after potential stale removal
+        ansible.builtin.stat:
+          path: /etc/minecraft/whitelist.lock
+        register: lockfile_final
 
-    - name: Remove stale lock file
-      ansible.builtin.file:
-        path: /etc/minecraft/whitelist.lock
-        state: absent
-      when:
-        - lockfile.stat.exists
-        - (ansible_date_time.epoch | int) - (lockfile.stat.mtime | int) > lock_timeout
+      - name: Fail if lock file still exists
+        ansible.builtin.fail:
+          msg: "Another process is updating the file. Please try again later."
+        when: lockfile_final.stat.exists
 
-    - name: Check lock file again after potential stale removal
-      ansible.builtin.stat:
-        path: /etc/minecraft/whitelist.lock
-      register: lockfile_final
+      - name: Create lock file
+        ansible.builtin.file:
+          path: /etc/minecraft/whitelist.lock
+          state: touch
 
-    - name: Fail if lock file still exists
-      ansible.builtin.fail:
-        msg: "Another process is updating the file. Please try again later."
-      when: lockfile_final.stat.exists
+      - name: Ensure whitelist.json exists
+        ansible.builtin.file:
+          path: /etc/minecraft/whitelist.json
+          state: touch
 
-    - name: Create lock file
-      ansible.builtin.file:
-        path: /etc/minecraft/whitelist.lock
-        state: touch
+      - name: Read existing whitelist.json
+        ansible.builtin.slurp:
+          src: /etc/minecraft/whitelist.json
+        register: whitelist_file
+        ignore_errors: true
 
-    - name: Ensure whitelist.json exists
-      ansible.builtin.file:
-        path: /etc/minecraft/whitelist.json
-        state: touch
+      - name: Parse existing whitelist.json
+        ansible.builtin.set_fact:
+          existing_whitelist: "{{ (whitelist_file['content'] | b64decode | from_json) if (whitelist_file['content'] is defined and whitelist_file['content'] | length > 0) else [] }}"
 
-    - name: Read existing whitelist.json
-      ansible.builtin.slurp:
-        src: /etc/minecraft/whitelist.json
-      register: whitelist_file
-      ignore_errors: true
+      - name: Merge whitelist entries
+        ansible.builtin.set_fact:
+          updated_whitelist: "{{ (existing_whitelist | default([])) + whitelist_entries | unique(attribute='uuid') }}"
 
-    - name: Parse existing whitelist.json
-      ansible.builtin.set_fact:
-        existing_whitelist: "{{ (whitelist_file['content'] | b64decode | from_json) if (whitelist_file['content'] is defined and whitelist_file['content'] | length > 0) else [] }}"
-
-    - name: Merge whitelist entries
-      ansible.builtin.set_fact:
-        updated_whitelist: "{{ (existing_whitelist | default([])) + whitelist_entries | unique(attribute='uuid') }}"
-
-    - name: Write updated whitelist.json
-      ansible.builtin.copy:
-        content: "{{ updated_whitelist | to_nice_json }}"
-        dest: /etc/minecraft/whitelist.json
-        mode: '0644'
-      register: write_result
-    
-    - name: Reload the whitelist
-      command: rcon-cli --password password whitelist reload 
-
-  always:
-    - name: Remove lock file
-      ansible.builtin.file:
-        path: /etc/minecraft/whitelist.lock
-        state: absent
+      - name: Write updated whitelist.json
+        ansible.builtin.copy:
+          content: "{{ updated_whitelist | to_nice_json }}"
+          dest: /etc/minecraft/whitelist.json
+          mode: '0644'
+        register: write_result
+      
+      - name: Reload the whitelist
+        command: rcon-cli --password password whitelist reload 
+    always:
+      - name: Remove lock file
+        ansible.builtin.file:
+          path: /etc/minecraft/whitelist.lock
+          state: absent
 
