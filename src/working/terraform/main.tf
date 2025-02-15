@@ -49,18 +49,29 @@ resource "libvirt_pool" "ubuntu" {
   target {
     path = "/var/workshop/pools/ubuntu"
   }
+  replace_triggered_by = [
+      var.image_source,
+    ]
 }
 
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = "ubuntu-qcow2"
   pool   = libvirt_pool.ubuntu.name
-  source = var.image_source 
+  source = var.image_source
+
+  replace_triggered_by = [
+      var.image_source,
+    ]
 }
 
 resource "libvirt_domain" "domain-ubuntu" {
   name   = "ubuntu-terraform"
   memory = "3096"
   vcpu   = 4
+
+  replace_triggered_by = [
+      var.image_source,
+    ]
 
   network_interface {
     network_name   = libvirt_network.minecraft.name
