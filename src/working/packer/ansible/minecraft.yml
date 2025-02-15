@@ -63,7 +63,7 @@
     
     - name: Download Minecraft mods
       get_url:
-        url: https://storage.googleapis.com/jumppad_sko/mods_v0.0.1.tar.gz
+        url: https://storage.googleapis.com/jumppad_sko/mods_v0.0.2.tar.gz
         dest: /etc/minecraft/mods.tar.gz
 
     - name: Extract Minecraft mods
