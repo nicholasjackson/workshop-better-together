@@ -41,7 +41,7 @@
       - name: Generate UUIDs for whitelist
         loop: "{{ minecraft_usernames }}"
         register: java_responses
-        command: java -jar /etc/minecraft/MinecraftOfflineUUID.java "{{ item }}"
+        command: java /etc/minecraft/MinecraftOfflineUUID.java "{{ item }}"
 
       - name: Create entires
         set_fact:
