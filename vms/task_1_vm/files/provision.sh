@@ -24,12 +24,12 @@ curl -L -o fabric-installer.jar https://maven.fabricmc.net/net/fabricmc/fabric-i
 java -Xmx2G -jar fabric-installer.jar server -mcversion 1.20.1 -downloadMinecraft
 
 ## Add the world
-curl -L -o task_1.tar.gz https://storage.googleapis.com/jumppad_sko/world_task_1.tar.gz
+curl -L -o task_1.tar.gz https://storage.googleapis.com/jumppad_sko/world_task_1_2.tar.gz
 tar -xzf task_1.tar.gz
 mv ./task_1 ./world
 
 ## Add the mods
-curl -L -o mods.tar.gz https://storage.googleapis.com/jumppad_sko/mods_v0.0.1.tar.gz
+curl -L -o mods.tar.gz https://storage.googleapis.com/jumppad_sko/mods_v0.0.2.tar.gz
 tar -xzf mods.tar.gz
 mv ./server_mods ./mods
 
@@ -64,7 +64,7 @@ enable-query=false
 enable-rcon=true
 enable-status=true
 enforce-secure-profile=true
-enforce-whitelist=true
+enforce-whitelist=false
 entity-broadcast-range-percentage=100
 force-gamemode=true
 function-permission-level=2
@@ -85,7 +85,7 @@ max-tick-time=60000
 max-world-size=29999984
 motd=Welcome to SKO
 network-compression-threshold=256
-online-mode=false
+online-mode=true
 op-permission-level=4
 pause-when-empty-seconds=60
 player-idle-timeout=0

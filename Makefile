@@ -1,5 +1,5 @@
 REPO=ghcr.io/nicholasjackson/workshop-better-together
-VERSION=v0.0.1
+VERSION=v0.0.2
 
 build_codeserver:
 	docker buildx create --name vscode || true

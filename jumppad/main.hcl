@@ -72,7 +72,7 @@ resource "container" "vscode" {
   }
 
   image {
-    name = "ghcr.io/nicholasjackson/workshop-better-together:v0.0.1"
+    name = "ghcr.io/nicholasjackson/workshop-better-together:v0.0.2"
   }
 
   volume {
@@ -101,7 +101,7 @@ resource "container" "vscode" {
     destination = "/workshop/images"
   }
 
-  
+
 
   environment = {
     CONNECTION_TOKEN = variable.vscode_token

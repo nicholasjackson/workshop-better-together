@@ -4,7 +4,7 @@ variable "jumppad_version" {
 
 variable "image_version" {
   type    = string
-  default = "9"
+  default = "10"
 }
 
 variable "jumppad_images" {

@@ -1,4 +1,4 @@
-FROM ghcr.io/jumppad-labs/vscode:vscode-v0.5.2
+FROM ghcr.io/jumppad-labs/vscode:vscode-v0.5.3
 
 LABEL org.opencontainers.image.source=https://github.com/nicholasjackson/workshop-better-together
 
