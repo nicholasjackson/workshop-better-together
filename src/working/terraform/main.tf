@@ -31,6 +31,10 @@ variable "image_source" {
   default = "/var/workshop/images/minecraft_task_1/minecraft-task-1.qcow2"
 }
 
+resource "terraform_data" "image" {
+  input = var.image_source
+}
+
 resource "libvirt_network" "minecraft" {
   # the name used by libvirt
   name = "minecraft"
@@ -49,9 +53,13 @@ resource "libvirt_pool" "ubuntu" {
   target {
     path = "/var/workshop/pools/ubuntu"
   }
-  replace_triggered_by = [
-      var.image_source,
+
+  lifecycle {
+    replace_triggered_by = [
+      data.terraform_data.image
     ]
+  }
+  
 }
 
 resource "libvirt_volume" "ubuntu-qcow2" {
@@ -59,19 +67,22 @@ resource "libvirt_volume" "ubuntu-qcow2" {
   pool   = libvirt_pool.ubuntu.name
   source = var.image_source
 
-  replace_triggered_by = [
-      var.image_source,
+  lifecycle {
+    replace_triggered_by = [
+      data.terraform_data.image
     ]
+  }
 }
 
 resource "libvirt_domain" "domain-ubuntu" {
   name   = "ubuntu-terraform"
   memory = "3096"
   vcpu   = 4
-
-  replace_triggered_by = [
-      var.image_source,
+  lifecycle {
+    replace_triggered_by = [
+      data.terraform_data.image
     ]
+  }
 
   network_interface {
     network_name   = libvirt_network.minecraft.name
