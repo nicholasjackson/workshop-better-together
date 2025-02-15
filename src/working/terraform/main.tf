@@ -56,7 +56,7 @@ resource "libvirt_pool" "ubuntu" {
 
   lifecycle {
     replace_triggered_by = [
-      data.terraform_data.image
+      terraform_data.image
     ]
   }
   
@@ -69,7 +69,7 @@ resource "libvirt_volume" "ubuntu-qcow2" {
 
   lifecycle {
     replace_triggered_by = [
-      data.terraform_data.image
+      terraform_data.image
     ]
   }
 }
@@ -80,7 +80,7 @@ resource "libvirt_domain" "domain-ubuntu" {
   vcpu   = 4
   lifecycle {
     replace_triggered_by = [
-      data.terraform_data.image
+      terraform_data.image
     ]
   }
 
