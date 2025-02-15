@@ -1,9 +1,11 @@
 # 💻 Step 2: Verify your Minecraft Server
+
 1. Use SSH from the terminal tab to connect to your Minecraft server and verify it is running:
 
 ```bash
-ssh packer@localhost -p2222 
+ssh packer@<terraform output server_ip_addr>
 ``` 
+
 2. Select Yes for known host then input `packer` as password when prompted
 
 3. Check the status of the Minecraft service:
@@ -11,7 +13,5 @@ ssh packer@localhost -p2222
 ```bash
 systemctl status minecraft
 ```
+
 4. Once complete, exit the ssh session by typing `exit` and pressing enter.
-
-
-

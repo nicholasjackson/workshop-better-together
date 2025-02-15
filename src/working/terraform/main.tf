@@ -135,10 +135,6 @@ resource "libvirt_domain" "domain-ubuntu" {
   }
 }
 
-output "ip_address" {
-  value = var.server_ip_addr
-}
-
-output "socat_command" {
-  value = "socat TCP-LISTEN:25565,fork,reuseaddr TCP:${var.server_ip_addr}:25565"
+output "server_address" {
+  value = "${var.server_ip_addr}"
 }
