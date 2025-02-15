@@ -77,7 +77,7 @@ curl -L -o ubuntu_base.tar https://storage.googleapis.com/jumppad_sko/ubuntu-240
 tar -xzf ubuntu_base.tar -C /var/workshop/images/base
 
 ## Add the minecraft image for task 1
-curl -L -o minecraft-task-1.tar.gz https://storage.googleapis.com/jumppad_sko/minecraft-task-1.tar.gz
+curl -L -o minecraft-task-1.tar.gz https://storage.googleapis.com/jumppad_sko/minecraft-task-1-3.tar.gz
 tar -xzf minecraft-task-1.tar.gz -C /var/workshop/images/minecraft_task_1
 
 ## Add a dirty redirect to the static ip for the minecraft server
@@ -88,6 +88,7 @@ After=network.target
 
 [Service]
 ExecStart=/usr/bin/socat TCP-LISTEN:25565,fork,reuseaddr TCP:192.168.16.100:25565
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
@@ -102,6 +103,7 @@ After=network.target
 
 [Service]
 ExecStart=/usr/bin/socat TCP-LISTEN:2222,fork,reuseaddr TCP:192.168.16.100:22
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
