@@ -91,6 +91,7 @@ resource "aap_host" "vm_hosts" {
 }
 
 resource "aap_job" "minecraft_whitelist" {
+  depends_on = [ time_sleep.wait_30_seconds ]
   job_template_id = local.template_id
   inventory_id    = aap_inventory.dedicated_minecraft.id
   extra_vars      = jsonencode({
@@ -102,6 +103,12 @@ resource "aap_job" "minecraft_whitelist" {
   }
   
 }
+
+resource "time_sleep" "wait_30_seconds" {
+  depends_on = [resource.libvirt_domain.domain-ubuntu , resource.libvirt_volume.ubuntu-qcow2 ]
+  create_duration = "30s"
+}
+
 
 output "aap_job_url" {
   value = "https://44.210.128.100${aap_job.minecraft_whitelist.url}"
