@@ -124,57 +124,25 @@ you can run terraform plan to review the changes.
 terraform plan
 ```
 
-_see example output below_:
-
-```
-root@debian:/workshop/src/working/terraform# terraform plan
-data.http.minecraft_accesslist: Reading...
-data.http.minecraft_accesslist: Read complete after 1s [
-  id=https://44.210.128.100/api/controller/v2/job_templates/?name=minecraft_whitelist]
-
-Terraform used the selected providers to generate the following execution plan. 
-Resource actions are indicated with the following symbols:
-  + create
-
-Terraform will perform the following actions:
-
-  # aap_host.vm_hosts will be created
-...
-...
-  # libvirt_volume.ubuntu-qcow2 will be created
-  + resource "libvirt_volume" "ubuntu-qcow2" {
-      + format = (known after apply)
-      + id     = (known after apply)
-      + name   = "ubuntu-qcow2"
-      + pool   = "ubuntu"
-      + size   = (known after apply)
-      + source = "/var/workshop/images/minecraft_vm_ansible/minecraft-vm-ansible.qcow2"
-    }
-
-Plan: 7 to add, 0 to change, 0 to destroy.
-
-Changes to Outputs:
-  + ip_address    = "192.168.16.100"
-  + socat_command = "socat TCP-LISTEN:25565,fork,reuseaddr TCP:192.168.16.100:25565"
-────────────────────────────────────────────────────────────────────────────────────────────
-Note: You didn't use the -out option to save this plan, 
-so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
-```
-
 6. Deploy Terraform Configuration:
 ```
 terraform apply -auto-approve
 ```
-
 _see example run below_: 
 ```
-libvirt_network.minecraft: Creating...
-libvirt_pool.ubuntu: Creating...
-libvirt_pool.ubuntu: Creation complete after 0s [id=267dcea0-e95e-45d5-957c-24c30602d529]
-libvirt_volume.ubuntu-qcow2: Creating...
-libvirt_network.minecraft: Creation complete after 0s [id=ae0aa162-528d-4ec2-9556-fcd0000d4131]
 aap_inventory.dedicated_minecraft: Creating...
+aap_inventory.dedicated_minecraft: Creation complete after 1s [name=minecraft_dedicated]
+aap_host.vm_hosts: Creating...
+aap_job.minecraft_whitelist: Creating...
+aap_job.minecraft_whitelist: Creation complete after 0s
+aap_host.vm_hosts: Creation complete after 0s [name=debian.32xyd90e36sn.instruqt.io]
 libvirt_volume.ubuntu-qcow2: Still creating... [10s elapsed]
+libvirt_volume.ubuntu-qcow2: Still creating... [20s elapsed]
+libvirt_volume.ubuntu-qcow2: Still creating... [30s elapsed]
+libvirt_volume.ubuntu-qcow2: Still creating... [40s elapsed]
+libvirt_volume.ubuntu-qcow2: Creation complete after 50s [id=/var/workshop/pools/ubuntu/ubuntu-qcow2]
+
+Apply complete! Resources: 4 added, 0 changed, 1 destroyed.
 ```
 7. Validate Your Deployment in Minecraft
 Now that your Minecraft server is up and running, it’s time to test your deployment!
