@@ -1,49 +1,63 @@
-# 💻 Step 3: Create a Vault policy to allow access to the tavern_key
+# 💻 Step 3: Configure a user for your Minecraft User.
 
-The user you just added to the `userpass` authentication method will alow your Minecraft
-user to authenticate to Vault. But, in order to access the `tavern_key` secret you will need to 
-create a policy and attach it to the user.
 
-1. Create a policy called `tavern` that allows access to the `tavern_key`.
+We will use the username of your Minecraft user as the userpass user and the Minecraft UUID as the password.
 
-_The `tavern_key` secret is in the Vault kv2 secret engine at the path `secrets/data/tavern_key`_.
+1. To retrieve this information, you can head over to the following URL: <Link href="https://mcuuid.net/" target="_blank" rel="noopener noreferrer"/>
 
-_A policy that would allow read access to this secret would look like the following_:
+2. Enter your Minecraft user and click the Lookup button. 
 
-```javascript
-path "secrets/data/tavern_key" {
-  capabilities = ["read"]
-}
-```
+_You should see something like this_:
 
-2. Add this policy to Vault using the following command:
+![](/assets/task_1b/mcuuid.png)
+
+3. Copy the Full UUID value and use it as the password for the user.
+export as env vars the following:
 
 ```bash
-vault policy write -ns=admin/${TEAM_NAME} tavern - <<EOF
-path "secrets/data/tavern_key" {
-  capabilities = ["read"]
-}
-EOF
+export MINECRAFT_USER=<your minecraft user>
+export MCUUID=<full mcuuid>
 ```
 
-_You should see the following output_:
+4. Create a user for your Minecraft user in the `userpass' authentication method. 
+   You will also assign the `tavern` policy to the user.
 
 ```bash
-Success! Uploaded policy: tavern
+vault write -ns=admin/${TEAM_NAME} /auth/userpass/users/${MINECRAFT_USER} password="${MCUUID}" policies="tavern"
 ```
 
-Now that the policy is created, you can attach it to the user in the next step.
+_You should see some output like the following_:
+
+```bash
+Success! Data written to: auth/userpass/users/<minecraft user>
+```
+
+Feel free to use the Vault UI to verify the user has been created as expected.
+
+Now that is done, let's create a policy for the user in the next step.
 
 ## 🔍 Did You Get It Right?
 
-<Solution title="Solution: Vault cli">
-check your env vars are set correctly `env`
+<Solution>
+Check your environment vars are set correctly and the policy has been attached.
+
 ```bash
 echo $TEAM_NAME
-vault policy write -ns=admin/${TEAM_NAME} tavern - <<EOF
-path "secrets/data/tavern_key" {
-  capabilities = ["read"]
-}
-EOF
+echo $MINECRAFT_USER
+vault read -ns admin/${TEAM_NAME} auth/userpass/users/${MINECRAFT_USER}
+```
+
+```bash
+Key                        Value
+---                        -----
+token_bound_cidrs          []
+token_explicit_max_ttl     0s
+token_max_ttl              0s
+token_no_default_policy    false
+token_num_uses             0
+token_period               0s
+token_policies             [tavern]
+token_ttl                  0s
+token_type                 default
 ```
 </Solution>

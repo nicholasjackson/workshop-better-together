@@ -11,17 +11,7 @@ _You should see the following output_:
 Success! Data written to: auth/userpass/users/<your minecraft user>/policies
 ```
 
-Now you can open the Iron Door and retrieve Blackbeards treasure that you are going to need for the next 
+Now you can open the Iron Door and retrieve Blackbeards treasure that you will need for the next 
 task.
 
-## 🔍 Did You Get It Right?
-
-<Solution title="Solution: vault cli">
-check your env vars are set correctly `env`
-```bash
-echo $TEAM_NAME
-echo $MINECRAFT_USER
-vault write -ns admin/${TEAM_NAME} auth/userpass/users/${MINECRAFT_USER@L}/policies token_policies="tavern"
-```
-</Solution>
-
+First you need to authenticate with Vault, right clicking on the .

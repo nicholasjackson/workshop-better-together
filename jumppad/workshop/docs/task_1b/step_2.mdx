@@ -1,4 +1,4 @@
-# 💻 Step 2: Configure a user for your Minecraft User.
+# 💻 Step 2: Create a Vault policy to allow access to the tavern_key
 
 Each team has a unique namespace in Vault, this is rooted under the `admin` namespace.
 For example if your team name is `team1`, your namespace will be `admin/team1`.
@@ -7,46 +7,49 @@ Within your namespace `userpass` authentication method is enabled. This allows y
 In order to open the iron door, you need to create a user for your Minecraft user and ensure that the user has the correct policy 
 attached granting access to the `tavern_key` secret engine and open the iron door.
 
-We will use the username of your Minecraft user as the userpass user and the Minecraft UUID as the password.
+First you need to create a policy that allows access to the `tavern_key` in the kv2 secret engine
+for your namespace.
 
-1. To retrieve this information, you can head over to the following URL: <Link href="https://mcuuid.net/" target="_blank" rel="noopener noreferrer"/>
+1. Create a policy called `tavern` that allows access to the `tavern_key`.
 
-2. Enter your Minecraft user and click the Lookup button. 
+_The `tavern_key` secret is in the Vault kv2 secret engine at the path `secrets/data/tavern_key`_.
 
-_You should see something like this_:
+_A policy that would allow read access to this secret would look like the following_:
 
-![](/assets/task_1b/mcuuid.png)
-
-3. Copy the Full UUID value and use it as the password for the user.
-export as env vars the following:
-
-```bash
-export MCUUID=<full mcuuid>
-export MINECRAFT_USER=<your minecraft user>
+```javascript
+path "secrets/data/tavern_key" {
+  capabilities = ["read"]
+}
 ```
 
-4. Create a user for your Minecraft user in the `userpass' authentication method.
+2. Add this policy to Vault using the following command:
 
 ```bash
-vault write -ns=admin/${TEAM_NAME} /auth/userpass/users/${MINECRAFT_USER@L} password="${MCUUID}"
+vault policy write -ns=admin/${TEAM_NAME} tavern - <<EOF
+path "secrets/data/tavern_key" {
+  capabilities = ["read"]
+}
+EOF
 ```
 
-_You should see some output like the following_:
+_You should see the following output_:
 
 ```bash
-Success! Data written to: auth/userpass/users/<minecraft user>
+Success! Uploaded policy: tavern
 ```
 
-Now that is done, let's create a policy for the user in the next step.
+Now that the policy is created, let's create a user and assign them this policy.
 
 ## 🔍 Did You Get It Right?
 
-<Solution title="Solution: vault cli">
+<Solution title="Solution">
 check your env vars are set correctly `env`
 ```bash
 echo $TEAM_NAME
-echo $MCUUID
-echo $MINECRAFT_USER
-vault write -ns=admin/${TEAM_NAME} /auth/userpass/users/${MINECRAFT_USER@L} password="${MCUUID}"
+vault policy write -ns=admin/${TEAM_NAME} tavern - <<EOF
+path "secrets/data/tavern_key" {
+  capabilities = ["read"]
+}
+EOF
 ```
 </Solution>
