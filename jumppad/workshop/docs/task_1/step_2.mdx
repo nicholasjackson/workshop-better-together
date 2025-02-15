@@ -1,17 +1,26 @@
 # 💻 Step 2: Verify your Minecraft Server
+
 1. Use SSH from the terminal tab to connect to your Minecraft server and verify it is running:
 
 ```bash
-ssh packer@localhost -p2222 
+ssh packer@$(terraform output --raw server_address)
 ``` 
-2. Select Yes for known host then input `packer` as password when prompted
+
+2. Select `yes` for known host then input `packer` as password when prompted
 
 3. Check the status of the Minecraft service:
 
 ```bash
 systemctl status minecraft
 ```
+
+When the service is running, you will see the following output:
+
+```bash
+Feb 15 08:28:03 ubuntu java[1092]: [08:28:03] [Server thread/INFO]: Done (16.680s)! For help, type "help"
+Feb 15 08:28:03 ubuntu java[1092]: [08:28:03] [Server thread/INFO]: Starting remote control listener
+Feb 15 08:28:03 ubuntu java[1092]: [08:28:03] [Server thread/INFO]: Thread RCON Listener started
+Feb 15 08:28:03 ubuntu java[1092]: [08:28:03] [Server thread/INFO]: RCON running on 0.0.0.0:25575
+````
+
 4. Once complete, exit the ssh session by typing `exit` and pressing enter.
-
-
-

@@ -1,4 +1,5 @@
 # 💻 Step 1: Initialize the Environment:
+
  1. Open the Instruqt terminal and navigate to the Terraform project directory.
 
  2. You need to set a couple of environment variables to configure the server. 
@@ -17,6 +18,7 @@ export TF_VAR_vault_namespace=admin/$TEAM_NAME
 cd terraform
 terraform init
 ```
+
 *_This downloads the necessary Libvirt provider plugins required to create the virtual machine_.*
 
 4. Apply the Terraform configuration to deploy the Minecraft server:
@@ -24,6 +26,7 @@ terraform init
 ```
 terraform apply -auto-approve
 ```
+
 *_Terraform will provision a virtual machine that acts as your pirate world_.*
 
 5. Once complete, Terraform will output the server’s IP address.
@@ -31,19 +34,12 @@ terraform apply -auto-approve
 ## 🔍 Did You Get It Right?
 
 <Task id="apply_terraform_configuration">
+
 To deploy the Minecraft server you need to run the following commands:
+
 ```bash
 cd terraform
 terraform init
 terraform apply
 ```
 </Task>
-
-
-<Solution title="Solution: terraform apply">
-```bash
-cd terraform
-terraform init
-terraform apply -auto-approve
-```
-</Solution>

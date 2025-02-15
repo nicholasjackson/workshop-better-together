@@ -112,3 +112,15 @@ resource "aap_job" "minecraft_whitelist" {
   }
   
 }
+
+output "aap_job_url" {
+  value = "https://44.210.128.100${aap_job.minecraft_whitelist.url}"
+}
+
+output "aap_job_type" {
+  value = aap_job.minecraft_whitelist.job_type
+}
+
+output "aap_job_status" {
+  value = aap_job.minecraft_whitelist.status
+}
