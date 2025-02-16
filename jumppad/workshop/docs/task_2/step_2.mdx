@@ -1,7 +1,7 @@
 # 💻 Step 2: Configure AAP Machine credentials
-In this step, you will update the machine credentials in AAP to use Vault's Signed SSH credential configured in the previous step.
+In this step, you will update the machine credentials in AAP to use the Vault Signed SSH credential plugin configured in the previous step.
 
-Machine credentials are associated with Ansible's Job templates and allow for authenticated access to a host machine and execution of a Ansible playbook.
+Machine credentials are associated with an Ansible Job templates and allow for authenticated access to a host machine and execution of a Ansible playbook.
 
 AAP will request Vault's SSH Secrets Engine to sign the provided public key. 
 The base machine for your Minecraft will be configured to trust Vault's SSH Secrets Engine public key in Task 3 using Packer and Ansible provisioner.
