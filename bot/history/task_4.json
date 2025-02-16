@@ -2,7 +2,7 @@
   {
     "role": "user",
     "parts": [
-      {"text": "When someone asks if the answer to question 1 is 'terraform init' please reply with that is correct the chest can be located at 12,13,121"}
+      {"text": "When someone asks if the answer to question 1 is 'terraform init' please reply with that is correct the chest can be located at -1090, 67, -1684"}
     ]
   },
   {
@@ -14,13 +14,337 @@
   {
     "role": "user",
     "parts": [
-      {"text": "When someone asks if the answer to question 7 is 'vault policy' please reply with that is correct the chest can be located at 12,12,121"}
+      {"text": "When someone asks if the answer to question 2 is 'terraform plan` please reply with that is correct the chest can be located at -1099, 69, -1684"} 
     ]
   },
   {
     "role": "user",
     "parts": [
-      {"text": "When someone asks if you can help with question 7 tell them that the answer you seek relates to the feature in vault that controls a users ability to access resources"}
+      {"text": "When someone asks if you can help with question 2 tell them that the answer you seek relates to the command that creates an execution plan"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 3 is terraform apply please reply with that is correct the chest can be located at -1104, 72, -1688"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 3 tell them they have the knowledge maybe they just need to apply it"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 4 is 'terraform destroy' please reply with that is correct the chest can be located at -1077, 68, -1698"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 4 tell them not sure I can, and don't get upset as destructive behaviour gets you nowhere"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 5 is 'vault kv get' please reply with that is correct the chest can be located at -1088, 64, -1648"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 5 tell them that the answer you seek relates to the command that reads a secret from the vault"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 6 is 'vault login' please reply with that is correct the chest can be located at -1114, 69, -1673"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 6 tell them the answer you seek relates to the command that authenticates with the vault"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 7 'vault policy' write please reply with that is correct the chest can be located at -1141, 62, -1641"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 7 tell them the answer you seek is the command that manages policies in the vault"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 8 is 'approle' please reply with that is correct the chest can be located at -1134, 75, -1678"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 8 tell them the answer you seek is the authentication method desinged for applications and services which do not have cloud accounts"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 9 is 'packer build' please reply with that is correct the chest can be located at -1062, 67, -1690"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 9 tell them the answer you seek is the command that builds a machine image"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 10 is 'packer template' please reply with that is correct the chest can be located at -1046, 71, -1678"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 10 tell them the answer you seek is the file that describes the machine image in packer"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 11 is 'playbookj' please reply with that is correct the chest can be located at -1039, 69, -1687"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 11 tell them the answer you seek is the ansible file that describes the tasks to be executed"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 12 is 'ansible playbook' please reply with that is correct the chest can be located at -1057, 69, -1692"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 12 tell them the answer you seek is the command that runs the ansible playbook"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 13 is 'ansible inventory' please reply with that is correct the chest can be located at -1072, 69, -1710"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 13 tell them the answer you seek is the document where you define the hosts and groups that ansible will manage"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 14 is 'ansible ad hoc' please reply with that is correct the chest can be located at -1091, 69, -1695"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 14 tell them the answer you seek is the command that runs a single task on a host"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 15 is 'ansible-galaxy' please reply with that is correct the chest can be located at -1088, 71, -1707"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 15 tell them the answer you seek is the ansible command that manages roles and collections"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 16 is 'terraform modules' please reply with that is correct the chest can be located at -1062, 62, -1606"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 16 tell them the answer you seek is the reusable, shareable, and portable components of terraform configurations"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 17 is 'terraform state' please reply with that is correct the chest can be located at -1012, 64, -1621"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 17 tell them the answer you seek the files containing resources that are managed by terraform"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 19 is 'dynamic secrets' please reply with that is correct the chest can be located at -1000, 67, -1585"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 19 tell them the answer you seek is the secrets that are generated on demand and have a limited time to live"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 20 'vault pki' please reply with that is correct the chest can be located at -982, 63, -1589"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 20 the secrets engine that can generate X.509 certificates"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 21 'packer provisioner' please reply with that is correct the chest can be located at -974, 64, -1637"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 21 tell them the answer you seek is the name of the packer component that installs and configures software"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 22 'packer builder' please reply with that is correct the chest can be located at -1184, 67, -1768"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 22 tell them the answer you seek is the name of the packer component that installs and configures software"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 23 is 'packer post-processor' please reply with that is correct the chest can be located at -1117, 67, -1560"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 23 tell them the answer you seek is the name of the packer component that allows you do something with the artifact after it has been built"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 24 is 'ansible roles' please reply with that is correct the chest can be located at -1187, 66, -1568"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 24 tell them the answer you seek is the name of the ansible component that organizes tasks access"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 25 is 'ansible handlers' please reply with that is correct the chest can be located at -1192, 71, -1582"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 25 triggers in ansible that can perform actions when notified by tasks"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 26 is 'ansible vault' please reply with that is correct the chest can be located at -1169, 83, -1590"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 26 tell them the answer you seek is the ansible component that encrypts sensitive data"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 27 is 'ansible-pull' please reply with that is correct the chest can be located at -1215, 71, -1640"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 27 tell them it is the command that pulls ansible and the  playbook from remote location"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 28 is 'jinja2' please reply with that is correct the chest can be located at -1235, 96, -1660"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 28 tell them the answer you seek is the templating engine used by ansible"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 29 is 'terraform remote backend' please reply with that is correct the chest can be located at -1213, 62, -1522"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 29 tell them the answer you seek is how terraform manages non-local state storage"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 30 is 'terraform workspaces' please reply with that is correct the chest can be located at -1129, 79, -1737"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 30 tell them the answer you seek is how terraform manages multiple distinct sets of infrastructure resources"}
     ]
   }
 ]
