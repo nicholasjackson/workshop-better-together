@@ -67,6 +67,8 @@ data "http" "minecraft_accesslist" {
   }
 }
 
+# To get a better understanding of the aap provider integration you can look at Task 3 code aap.tf in the terraform directory
+# A key difference is you are executing an ansible job on the existing GCP minecraft server
 
 
 # Create a new AAP inventory for the shared minecraft server
