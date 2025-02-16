@@ -1,9 +1,9 @@
 
 
 ```
-sudo ./sko-test.sh \
+sh /workshop/src/final/test_script/sko-test.sh \
   --team-name testorgz \
-  --minecraft-hostname "debian.k79c5zetilyf.instruqt.io" \
+  --minecraft-hostname "debian.ujlnv2obb4zm.instruqt.io" \
   --minecraft-usernames '["SherrifJackson"]' \
-  --team-password 'password'
+  --team-password '....'
 ```
