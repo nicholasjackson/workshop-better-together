@@ -11,24 +11,24 @@ Starter code has been provided in the final task directory. You will need to
 complete this task in vscode and apply your changes for access to the shared GCP Minecraft server, where the final Minecraft challenge will Start.
 ![vscode](/assets/task_4/task4-vscode.png)
 
-Note: The GCP Minecraft server is already running and accessible via SSH on port 22.
-```
-{{ shared_minecraft_instance}}
-```
+Note: The GCP Minecraft server is already running and accessible via SSH on port 22. The location you retrieved
+in the previous task from Blackbeard's treassure chest.
+
 Ansible Automation Platform login details:
 ```bash
 username: <team_name>_admin
 Ansible Automation password:{{ ansible_pass }}
 ```
+
 ## 1. Create a new AAP inventory for the shared GCP Minecraft server
 
 <Link href="https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/inventory" target="_blank" rel="noopener noreferrer">ansible/aap/latest/docs/resources/inventory</Link>
- * Hint: you will need your organization id use the locals provided
+* Hint: you will need to set the `organization` property to your organization id, use the locals provided
 
 
 ## 2. Create a new AAP host for the GCP minecraft server set any required variables
 <Link href="https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/host" target="_blank" rel="noopener noreferrer">ansible/aap/latest/docs/resources/host</Link>
-
+* Hint: you will need to set the variables `ansible_host` and `ansible_port` to the value from Blackbeard's treasure chest and the ssh port 22 respectively.
 
 ## 3. Execute the Job Template to update the minecraft server for access using existing job template - minecraft_whitelist
 <Link href="https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/job" target="_blank" rel="noopener noreferrer">ansible/aap/latest/docs/resources/job</Link>
@@ -47,12 +47,10 @@ You can see the job status and output in the menu on the left side of the screen
 
 ## 🔍 Did You Get It Right?
 
-<Solution title="Solution: Gain access to the shared GCP Minecraft server using AAP">
-```bash
-See TA if your stuck and need help.
-The GCP server is existing and listening on port 22 for SSH connections.
-Hint: The code required for AAP integration is similar to task 3, step 2.
-```
+<Solution>
+
+The code you ran in task 3 `aap.tf` contains the answers you seek.
+
 </Solution>
 
 ## Step 1 Complete
