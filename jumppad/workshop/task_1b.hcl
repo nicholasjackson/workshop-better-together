@@ -30,13 +30,6 @@ resource "chapter" "task_1b" {
     })
   }
 
-  page "step4" {
-    content = template_file("docs/task_1b/step_4.mdx", {
-      docs_url    = variable.docs_url
-      machine_url = variable.machine_url
-    })
-  }
-
   page "outro" {
     content = template_file("docs/task_1b/outro.mdx", {
       docs_url    = variable.docs_url
