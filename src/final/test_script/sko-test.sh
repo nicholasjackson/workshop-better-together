@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 # Parse command line arguments
-while [[ $# -gt 0 ]]; do
+while [ $# -gt 0 ]; do
     case $1 in
         --team-name)
             TEAM_NAME="$2"
@@ -29,8 +29,8 @@ done
 # Validate required inputs
 if [ -z "$TEAM_NAME" ] || [ -z "$MINECRAFT_HOSTNAME" ] || [ -z "$MINECRAFT_USERNAMES" ] || [ -z "$TEAM_PASSWORD" ]; then
     echo "Error: Missing required parameters"
-    echo "Usage: $0 --team-name <name> --minecraft-hostname <hostname> --minecraft-usernames <usernames> --team-password <password>"
-    echo "Example: $0 --team-name testorgz --minecraft-hostname 'debian.k79c5zetilyf.instruqt.io' --minecraft-usernames '[\"SherrifJackson\"]' --team-password 'Hashicorp123!sko2025'"
+    echo "Usage: sh $0 --team-name <name> --minecraft-hostname <hostname> --minecraft-usernames <usernames> --team-password <password>"
+    echo "Example: sh $0 --team-name testorgz --minecraft-hostname 'debian.yhjrgxniz0wk.instruqt.io' --minecraft-usernames '[\"SherrifJackson\"]' --team-password 'Hashicorp123!sko2025'"
     exit 1
 fi
 
