@@ -1,7 +1,7 @@
 
 
 ```
-./sko-test.sh \
+sudo ./sko-test.sh \
   --team-name testorgz \
   --minecraft-hostname "debian.k79c5zetilyf.instruqt.io" \
   --minecraft-usernames '["SherrifJackson"]' \
