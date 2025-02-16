@@ -1,20 +1,18 @@
 # 💻 Step 1: Login to HCP Vault to confgure userpass authentication
 
-To access the HCP Vault Dedicated cluster you can use the following FQDN:
-```
-https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200
-```
-
 For this lab, the HCP Vault Dedicated cluster is accessible over the public internet. Generally, this is not recommended and should be disabled. 
 If there is a requirement to allow public access, we recommend customers to use the IP allow list as measure to limit access and security exposure. 
 More information can be found in the <Link href="https://developer.hashicorp.com/hcp/docs/vault/get-started/manage-public-access" target="_blank" rel="noopener noreferrer">manage public network access</Link>
 
 
 1. From the Instruqt lab, click on Instruqt terminal tab to begin.
-2. The Vault CLI is pre-installed in the terminal. The `VAULT_ADDR` environment variable has also been set for you.
+2. The Vault CLI is pre-installed in the terminal. The `VAULT_ADDR` environment variable has also been set for you. 
 
 _Since you already set the `TEAM_NAME` environment variable to your team name in the previous step, you are ready
 to go._
+
+_Your VAULT_ADDR should be pre-set as 
+```https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200```._
 
 3. Check Vault status using the command:
 

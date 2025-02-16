@@ -7,22 +7,10 @@ Within your namespace `userpass` authentication method is enabled. This allows y
 In order to open the iron door, you need to create a user for your Minecraft user and ensure that the user has the correct policy 
 attached granting access to the `tavern_key` secret engine and open the iron door.
 
-First you need to create a policy that allows access to the `tavern_key` in the kv2 secret engine
-for your namespace.
 
-1. Create a policy called `tavern` that allows access to the `tavern_key`.
 
-_The `tavern_key` secret is in the Vault kv2 secret engine at the path `secrets/data/tavern_key`_.
-
-_A policy that would allow read access to this secret would look like the following_:
-
-```javascript
-path "secrets/data/tavern_key" {
-  capabilities = ["read"]
-}
-```
-
-2. Add this policy to Vault using the following command:
+1. Create a policy that allows access to the `tavern_key` in the kv2 secret engine
+for your namespace using the following command:
 
 ```bash
 vault policy write -ns=admin/${TEAM_NAME} tavern - <<EOF
@@ -38,7 +26,7 @@ _You should see the following output_:
 Success! Uploaded policy: tavern
 ```
 
-Now that the policy is created, let's create a user and assign them this policy.
+**Now that the policy is created, let's create a user and assign them this policy.**
 
 ## 🔍 Did You Get It Right?
 
