@@ -147,24 +147,8 @@ Apply complete! Resources: 4 added, 0 changed, 1 destroyed.
 7. Validate Your Deployment in Minecraft
 Now that your Minecraft server is up and running, it’s time to test your deployment!
 
-a. Launch Minecraft and connect to your deployed server using the machine name.
-b. Enter the world and check the environment:
-* Confirm that the server is accessible.
-* Verify that the spawn point is correct.
-* Ensure that your custom settings from Ansible & Terraform were applied.
+a. Launch Minecraft and connect to your deployed server, you can use the same multiplayer
+settings as before.
 
-c. Test User Access Permissions:
-* If you set specific users in Terraform, check if they can join and interact.
-* Try to break/place blocks if survival mode is enabled.
-* Ensure only the whitelisted users can connect.
-
-d. Solve the Hidden Coordinates Puzzle:
-* Look at the Terraform output from Step 5.
-* It contains mysterious coordinates – go there in Minecraft!
-* At the location, you will find a hidden sign with a secret message.
-* Note down this message – you’ll need it for the final challenge.
-
-🚀 Once you have validated the server and solved the puzzle, you’ve completed Task 3!
-
-
-
+If all has been configured correctly you will be able to access the server and you
+should see Pirate `HashiCorp_Nic` in the game.
