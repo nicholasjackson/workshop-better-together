@@ -37,7 +37,6 @@ variable "minecraft_hostname" {
 variable "minecraft_usernames" {
   type = list(string)
   description = "minecraft usernames for access list"
-  default = []
 }
 
 variable "job_template_id" {
