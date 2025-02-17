@@ -91,8 +91,11 @@ resource "aap_host" "vm_hosts" {
   variables    = jsonencode({
     "ansible_host"     : "${var.minecraft_hostname}",
     "ansible_port"     : var.ansible_port
+    "minecraft_usernames" : var.minecraft_usernames
+
 })
 }
+
 
 resource "aap_job" "minecraft_whitelist" {
   depends_on = [ time_sleep.wait_30_seconds ]
@@ -124,4 +127,12 @@ output "aap_job_type" {
 
 output "aap_job_status" {
   value = aap_job.minecraft_whitelist.status
+}
+
+output "aap_job_vars" {
+  value = aap_job.minecraft_whitelist.extra_vars
+}
+
+output "aap_host_vars" {
+  value = aap_host.vm_hosts.variables
 }
