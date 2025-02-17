@@ -5,20 +5,27 @@
 ## 🎯 Learning Objectives:
 By completing this task, you will:
 
-* ✅ Use Vault-signed SSH credentials to configure access for AAP.
-* ✅ Solve in-game puzzles to unlock the hidden door inside the tavern.
-* ✅ Locate and open the treasure chest to retrieve the book of secrets for Task 3.
+* ✅ Authenticate to HCP Vault using your Minecraft user credentials via userpass.
+* ✅ Retrieve AppRole credentials (Role ID and Secret ID) from Vault.
+* ✅ Configure Ansible Automation Platform (AAP) to authenticate with Vault using AppRole.
+* ✅ Set up signed SSH credentials in AAP to enable secure Ansible playbook execution later.
+
 
 ## 📖 Scenario:
 
-You have retrieved the next clue from Blackbeards treasure chest, it contains vital infomation
-that will help you to your next step in your journey.
+You’ve made it past the iron door and claimed your first piece of Blackbeard’s treasure, but your journey has only just begun. Ahead lies a vast and dangerous sea filled with more locked chests and guarded secrets. To progress, you’ll need to grant your crew secure access to the tools and servers controlling these treasures.
+
+However, Blackbeard was no fool—he secured his operations with layers of protection. You must now deepen your mastery of Vault and Ansible Automation Platform (AAP) to gain trusted access to the systems running your pirate stronghold.
+
+Your task is to retrieve secure credentials from Vault, configure AAP to authenticate using these secrets, and prepare machine credentials that will allow your Ansible jobs to remotely control your future Minecraft servers—all without exposing your keys to the enemy.
+
+If done right, you’ll earn the power to command servers securely—and unlock the next step toward Blackbeard’s ultimate fortune.
 
 ## ⚙️ Under the Hood 
 
-1. Configure Ansible Automation Platform (AAP) Hashicorp Vault Signed SSH credentials plugin to authenticate with Hashicorp Vault
+1. Configure Ansible Automation Platform (AAP) with Hashicorp Vault Signed SSH credentials plugin to authenticate with Hashicorp Vault
 2. Configure machine credentials for Ansible Job Templates to authenticate with remote hosts using Vault signed SSH credentials
-3. Each team will be allocated a team name that will present as a child namespace in Vault and organization in Ansible Automation Platform (AAP).
+3. Each team will be allocated a team name that will present as a child namespace in Vault and organization in AAP.
 4. For this lab, we are leveraging a single shared HCP Vault Dedicated. The parent namespace `admin` is configured with `userpass` authentication method for each team to authenticate with their respective child namespaces to read KV secrets and retreive AppRole credentials.
 5. AAP itself will be configured to authenticate with Vault using the AppRole method directly to the child namespaces.
 

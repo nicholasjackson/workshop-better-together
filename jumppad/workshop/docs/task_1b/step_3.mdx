@@ -11,16 +11,14 @@ _You should see something like this_:
 
 ![](/assets/task_1b/mcuuid.png)
 
-3. Copy the Full UUID value and use it as the password for the user.
-export as env vars the following:
+3. Copy the Full UUID value and use it as the password for the user. Export as env vars as below:
 
 ```bash
 export MINECRAFT_USER=<your minecraft user>
 export MCUUID=<full mcuuid>
 ```
 
-4. Create a user for your Minecraft user in the `userpass' authentication method. 
-   You will also assign the `tavern` policy to the user.
+4. Create a user for your Minecraft user in the `userpass` authentication method. You will also assign the `tavern` policy to the user.
 
 ```bash
 vault write -ns=admin/${TEAM_NAME} /auth/userpass/users/${MINECRAFT_USER} password="${MCUUID}" policies="tavern"
@@ -32,13 +30,13 @@ _You should see some output like the following_:
 Success! Data written to: auth/userpass/users/<minecraft user>
 ```
 
-Feel free to use the Vault UI to verify the user has been created as expected.
+_Feel free to use the Vault UI to verify the user has been created as expected_.
 
 **Now that is done, let's create a policy for the user in the next step.**
 
 ## 🔍 Did You Get It Right?
 
-<Solution>
+<Solution title="Solution">
 Check your environment vars are set correctly and the policy has been attached.
 
 ```bash
