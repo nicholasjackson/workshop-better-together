@@ -7,55 +7,56 @@ To gain entry, you must configure Ansible Automation Platform (AAP) to execute a
 🧩 Your task is to use AAP to update the existing shared GCP Minecraft server’s access list, granting you passage to the final challenge.
 ![finaltask](/assets/task_4/final_task.png)
 
-Starter code has been provided in the final task directory. You will need to
-complete this task in vscode and apply your changes for access to the shared GCP Minecraft server, where the final Minecraft challenge will Start.
+Starter code has been provided in the `final` task directory. You will need to
+complete this task in VS Code and apply your changes to gain access to the shared GCP Minecraft server, where the final Minecraft challenge will begin.
 ![vscode](/assets/task_4/task4-vscode.png)
 
-Note: The GCP Minecraft server is already running and accessible via SSH on port 22. The location you retrieved
-in the previous task from Blackbeard's treassure chest.
+**Note**:  The GCP Minecraft server is already running and accessible via SSH on port 22.
+Its location was revealed in the previous task from Blackbeard’s treasure chest—refer back to your notes to find the server address.
 
-Ansible Automation Platform login details:
-```bash
-username: <team_name>_admin
-Ansible Automation password:{{ ansible_pass }}
-```
+# Complete the following tasks inside of the `final` directory:
 
-## 1. Create a new AAP inventory for the shared GCP Minecraft server
+## 1. Create a New AAP Inventory for the Shared GCP Minecraft Server
 
 <Link href="https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/inventory" target="_blank" rel="noopener noreferrer">ansible/aap/latest/docs/resources/inventory</Link>
-* Hint: you will need to set the `organization` property to your organization id, use the locals provided
+* Hint: You will need to set the `organization` property in your configuration to your organization ID, which can be found in the provided `locals` block.
 
 
 ## 2. Create a new AAP host for the GCP minecraft server set any required variables
 <Link href="https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/host" target="_blank" rel="noopener noreferrer">ansible/aap/latest/docs/resources/host</Link>
-* Hint: you will need to set the variables `ansible_host` and `ansible_port` to the value from Blackbeard's treasure chest and the ssh port 22 respectively.
+* Hint: You will need to set the ansible_host variable to the server address retrieved from Blackbeard’s treasure chest and set ansible_port to 22 for SSH access.
 
 ## 3. Execute the Job Template to update the minecraft server for access using existing job template - minecraft_whitelist
 <Link href="https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/job" target="_blank" rel="noopener noreferrer">ansible/aap/latest/docs/resources/job</Link>
-* Hint: credentials are preconfigured and using the same credentials as task 3 no changes are required to the AAP job template.
+* Hint: Credentials are preconfigured and the same as in Task 3, so no changes are needed to the AAP job template.
 
-Once you have successfully completed the task, you can verify the Ansible job execution in AAP.
-Login to the AAP web console and from the tab **Ansible Automation Platform**, using `<teamname_admin>` and passwword (see AAP login details at the top).
-You can see the job status and output in the menu on the left side of the screen. 
-**Automation Execution -> Jobs**
+## 4. Update variables in the `terraform.auto.tfvars` file.
 
-* The job template executed successfully in Ansible Automation Platform (AAP), completing the intended task
-* The Vault-signed SSH certificate was successfully injected into the execution environment and used to authenticate with the shared GCP Minecraft server
-* The debug output from the job execution displays the results of updating the Minecraft server's access list, confirming the changes were applied
+
+## 5. Once you have successfully completed the above tasks, verify the Ansible job execution in AAP:
+
+* Login to the AAP web console from the tab **Ansible Automation Platform**, using `<teamname_admin>` and passwword.
+
+* In the left menu, navigate to **Automation Execution -> Jobs**.
+* Locate and review your job to check the status and output: 
+    - Successful execution confirms the task was completed.
+    - Vault-signed SSH certificate was injected into the execution environment and used to authenticate with the GCP Minecraft server.
+    - Debug output confirms the Minecraft server’s access list was updated, granting your team access.
+
 
 ![aaprun](/assets/task_4/task4-aap.png)
 
 ## 🔍 Did You Get It Right?
 
-<Solution title="Solution: AAP for shared GCP Minecraft configuration">
+<Solution title="Solution">
 
 The code you ran in task 3 `aap.tf` contains the answers you seek.
 
 </Solution>
 
-## Step 1 Complete
+## Step 1 Complete 😄
 
-🎉 Congratulations! You’ve now bypassed the fortress gates and stand on the threshold of the ultimate treasure hunt. 
+🎉 **Congratulations! You’ve now bypassed the fortress gates and stand on the threshold of the ultimate treasure hunt.**
 
-In Step 2, you’ll face a gauntlet of puzzles—some easy, some devilishly complex—but all lead to buried treasure in the Minecraft survival world.
+**In Step 2, you’ll face a gauntlet of puzzles—some easy, some devilishly complex—but all lead to buried treasure in the Minecraft survival world.**
 

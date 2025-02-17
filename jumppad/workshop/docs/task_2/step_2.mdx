@@ -1,19 +1,17 @@
 # 💻 Step 2: Configure AAP Machine credentials
 In this step, you will update the machine credentials in AAP to use the Vault Signed SSH credential plugin configured in the previous step.
 
-Machine credentials are associated with an Ansible Job templates and allow for authenticated access to a host machine and execution of a Ansible playbook.
+Machine credentials are linked to Ansible Job Templates, enabling authenticated access to the target machine for playbook execution.
 
-AAP will request Vault's SSH Secrets Engine to sign the provided public key. 
-The base machine for your Minecraft will be configured to trust Vault's SSH Secrets Engine public key in Task 3 using Packer and Ansible provisioner.
+When a job runs, AAP requests Vault’s SSH Secrets Engine to sign the provided public key. The base Minecraft server is already configured to trust Vault’s SSH public key (this was set up in Task 3 using Packer and Ansible).
 
 ## 1. Retrieve SSH keypair from Vault
-You'll need to retrieve the SSH keypair from Vault's KVv2 Secrets Engine to configure the machine credentials in AAP, they are located in the `secrets/aap` path in Vault or use your own if you are feeling adventurous.
-
-You can refer back to the last step for guidance.
+Retrieve the SSH keypair from Vault’s KVv2 Secrets Engine at the path `secrets/aap` to configure the machine credentials in AAP. Alternatively, you may use your own keypair if you’re feeling adventurous.
+Refer to the previous step for guidance on accessing Vault.
 
 ## 🔍 Did You Get It Right?
 
-<Solution title="Solution: Retrieving SSH keypair from Vault">
+<Solution title="Solution">
 The SSH keypair was generated using Terraform and stored in Vault's KVv2 Secrets Engine.
 
 1. Login to Vault if you haven't already, see step 1 for instructions.
@@ -42,11 +40,11 @@ ssh-ed25519 REDTACTED
 
 ## 2. Configure AAP Machine credentials
 
-1. From the left menu, click on **Automation Execution** and then **Infrastructure** and **Credentials**. The `minecraft_ssh_credentials` has been preconfigured but you'll need to input your SSK keypair.
+1. From the left menu, click Automation Execution, then Infrastructure, and select Credentials. Locate `minecraft_ssh_credentials`, which has been preconfigured, but you will need to enter your SSH keypair to complete the setup.
 ![machinecreds](/assets/task_2/aap_machine_creds.png)
 2. Click the edit icon for **minecraft_ssh_credentials**.
 ![machinecredsedit](/assets/task_2/aap_machine_creds_edit.png)
-3. Copy the `ssh-unsigned-private-key` you retrieved in the previous task into the **SSH Private Key** field.
+3. Copy the `ssh-unsigned-private-key` retrieved in the previous task into the **SSH Private Key** field.
 ![updatecreds](https://dl.dropbox.com/scl/fi/inxuavg90revxwvs2zlnt/update_creds.png?rlkey=agh5s6hq9lqfbelg32wgegvjn&st=do3xae7n&dl=0)
 4. Click the **Signed SSH Certificate** key icon to open the **Select external credential** configuration window.
     ![selectexternalcredential](/assets/task_2/aap_machine_creds_ssh.png)
@@ -62,7 +60,7 @@ ssh-ed25519 REDTACTED
 
 ## 🔍 Did You Get It Right?
 
-<Solution title="Solution: Update AAP Machine credentials">
+<Solution title="Solution">
 ```
 See TA if your stuck and need help.
 You will be unable to complete the next task without the machine credentials.

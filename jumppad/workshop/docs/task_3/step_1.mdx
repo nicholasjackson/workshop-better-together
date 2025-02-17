@@ -1,8 +1,6 @@
 # 💻 Step 1: Build New Secure Packer Image with Ansible
 
-In this step, you will build a new secure Packer image using Ansible provisioner . 
-The Packer image will be used to create a new Minecraft server.
-The below code block has been added to the Packer hcl template to include the Ansible provisioner and execute a playbook.
+In this step, you will build a secure Packer image configured with the Ansible provisioner. This image will serve as the foundation for creating a new Minecraft server. An Ansible playbook is executed during the image build process, as shown in the preconfigured code block in the Packer HCL template.
 
 ```hcl
    provisioner "ansible" {
@@ -29,10 +27,10 @@ The below code block has been added to the Packer hcl template to include the An
   }
 ```
 
-The Ansible playbook will perform the following tasks:
+The Ansible playbook executed during the Packer image build will:
 - Install and configure the Minecraft server
-- Configure sshd to trust the Vault server public keys for your namespace
-see the playbook below:
+- Configure sshd to trust Vault’s public key for your namespace, enabling secure signed SSH access.
+Example structure from the playbook:
 ```yaml
 - name: Minecraft Install with Vault SSH prereqs
   hosts: all
@@ -45,7 +43,7 @@ see the playbook below:
     - name: "Include vault tasks"
       include_tasks: vault_ssh.yml
 ```
-You can browse the playbook files from the **workshop tab** and then the **packer/ansible** directory. To view the code for each of the referenced tasks in the playbook.
+You can explore the playbook and task files by navigating to the **workshop** tab → **packer/ansible** directory in your environment.
 ![vault_task](/assets/task_3/ansible-task.png)
 
 # Build New Secure Packer Image
@@ -59,7 +57,7 @@ cd packer
 packer init .
 packer validate .
 ```
-_You should see the following output_:
+_You will likely see the following output:_:
 ```
 root@debian:/workshop/src/working/task3_a_packer# packer validate .
 Error: Unset variable "vault_namespace"
@@ -67,6 +65,11 @@ Error: Unset variable "vault_namespace"
 A used variable must be set or have a default value; see
 https://packer.io/docs/templates/hcl_templates/syntax for details.
 ```
+This error is expected!
+It indicates that the required `vault_namespace` variable is not set.
+
+Before moving forward, take a moment to think through how you might fix this based on your past work with Terraform variables and environment setup.
+When ready, set the vault_namespace variable with your team’s namespace before validating.
 
 ## 🔍 Did You Get It Right?
 
@@ -78,7 +81,7 @@ env var: `TEAM_NAME` should already be set to your team name, check `env`
 packer build -var vault_namespace="${TEAM_NAME}" .
 ```
 </Task>
-<Solution title="Solution: Packer build">
+<Solution title="Solution">
 check your env vars are set correctly `env`
 ```bash
 echo $TEAM_NAME

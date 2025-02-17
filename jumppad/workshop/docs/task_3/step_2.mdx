@@ -18,21 +18,18 @@ username: <team_name>_admin
 Ansible Automation password:{{ ansible_pass }}
 ```
 # 2. Update existing Terraform Configuration
-Now, let's configure Terraform to deploy the new image and integrate with AAP.
+In this step, you will update your Terraform setup to deploy the new secure Minecraft image you built with Packer.
 
-In this task we are updating the existing Terraform configuration to use the 
-new packer image and apply user access using the AAP provider.
-The additional required to integrate the AAP provider is already provided in the aap directory,
-copy the contents to your Terraform directory.
+You will also integrate Terraform with AAP using the AAP provider to automatically update the Minecraft server access list upon deployment.
 
-The AAP provider allows application teams to directly manage their application inventory and can coexist with dynamic inventories that may be managed using cloud metadata.
-We use the Ansible Automation Platform **ansible/aap** provider to perform the following tasks. 
+The AAP provider allows application teams to directly manage their application inventory and can co-exist with dynamic inventories that may be managed using cloud metadata.
+We use the Ansible Automation Platform **ansible/aap** provider to perform the following tasks: 
 
 * Create an inventory in your AAP organization.
-* Create a host in the inventory amd assign the ansible_host and ansible_port.
-* Execute an existing job template passing in as a variable your minecraft username to allow access to a the minecraft server.
+* Create a host in the inventory and assign the ansible_host and ansible_port.
+* Execute an existing job template to whitelist your Minecraft usernames, granting your team access to the server.
 
-_see the sample code snippet below_:
+_See the sample code snippet below (for Reference Only)_:
 ```hcl
 # Create a new AAP inventory for the your minecraft server
 resource "aap_inventory" "dedicated_minecraft" {
@@ -71,13 +68,12 @@ See below:
 ```bash
 cd /workshop/src/working/terraform
 cp ../aap/* .
-ls
 ```
-2. Confirm the files are copied by listing those files out: 
+2. Confirm the files are copied by listing  the contents of the directory: 
 ```bash
 root@debian:/workshop/src/working/terraform# ls
 ```
-_You should see these files in the terraform directory as aap.tf,  main.tf providers.tf, and  terraform.auto.tfvars_.
+_You should see these files in the terraform directory as `aap.tf`,  `main.tf`, `providers.tf`, and  `terraform.auto.tfvars`_.
 
 ## 🔍 Did You Get It Right?
 
@@ -85,7 +81,7 @@ _You should see these files in the terraform directory as aap.tf,  main.tf provi
 check the files are copied
 </Task>
 
-3. Update the terraform.auto.tfvars using the terminal and vi, or if you are more comfortable with the vscode you can use that from the workshop tab.
+3. Update the `terraform.auto.tfvars` using the terminal and `vi`, or if you are more comfortable with the vscode you can use that from the workshop tab.
 
 ![vscode-terraform](https://dl.dropbox.com/scl/fi/zq9xbve7g8pp7c50bfcwd/vscode-terraform.png?rlkey=z64crgxgndh7hsnz54m3nliyu&st=myh94xd7&dl=0)
 _Alternatively you can follow the steps below to use the CLI_.
@@ -144,11 +140,9 @@ libvirt_volume.ubuntu-qcow2: Creation complete after 50s [id=/var/workshop/pools
 
 Apply complete! Resources: 4 added, 0 changed, 1 destroyed.
 ```
-7. Validate Your Deployment in Minecraft
-Now that your Minecraft server is up and running, it’s time to test your deployment!
+7. Now that your Minecraft server is up and running, test your deployment by verifying your team can successfully connect and access the server.
 
-a. Launch Minecraft and connect to your deployed server, you can use the same multiplayer
-settings as before.
+8. Launch Minecraft and connect to your deployed server. You can use the same multiplayer settings as before.
 
-If all has been configured correctly you will be able to access the server and you
-should see Pirate `HashiCorp_Nic` in the game.
+**If all has been configured correctly you will be able to access the server and you
+should see Pirate `HashiCorp_Nic` in the game**.
