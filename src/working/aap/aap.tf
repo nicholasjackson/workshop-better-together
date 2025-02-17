@@ -37,6 +37,11 @@ variable "minecraft_hostname" {
 variable "minecraft_usernames" {
   type = list(string)
   description = "minecraft usernames for access list"
+
+  validation {
+    condition     = length(var.minecraft_usernames) > 0
+    error_message = "The minecraft_usernames list cannot be empty. Please provide at least one username."
+  }
 }
 
 variable "job_template_id" {
