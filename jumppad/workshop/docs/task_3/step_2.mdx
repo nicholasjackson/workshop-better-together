@@ -26,7 +26,7 @@ The AAP provider allows application teams to directly manage their application i
 We use the Ansible Automation Platform **ansible/aap** provider to perform the following tasks: 
 
 * Create an inventory in your AAP organization.
-* Create a host in the inventory and assign the ansible_host and ansible_port.
+* Create a host in the inventory and assign the `ansible_host` and `ansible_port`.
 * Execute an existing job template to whitelist your Minecraft usernames, granting your team access to the server.
 
 _See the sample code snippet below (for Reference Only)_:
@@ -63,7 +63,7 @@ resource "aap_job" "minecraft_whitelist" {
 ```
 
 1. Before proceeding ensure your in the terraform directory from the terminal.
-Switch to the terraform directory and copy the files from the aap directory to Terraform directory.
+Switch to the terraform directory and copy the files from the `aap` directory to Terraform directory.
 See below:
 ```bash
 cd /workshop/src/working/terraform
@@ -73,7 +73,7 @@ cp ../aap/* .
 ```bash
 root@debian:/workshop/src/working/terraform# ls
 ```
-_You should see these files in the terraform directory as `aap.tf`,  `main.tf`, `providers.tf`, and  `terraform.auto.tfvars`_.
+_You should see these files in the terraform directory as **aap.tf**,  **main.tf**, **providers.tf**, and  **terraform.auto.tfvars**_.
 
 ## 🔍 Did You Get It Right?
 
@@ -81,7 +81,7 @@ _You should see these files in the terraform directory as `aap.tf`,  `main.tf`, 
 check the files are copied
 </Task>
 
-3. Update the `terraform.auto.tfvars` using the terminal and `vi`, or if you are more comfortable with the vscode you can use that from the workshop tab.
+3. Update the `terraform.auto.tfvars` using the terminal and `vi`, or if you are more comfortable with the VS Code, you can use that from the `workshop` tab.
 
 ![vscode-terraform](https://dl.dropbox.com/scl/fi/zq9xbve7g8pp7c50bfcwd/vscode-terraform.png?rlkey=z64crgxgndh7hsnz54m3nliyu&st=myh94xd7&dl=0)
 _Alternatively you can follow the steps below to use the CLI_.
@@ -106,7 +106,7 @@ esc :wq
 ## 🔍 Did You Get It Right?
 
 <Task id="terraform_validate">
-validate the terraform configuration updates
+Validate the terraform configuration updates
 </Task>
 ```bash
 terraform init
@@ -144,5 +144,4 @@ Apply complete! Resources: 4 added, 0 changed, 1 destroyed.
 
 8. Launch Minecraft and connect to your deployed server. You can use the same multiplayer settings as before.
 
-**If all has been configured correctly you will be able to access the server and you
-should see Pirate `HashiCorp_Nic` in the game**.
+**If all has been configured correctly, you will be able to access the server and see Pirate `HashiCorp_Nic` in the game🏴‍☠️**.

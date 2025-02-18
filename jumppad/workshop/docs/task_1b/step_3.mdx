@@ -1,30 +1,30 @@
-# 💻 Step 3: Configure a user for your Minecraft User.
+# 💻 Step 3: Configure a User for Your Minecraft User
 
 
-We will use the username of your Minecraft user as the userpass user and the Minecraft UUID as the password.
+You will use the username of your Minecraft user as the userpass user and the Minecraft UUID as the password.
 
-1. To retrieve this information, you can head over to the following URL: <Link href="https://mcuuid.net/" target="_blank" rel="noopener noreferrer"/>
+1. To retrieve UUID: go to this link as below<Link href="https://mcuuid.net/" target="_blank" rel="noopener noreferrer"/>
 
-2. Enter your Minecraft user and click the Lookup button. 
+2. Enter your Minecraft user and click the `Lookup` button. 
 
 _You should see something like this_:
 
 ![](/assets/task_1b/mcuuid.png)
 
-3. Copy the Full UUID value and use it as the password for the user. Export as env vars as below:
+3. Copy the `Full UUID` value and use it as the password for the user. Export env vars as below:
 
 ```bash
 export MINECRAFT_USER=<your minecraft user>
 export MCUUID=<full mcuuid>
 ```
 
-4. Create a user for your Minecraft user in the `userpass` authentication method. You will also assign the `tavern` policy to the user.
+4. Create a Vault user for your Minecraft username using the `userpass` authentication method, and attach the tavern policy to grant access to the `tavern_key` secret:
 
 ```bash
 vault write -ns=admin/${TEAM_NAME} /auth/userpass/users/${MINECRAFT_USER} password="${MCUUID}" policies="tavern"
 ```
 
-_You should see some output like the following_:
+_You should see the output as the following_:
 
 ```bash
 Success! Data written to: auth/userpass/users/<minecraft user>

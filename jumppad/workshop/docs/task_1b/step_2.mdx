@@ -1,16 +1,15 @@
-# 💻 Step 2: Create a Vault policy to allow access to the tavern_key
+# 💻 Step 2: Create a Vault Policy to Allow Access to the Tavern_key
 
-Each team has a unique namespace in Vault, this is rooted under the `admin` namespace.
-For example if your team name is `team1`, your namespace will be `admin/team1`.
+Each team has a unique namespace in Vault, structured under the `admin` namespace.
+For example, if your team name is `team1`, your namespace will be `admin/team1`.
 
-Within your namespace `userpass` authentication method is enabled. This allows you to create users and assign policies to them.
-In order to open the iron door, you need to create a user for your Minecraft user and ensure that the user has the correct policy 
-attached granting access to the `tavern_key` secret engine and open the iron door.
+Within your namespace, the `userpass` authentication method is enabled, allowing you to create users and assign policies.
+
+To unlock the iron door in Minecraft, you’ll need to create a Vault user for your Minecraft username and attach a policy that grants access to the `tavern_key` secret in Vault. This will allow you to retrieve the key and open the door.
 
 
 
-1. Create a policy that allows access to the `tavern_key` in the kv2 secret engine
-for your namespace using the following command:
+1. Create a policy in your team’s namespace that grants access to the `tavern_key` secret in the KVv2 secrets engine using the command below:
 
 ```bash
 vault policy write -ns=admin/${TEAM_NAME} tavern - <<EOF

@@ -1,20 +1,15 @@
-# 💻 Step 1: Login to HCP Vault to confgure userpass authentication
+# 💻 Step 1: Login to HCP Vault to Configure Userpass Authentication
 
 For this lab, the HCP Vault Dedicated cluster is accessible over the public internet. Generally, this is not recommended and should be disabled. If there is a requirement to allow public access, we recommend customers to use the IP allow list as measure to limit access and security exposure.
 
 
-1. From the Instruqt lab, click on Instruqt terminal tab to begin.
-2. The Vault CLI is pre-installed in the terminal. The `VAULT_ADDR` environment variable has also been set for you. 
-
-_Since you already set the `TEAM_NAME` environment variable to your team name in the previous step, you are ready
-to go. Your VAULT_ADDR should be pre-set as 
-```https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200```._
-
-3. Check Vault status using the command:
-
+1. From the Instruqt lab, click on Instruqt terminal tab using the command to check Vault status: 
 ```bash
 vault status
 ```
+_`TEAM_NAME` has been set in the previous task. `VAULT_ADDR` is pre-set as  
+```https://skoaap-public-vault-8683511a.d19fbab7.z1.hashicorp.cloud:8200```._
+
 
 _You should see the following output_:
 
@@ -42,7 +37,7 @@ Raft Applied Index       1945872
 Last WAL                 800808
 ```
 
-4. Login using the `userpass` method with the team's credentials by using the following command. TEAM_NAME should be already exported to env in step 2.
+2. Login using the `userpass` method with the team's credentials by using the following command. 
 
 ```bash
 vault login -ns=admin -method=userpass username="${TEAM_NAME}" password='{{ ansible_pass }}'

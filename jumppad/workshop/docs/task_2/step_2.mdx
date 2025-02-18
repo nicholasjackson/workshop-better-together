@@ -1,4 +1,4 @@
-# 💻 Step 2: Configure AAP Machine credentials
+# 💻 Step 2: Configure AAP Machine Credentials
 In this step, you will update the machine credentials in AAP to use the Vault Signed SSH credential plugin configured in the previous step.
 
 Machine credentials are linked to Ansible Job Templates, enabling authenticated access to the target machine for playbook execution.
@@ -40,7 +40,7 @@ ssh-ed25519 REDTACTED
 
 ## 2. Configure AAP Machine credentials
 
-1. From the left menu, click Automation Execution, then Infrastructure, and select Credentials. Locate `minecraft_ssh_credentials`, which has been preconfigured, but you will need to enter your SSH keypair to complete the setup.
+1. From the left menu, click **Automation Execution** -> **Infrastructure** -> **Credentials**. Locate `minecraft_ssh_credentials`, which has been preconfigured, but you will need to enter your SSH keypair to complete the setup.
 ![machinecreds](/assets/task_2/aap_machine_creds.png)
 2. Click the edit icon for **minecraft_ssh_credentials**.
 ![machinecredsedit](/assets/task_2/aap_machine_creds_edit.png)
@@ -48,11 +48,11 @@ ssh-ed25519 REDTACTED
 ![updatecreds](https://dl.dropbox.com/scl/fi/inxuavg90revxwvs2zlnt/update_creds.png?rlkey=agh5s6hq9lqfbelg32wgegvjn&st=do3xae7n&dl=0)
 4. Click the **Signed SSH Certificate** key icon to open the **Select external credential** configuration window.
     ![selectexternalcredential](/assets/task_2/aap_machine_creds_ssh.png)
-    * From the *Credential* dropdown list, select **hashicorp_vault_ssh_approle**. 
-    * For `Unsigned Public Key`, insert a unsigned public key. 
-    * For `Path to Secret`, insert `ssh`.
-    * For `Path to Auth`, insert `approle`.
-    * For `Role Name`, insert `aap`.
+    * From the **Credential** dropdown list, select **hashicorp_vault_ssh_approle**, fill out the following fields:
+        - **Unsigned Public Key**: copy paste the `unsigned public key` from the last step
+        - **Path to Secret**: `ssh`
+        - **Path to Auth**: `approle`
+        - **Role Name**: `aap`
 5. Click **Test**
 ![testcreds](https://dl.dropbox.com/scl/fi/imql8636prbjh266ajko3/test_creds.png?rlkey=jirr6jockxoil2uwgcsn1n7v1&st=673mumkf&dl=0)
 6. If the test is successful, click **Finish** and **Save credential** to save the configuration.
