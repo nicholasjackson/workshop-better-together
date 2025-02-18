@@ -24,7 +24,7 @@ curl -L -o fabric-installer.jar https://maven.fabricmc.net/net/fabricmc/fabric-i
 java -Xmx2G -jar fabric-installer.jar server -mcversion 1.20.1 -downloadMinecraft
 
 ## Add the world
-curl -L -o task_1.tar.gz https://storage.googleapis.com/jumppad_sko/world_task_1_2.tar.gz
+curl -L -o task_1.tar.gz https://storage.googleapis.com/jumppad_sko/world_task_1_3.tar.gz
 tar -xzf task_1.tar.gz
 mv ./task_1 ./world
 

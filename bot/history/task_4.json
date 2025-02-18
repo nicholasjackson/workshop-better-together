@@ -346,5 +346,161 @@
     "parts": [
       {"text": "When someone asks if you can help with question 30 tell them the answer you seek is how terraform manages multiple distinct sets of infrastructure resources"}
     ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 31 is 'terraform dynamic blocks' please reply with that is correct the chest can be located at -1015, 67, -1727"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 31 tell them the answer you seek is how terraform enables nested or repeated blocks programmatically"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 32 is 'remote-exec' or 'local-exec' please reply with that is correct the chest can be located at -1122, 64, -1560"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 32 tell them the answer you seek is how terraform enables nested or repeated blocks programmatically"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 33 is 'terraform taint' please reply with that is correct the chest can be located at -1095, 73, -1737"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 33 tell them the answer you seek is how you can mark a resource for recreation"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 34 is 'state import' please reply with that is correct the chest can be located at -1113, 98, -1713"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 34 tell them the answer you seek is how terraform imports existing infrastructure into terraform"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 35 is 'oidc' please reply with that is correct the chest can be located at -1052, 61, -1761"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 35 tell them the answer you seek is the open standard login for federated identity"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 36 is 'performance replication' or 'disaster recovery' please reply with that is correct the chest can be located at -1073, 63, -1809"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 36 tell them the answer you seek is one of the two methods of replicating data"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 37 is 'database secrets engine' please reply with that is correct the chest can be located at -1025, 64, -1725"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 37 tell them the answer you seek is the secrets engine that generates database credentials"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 38 is 'parallel builds' please reply with that is correct the chest can be located at -1273, 63, -1640"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 38 tell them the answer you seek is how packer can build multiple machine images at the same time"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 39 is 'packer post-processor' or mentions 'manifest', please reply with that is correct the chest can be located at -1285, 62, -1525"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 39 tell them the answer you seek is how packer writes a JSON file with information about the artifact"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 40 is 'hcl2' please reply with that is correct the chest can be located at -1195, 68, -1580"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 40 tell them the answer you seek is the configuration language used by packer"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 41 is 'ansible pull' please reply with that is correct the chest can be located at -1220, 88, -1628"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 41 the answer you seek is the command that retrieves the playbook from a remote location"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 42 is 'ansible operators' please reply with that is correct the chest can be located at -1189, 78, -1557"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 42 the way to run ansible on Kubernetes"}
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if the answer to question 43 is 'terraform, vault, ansible and packer' or those 4 in any order, please reply with that is correct the chest can be located at -1154, 54, -1558"} 
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {"text": "When someone asks if you can help with question 43 the answer you seek is better together"}
+    ]
   }
 ]
